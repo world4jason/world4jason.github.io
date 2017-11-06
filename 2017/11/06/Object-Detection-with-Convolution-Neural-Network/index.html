@@ -68,7 +68,7 @@
             <li class="waves-block waves-effect">
               <a href="/"  >
                 <i class="icon icon-lg icon-home"></i>
-                Main
+                Home
               </a>
             </li>
         
@@ -184,8 +184,6 @@
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/11/06/Object-Detection-with-Convolution-Neural-Network/" target="_blank" rel="external">https://world4jason.github.io/2017/11/06/Object-Detection-with-Convolution-Neural-Network/</a>
-        
     </div>
     <footer>
         <a href="https://world4jason.github.io">
@@ -278,8 +276,24 @@
     
 
 
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
 
 
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
 
 
 
@@ -298,10 +312,10 @@
         
 <p>
     <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+        總訪客數：<span id="busuanzi_value_site_uv"></span>
     </span>
     <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+        總訪問量：<span id="busuanzi_value_site_pv"></span>
     </span>
 </p>
 
@@ -438,10 +452,10 @@ MathJax.Hub.Queue(function() {
     var OriginTitile = document.title, titleTime;
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            document.title = '死鬼去哪里了！';
+            document.title = '持續搬磚中';
             clearTimeout(titleTime);
         } else {
-            document.title = '(つェ⊂)咦!又好了!';
+            document.title = '(つェ⊂)咦!又回來了!';
             titleTime = setTimeout(function() {
                 document.title = OriginTitile;
             },2000);
