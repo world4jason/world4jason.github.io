@@ -13,38 +13,39 @@
     
     
     
-    <title>R-CNN:Region proposals+CNN | world4jason | Dev blog</title>
+    <title>R-CNN:Region proposals+CNN | world4jason | 菜鳥搬磚日常</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
     <meta name="keywords" content="">
-    <meta name="description" content="#RCNN- 將CNN引入目標檢測的開山之作                                                                                                            RCNN (論文：Rich feature hierarchies for accurate object detection and se">
+    <meta name="description" content="#RCNN- 將CNN引入目標檢測的開山之作                                                                                                            CS231n lecture8 RCNN (論文：Rich feature hierarchies for accurate object">
 <meta property="og:type" content="article">
 <meta property="og:title" content="R-CNN:Region proposals+CNN">
-<meta property="og:url" content="http://yoursite.com/2017/11/06/R-CNN/index.html">
+<meta property="og:url" content="https://world4jason.github.io/2017/11/06/R-CNN/index.html">
 <meta property="og:site_name" content="world4jason">
-<meta property="og:description" content="#RCNN- 將CNN引入目標檢測的開山之作                                                                                                            RCNN (論文：Rich feature hierarchies for accurate object detection and se">
+<meta property="og:description" content="#RCNN- 將CNN引入目標檢測的開山之作                                                                                                            CS231n lecture8 RCNN (論文：Rich feature hierarchies for accurate object">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="http://yoursite.com/media/15099664021450.png">
-<meta property="og:image" content="http://yoursite.com/media/15099664799300.jpg">
-<meta property="og:image" content="http://yoursite.com/media/15099665196976.jpg">
-<meta property="og:image" content="http://yoursite.com/media/15099665384173.jpg">
-<meta property="og:image" content="http://yoursite.com/media/15099665471055.jpg">
-<meta property="og:image" content="http://yoursite.com/media/15099665602965.jpg">
-<meta property="og:image" content="http://yoursite.com/media/15099666382907.jpg">
-<meta property="og:image" content="http://yoursite.com/media/15099666636066.jpg">
-<meta property="og:image" content="http://yoursite.com/media/15099666918238.jpg">
-<meta property="og:image" content="http://yoursite.com/media/15099666873410.jpg">
-<meta property="og:image" content="http://yoursite.com/media/15099667042004.jpg">
-<meta property="og:image" content="http://yoursite.com/media/15099667194897.jpg">
-<meta property="og:image" content="http://yoursite.com/media/15099667603349.jpg">
-<meta property="og:updated_time" content="2017-11-06T11:36:14.000Z">
+<meta property="og:image" content="https://world4jason.github.io/media/15099664021450.png">
+<meta property="og:image" content="https://world4jason.github.io/media/15099664799300.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15099707654238.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15099665196976.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15099665384173.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15099665471055.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15099665602965.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15099666382907.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15099666636066.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15099666918238.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15099666873410.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15099667042004.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15099667194897.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15099667603349.jpg">
+<meta property="og:updated_time" content="2017-11-06T12:24:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="R-CNN:Region proposals+CNN">
-<meta name="twitter:description" content="#RCNN- 將CNN引入目標檢測的開山之作                                                                                                            RCNN (論文：Rich feature hierarchies for accurate object detection and se">
-<meta name="twitter:image" content="http://yoursite.com/media/15099664021450.png">
+<meta name="twitter:description" content="#RCNN- 將CNN引入目標檢測的開山之作                                                                                                            CS231n lecture8 RCNN (論文：Rich feature hierarchies for accurate object">
+<meta name="twitter:image" content="https://world4jason.github.io/media/15099664021450.png">
     
         <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
     
@@ -201,6 +202,7 @@
                 </div>
                 <div class="image-caption"></div>
             </figure>
+<p><a href="http://cs231n.stanford.edu/slides/2016/winter1516_lecture8.pdf" target="_blank" rel="external">CS231n lecture8</a></p>
 <p>RCNN (論文：Rich feature hierarchies for accurate object detection and semantic segmentation) 是將CNN方法引入目標檢測領域， 大大提高了目標檢測效果，可以說改變了目標檢測領域的主要研究思路， 緊隨其後的系列文章： （ RCNN ）, Fast RCNN , Faster RCNN 代表該領域當前最高水準。</p>
 <p>【論文主要特點】（相對傳統方法的改進）</p>
 <p>速度： 經典的目標檢測算法使用滑動窗法依次判斷所有可能的區域。 本文則(採用Selective Search方法)預先提取一系列較可能是物體的候選區域，之後僅在這些候選區域上(採用CNN)提取特徵，進行判斷。<br>訓練集： 經典的目標檢測算法在區域中提取人工設定的特徵。 本文則採用深度網絡進行特徵提取。 使用兩個數據庫： 一個較大的識​​別庫（ImageNet ILSVC 2012）：標定每張圖片中物體的類別。 一千萬圖像，1000類。 一個較小的檢測庫（PASCAL VOC 2007）：標定每張圖片中，物體的類別和位置，一萬圖像，20類。 本文使用識別庫進行預訓練得到CNN（有監督預訓練），而後用檢測庫調優參數，最後在檢測庫上評測。<br>看到這裡也許你已經對很多名詞很困惑，下面會解釋。 先來看看它的基本流程：</p>
@@ -208,6 +210,12 @@
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/media/15099664799300.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15099707654238.jpg" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure></p>
@@ -337,16 +345,16 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-11-06T11:36:14.000Z" itemprop="dateUpdated">2017-11-06 19:36:14</time>
+    最後更新時間：<time datetime="2017-11-06T12:24:19.000Z" itemprop="dateUpdated">2017-11-06 20:24:19</time>
 </span><br>
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/11/06/R-CNN/" target="_blank" rel="external">http://yoursite.com/2017/11/06/R-CNN/</a>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/11/06/R-CNN/" target="_blank" rel="external">https://world4jason.github.io/2017/11/06/R-CNN/</a>
         
     </div>
     <footer>
-        <a href="http://yoursite.com">
+        <a href="https://world4jason.github.io">
             <img src="/img/avatar.jpg" alt="Jason Yeh">
             Jason Yeh
         </a>
@@ -366,7 +374,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/11/06/R-CNN/&title=《R-CNN:Region proposals+CNN》 — world4jason&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2017/11/06/R-CNN/&title=《R-CNN:Region proposals+CNN》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -376,22 +384,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/11/06/R-CNN/&title=《R-CNN:Region proposals+CNN》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2017/11/06/R-CNN/&title=《R-CNN:Region proposals+CNN》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/11/06/R-CNN/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2017/11/06/R-CNN/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《R-CNN:Region proposals+CNN》 — world4jason&url=http://yoursite.com/2017/11/06/R-CNN/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《R-CNN:Region proposals+CNN》 — world4jason&url=https://world4jason.github.io/2017/11/06/R-CNN/&via=https://world4jason.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/11/06/R-CNN/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2017/11/06/R-CNN/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -416,9 +424,9 @@
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/03/28/hello-world/" id="post-next" class="post-nav-link">
+      <a href="/2017/11/06/Object-Detection-with-Convolution-Neural-Network/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Hello World</h4>
+        <h4 class="title">Object Detection with Convolution Neural Network Series</h4>
       </a>
     </div>
   
@@ -483,7 +491,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/11/06/R-CNN/&title=《R-CNN:Region proposals+CNN》 — world4jason&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2017/11/06/R-CNN/&title=《R-CNN:Region proposals+CNN》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -493,22 +501,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/11/06/R-CNN/&title=《R-CNN:Region proposals+CNN》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2017/11/06/R-CNN/&title=《R-CNN:Region proposals+CNN》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/11/06/R-CNN/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2017/11/06/R-CNN/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《R-CNN:Region proposals+CNN》 — world4jason&url=http://yoursite.com/2017/11/06/R-CNN/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《R-CNN:Region proposals+CNN》 — world4jason&url=https://world4jason.github.io/2017/11/06/R-CNN/&via=https://world4jason.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/11/06/R-CNN/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2017/11/06/R-CNN/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -519,7 +527,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2017/11/06/R-CNN/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://world4jason.github.io/2017/11/06/R-CNN/" alt="微信分享二维码">
 </div>
 
 
