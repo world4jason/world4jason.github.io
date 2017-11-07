@@ -20,12 +20,12 @@
     
     
     <meta name="keywords" content="">
-    <meta name="description" content="#RCNN- 將CNN引入目標檢測的開山之作                                                                                                            CS231n lecture8 RCNN (論文：Rich feature hierarchies for accurate object">
+    <meta name="description" content="RCNN- 將CNN引入目標檢測的開山之作                                                                                                           CS231n lecture8 RCNN (論文：Rich feature hierarchies for accurate object de">
 <meta property="og:type" content="article">
 <meta property="og:title" content="R-CNN:Region proposals+CNN">
 <meta property="og:url" content="https://world4jason.github.io/2017/11/06/R-CNN/index.html">
 <meta property="og:site_name" content="world4jason">
-<meta property="og:description" content="#RCNN- 將CNN引入目標檢測的開山之作                                                                                                            CS231n lecture8 RCNN (論文：Rich feature hierarchies for accurate object">
+<meta property="og:description" content="RCNN- 將CNN引入目標檢測的開山之作                                                                                                           CS231n lecture8 RCNN (論文：Rich feature hierarchies for accurate object de">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https://world4jason.github.io/media/15099664021450.png">
 <meta property="og:image" content="https://world4jason.github.io/media/15099664799300.jpg">
@@ -41,10 +41,10 @@
 <meta property="og:image" content="https://world4jason.github.io/media/15099667042004.jpg">
 <meta property="og:image" content="https://world4jason.github.io/media/15099667194897.jpg">
 <meta property="og:image" content="https://world4jason.github.io/media/15099667603349.jpg">
-<meta property="og:updated_time" content="2017-11-06T12:24:19.000Z">
+<meta property="og:updated_time" content="2017-11-07T06:56:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="R-CNN:Region proposals+CNN">
-<meta name="twitter:description" content="#RCNN- 將CNN引入目標檢測的開山之作                                                                                                            CS231n lecture8 RCNN (論文：Rich feature hierarchies for accurate object">
+<meta name="twitter:description" content="RCNN- 將CNN引入目標檢測的開山之作                                                                                                           CS231n lecture8 RCNN (論文：Rich feature hierarchies for accurate object de">
 <meta name="twitter:image" content="https://world4jason.github.io/media/15099664021450.png">
     
         <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
@@ -171,7 +171,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Selective-Search-主要思想"><span class="post-toc-number">1.</span> <span class="post-toc-text">Selective Search 主要思想:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重疊度（IOU）"><span class="post-toc-number">2.</span> <span class="post-toc-text">重疊度（IOU）:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#非極大值抑制（-NMS-）："><span class="post-toc-number">3.</span> <span class="post-toc-text">非極大值抑制（ NMS ）：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#候選框搜索階段："><span class="post-toc-number">3.1.</span> <span class="post-toc-text">候選框搜索階段：</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#RCNN-將CNN引入目標檢測的開山之作"><span class="post-toc-number">1.</span> <span class="post-toc-text">RCNN- 將CNN引入目標檢測的開山之作</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#基本流程"><span class="post-toc-number">2.</span> <span class="post-toc-text">基本流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Selective-Search"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">Selective Search</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重疊度（IOU）"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">重疊度（IOU）:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#非極大值抑制（-NMS-）："><span class="post-toc-number">2.0.3.</span> <span class="post-toc-text">非極大值抑制（ NMS ）：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#候選框搜索階段："><span class="post-toc-number">2.0.3.1.</span> <span class="post-toc-text">候選框搜索階段：</span></a></li></ol></li></ol></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -194,8 +194,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>#RCNN- 將CNN引入目標檢測的開山之作</p>
-<figure class="image-bubble">
+            <h1 id="RCNN-將CNN引入目標檢測的開山之作"><a href="#RCNN-將CNN引入目標檢測的開山之作" class="headerlink" title="RCNN- 將CNN引入目標檢測的開山之作"></a>RCNN- 將CNN引入目標檢測的開山之作</h1><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/media/15099664021450.png" alt="" title="">
@@ -206,23 +205,24 @@
 <p>RCNN (論文：Rich feature hierarchies for accurate object detection and semantic segmentation) 是將CNN方法引入目標檢測領域， 大大提高了目標檢測效果，可以說改變了目標檢測領域的主要研究思路， 緊隨其後的系列文章： （ RCNN ）, Fast RCNN , Faster RCNN 代表該領域當前最高水準。</p>
 <p>【論文主要特點】（相對傳統方法的改進）</p>
 <p>速度： 經典的目標檢測算法使用滑動窗法依次判斷所有可能的區域。 本文則(採用Selective Search方法)預先提取一系列較可能是物體的候選區域，之後僅在這些候選區域上(採用CNN)提取特徵，進行判斷。<br>訓練集： 經典的目標檢測算法在區域中提取人工設定的特徵。 本文則採用深度網絡進行特徵提取。 使用兩個數據庫： 一個較大的識​​別庫（ImageNet ILSVC 2012）：標定每張圖片中物體的類別。 一千萬圖像，1000類。 一個較小的檢測庫（PASCAL VOC 2007）：標定每張圖片中，物體的類別和位置，一萬圖像，20類。 本文使用識別庫進行預訓練得到CNN（有監督預訓練），而後用檢測庫調優參數，最後在檢測庫上評測。<br>看到這裡也許你已經對很多名詞很困惑，下面會解釋。 先來看看它的基本流程：</p>
-<p>【基本流程===================================】<br><figure class="image-bubble">
+<h1 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h1><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/media/15099664799300.jpg" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
-            </figure><br><figure class="image-bubble">
+            </figure>
+<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/media/15099707654238.jpg" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
-            </figure></p>
+            </figure>
 <p>RCNN算法分為4個步驟 </p>
 <p>候選區域生成： 一張圖像生成1K~2K個候選區域（採用Selective Search 方法）<br>特徵提取： 對每個候選區域，使用深度卷積網絡提取特徵（CNN）<br>類別判斷： 特徵送入每一類的SVM 分類器，判別是否屬於該類<br>位置精修： 使用回歸器精細修正候選框位置 </p>
 <p>【基礎知識===================================】</p>
-<h3 id="Selective-Search-主要思想"><a href="#Selective-Search-主要思想" class="headerlink" title="Selective Search 主要思想:"></a>Selective Search 主要思想:</h3><p>使用一種過分割手段，將圖像分割成小區域(1k~2k 個)<br>查看現有小區域，按照合併規則合併可能性最高的相鄰兩個區域。 重複直到整張圖像合併成一個區域位置<br>輸出所有曾經存在過的區域，所謂候選區域<br>其中合併規則如下： 優先合併以下四種區域：</p>
+<h3 id="Selective-Search"><a href="#Selective-Search" class="headerlink" title="Selective Search"></a>Selective Search</h3><p>主要思想:<br>使用一種過分割手段，將圖像分割成小區域(1k~2k 個)<br>查看現有小區域，按照合併規則合併可能性最高的相鄰兩個區域。 重複直到整張圖像合併成一個區域位置<br>輸出所有曾經存在過的區域，所謂候選區域<br>其中合併規則如下： 優先合併以下四種區域：</p>
 <p>顏色（顏色直方圖）相近的<br>紋理（梯度直方圖）相近的<br>合併後總面積小的： 保證合併操作的尺度較為均勻，避免一個大區域陸續“吃掉”其他小區域（例：設有區域abcdefgh。較好的合併方式是：ab-cd-ef-gh - &gt; abcd-efgh -&gt; abcdefgh。 不好的合併方法是：ab-cdefgh -&gt;abcd-efgh -&gt;abcdef-gh -&gt; abcdefgh）<br>合併後，總面積在其BBOX中所佔比例大的： 保證合併後形狀規則。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -345,7 +345,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-11-06T12:24:19.000Z" itemprop="dateUpdated">2017-11-06 20:24:19</time>
+    最後更新時間：<time datetime="2017-11-07T06:56:45.000Z" itemprop="dateUpdated">2017-11-07 14:56:45</time>
 </span><br>
 
 
