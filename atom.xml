@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://world4jason.github.io/"/>
-  <updated>2017-11-13T15:41:16.000Z</updated>
+  <updated>2017-12-13T07:49:23.000Z</updated>
   <id>https://world4jason.github.io/</id>
   
   <author>
@@ -15,6 +15,63 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python 筆記</title>
+    <link href="https://world4jason.github.io/2017/12/13/python-note/"/>
+    <id>https://world4jason.github.io/2017/12/13/python-note/</id>
+    <published>2017-12-13T07:35:34.000Z</published>
+    <updated>2017-12-13T07:49:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Different in Py2 and Py3</p><p>Pickle module</p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">if</span> sys.version_info[<span class="number">0</span>]&lt;<span class="number">3</span>:</div><div class="line">    <span class="keyword">import</span> cPickle <span class="keyword">as</span> pickle</div><div class="line"><span class="keyword">else</span></div><div class="line">    <span class="keyword">import</span> _pickle <span class="keyword">as</span> pickle</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Different in Py2 and Py3&lt;/p&gt;
+&lt;p&gt;Pickle module&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>zi2zi: Master Chinese Calligraphy with Conditional Adversarial Networks</title>
+    <link href="https://world4jason.github.io/2017/12/01/zi2zi/"/>
+    <id>https://world4jason.github.io/2017/12/01/zi2zi/</id>
+    <published>2017-11-30T19:36:19.000Z</published>
+    <updated>2017-12-09T19:46:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/media/15128482902404.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>Generated samples. Related code can be found <a href="https://github.com/kaonashi-tyc/zi2zi" target="_blank" rel="external">here</a></p><h2 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h2><p>字體風格轉換<br><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/media/15128485151045.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure></p><h2 id="動機"><a href="#動機" class="headerlink" title="動機"></a>動機</h2><p>直接用CNN進行風格轉換會有下列問題</p><ol><li>生成常常是模糊的</li><li>多數生成結果是失敗的</li><li>只能做一對一生成</li></ol><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/media/15128485338820.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>結論：用GAN試試看</p><h2 id="用GAN秒殺一切！"><a href="#用GAN秒殺一切！" class="headerlink" title="用GAN秒殺一切！"></a>用GAN秒殺一切！</h2><p>這篇借鑒了三篇paper內容</p><p><a href="https://arxiv.org/abs/1611.07004" target="_blank" rel="external">Image-to-Image Translation with Conditional Adversarial Networks</a><br><a href="https://arxiv.org/abs/1610.09585" target="_blank" rel="external">Conditional Image Synthesis With Auxiliary Classifier GANs</a><br><a href="https://arxiv.org/abs/1611.02200" target="_blank" rel="external">Unsupervised Cross-Domain Image Generation</a></p><p>主要是由pix2pix這篇修改而來的<br><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/media/15128487302209.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure></p><p>其中Encoder跟Decoder還有Discriminator是直接用pix2pix的, 尤其是裡面的Unet模型</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div class=&quot;img-lightbox&quot;&gt;
+                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+                   
+      
+    
+    </summary>
+    
+      <category term="GAN" scheme="https://world4jason.github.io/categories/GAN/"/>
+    
+    
+      <category term="Generation" scheme="https://world4jason.github.io/tags/Generation/"/>
+    
+      <category term="Generative Model" scheme="https://world4jason.github.io/tags/Generative-Model/"/>
+    
+      <category term="GAN" scheme="https://world4jason.github.io/tags/GAN/"/>
+    
+      <category term="Style Transfer" scheme="https://world4jason.github.io/tags/Style-Transfer/"/>
+    
+  </entry>
   
   <entry>
     <title>Mask R-CNN</title>
@@ -54,13 +111,13 @@
       <category term="GAN" scheme="https://world4jason.github.io/categories/GAN/"/>
     
     
+      <category term="Deep Learning" scheme="https://world4jason.github.io/tags/Deep-Learning/"/>
+    
       <category term="Generation" scheme="https://world4jason.github.io/tags/Generation/"/>
     
       <category term="Generative Model" scheme="https://world4jason.github.io/tags/Generative-Model/"/>
     
       <category term="GAN" scheme="https://world4jason.github.io/tags/GAN/"/>
-    
-      <category term="Deep Learning" scheme="https://world4jason.github.io/tags/Deep-Learning/"/>
     
   </entry>
   
@@ -85,13 +142,13 @@
       <category term="GAN" scheme="https://world4jason.github.io/categories/GAN/"/>
     
     
+      <category term="Deep Learning" scheme="https://world4jason.github.io/tags/Deep-Learning/"/>
+    
       <category term="Generation" scheme="https://world4jason.github.io/tags/Generation/"/>
     
       <category term="Generative Model" scheme="https://world4jason.github.io/tags/Generative-Model/"/>
     
       <category term="GAN" scheme="https://world4jason.github.io/tags/GAN/"/>
-    
-      <category term="Deep Learning" scheme="https://world4jason.github.io/tags/Deep-Learning/"/>
     
   </entry>
   

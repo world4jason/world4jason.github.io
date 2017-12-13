@@ -13,25 +13,30 @@
     
     
     
-    <title>Conditional GAN - 條件式生成對抗網路 | world4jason | 菜鳥搬磚日常</title>
+    <title>zi2zi: Master Chinese Calligraphy with Conditional Adversarial Networks | world4jason | 菜鳥搬磚日常</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Deep Learning,Generation,Generative Model,GAN">
-    <meta name="description" content="菜鳥搬磚日常">
-<meta name="keywords" content="Deep Learning,Generation,Generative Model,GAN">
+    <meta name="keywords" content="Generation,Generative Model,GAN,Style Transfer">
+    <meta name="description" content="Generated samples. Related code can be found here 目標字體風格轉換">
+<meta name="keywords" content="Generation,Generative Model,GAN,Style Transfer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Conditional GAN - 條件式生成對抗網路">
-<meta property="og:url" content="https://world4jason.github.io/2017/11/08/Conditional-GAN/index.html">
+<meta property="og:title" content="zi2zi: Master Chinese Calligraphy with Conditional Adversarial Networks">
+<meta property="og:url" content="https://world4jason.github.io/2017/12/01/zi2zi/index.html">
 <meta property="og:site_name" content="world4jason">
-<meta property="og:description" content="菜鳥搬磚日常">
+<meta property="og:description" content="Generated samples. Related code can be found here 目標字體風格轉換">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2017-11-08T12:37:52.000Z">
+<meta property="og:image" content="https://world4jason.github.io/media/15128482902404.png">
+<meta property="og:image" content="https://world4jason.github.io/media/15128485151045.png">
+<meta property="og:image" content="https://world4jason.github.io/media/15128485338820.png">
+<meta property="og:image" content="https://world4jason.github.io/media/15128487302209.png">
+<meta property="og:updated_time" content="2017-12-09T19:46:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Conditional GAN - 條件式生成對抗網路">
-<meta name="twitter:description" content="菜鳥搬磚日常">
+<meta name="twitter:title" content="zi2zi: Master Chinese Calligraphy with Conditional Adversarial Networks">
+<meta name="twitter:description" content="Generated samples. Related code can be found here 目標字體風格轉換">
+<meta name="twitter:image" content="https://world4jason.github.io/media/15128482902404.png">
     
         <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
     
@@ -112,7 +117,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Conditional GAN - 條件式生成對抗網路</div>
+        <div class="flex-col header-title ellipsis">zi2zi: Master Chinese Calligraphy with Conditional Adversarial Networks</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -134,11 +139,11 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">Conditional GAN - 條件式生成對抗網路</h1>
+        <h1 class="title">zi2zi: Master Chinese Calligraphy with Conditional Adversarial Networks</h1>
         <h5 class="subtitle">
             
-                <time datetime="2017-11-08T05:48:12.000Z" itemprop="datePublished" class="page-time">
-  2017-11-08
+                <time datetime="2017-11-30T19:36:19.000Z" itemprop="datePublished" class="page-time">
+  2017-12-01
 </time>
 
 
@@ -156,13 +161,20 @@
 
 <div class="container body-wrap">
     
-<article id="post-Conditional-GAN"
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目標"><span class="post-toc-number">1.</span> <span class="post-toc-text">目標</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#動機"><span class="post-toc-number">2.</span> <span class="post-toc-text">動機</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用GAN秒殺一切！"><span class="post-toc-number">3.</span> <span class="post-toc-text">用GAN秒殺一切！</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-zi2zi"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">Conditional GAN - 條件式生成對抗網路</h1>
+        <h1 class="post-card-title">zi2zi: Master Chinese Calligraphy with Conditional Adversarial Networks</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017-11-08 13:48:12" datetime="2017-11-08T05:48:12.000Z"  itemprop="datePublished">2017-11-08</time>
+            <time class="post-time" title="2017-12-01 03:36:19" datetime="2017-11-30T19:36:19.000Z"  itemprop="datePublished">2017-12-01</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/GAN/">GAN</a></li></ul>
@@ -177,14 +189,53 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            
+            <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15128482902404.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>Generated samples. Related code can be found <a href="https://github.com/kaonashi-tyc/zi2zi" target="_blank" rel="external">here</a></p>
+<h2 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h2><p>字體風格轉換<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15128485151045.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h2 id="動機"><a href="#動機" class="headerlink" title="動機"></a>動機</h2><p>直接用CNN進行風格轉換會有下列問題</p>
+<ol>
+<li>生成常常是模糊的</li>
+<li>多數生成結果是失敗的</li>
+<li>只能做一對一生成</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15128485338820.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>結論：用GAN試試看</p>
+<h2 id="用GAN秒殺一切！"><a href="#用GAN秒殺一切！" class="headerlink" title="用GAN秒殺一切！"></a>用GAN秒殺一切！</h2><p>這篇借鑒了三篇paper內容</p>
+<p><a href="https://arxiv.org/abs/1611.07004" target="_blank" rel="external">Image-to-Image Translation with Conditional Adversarial Networks</a><br><a href="https://arxiv.org/abs/1610.09585" target="_blank" rel="external">Conditional Image Synthesis With Auxiliary Classifier GANs</a><br><a href="https://arxiv.org/abs/1611.02200" target="_blank" rel="external">Unsupervised Cross-Domain Image Generation</a></p>
+<p>主要是由pix2pix這篇修改而來的<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15128487302209.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>其中Encoder跟Decoder還有Discriminator是直接用pix2pix的, 尤其是裡面的Unet模型</p>
+
         </div>
 
         <blockquote class="post-copyright">
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-11-08T12:37:52.000Z" itemprop="dateUpdated">2017-11-08 20:37:52</time>
+    最後更新時間：<time datetime="2017-12-09T19:46:26.000Z" itemprop="dateUpdated">2017-12-10 03:46:26</time>
 </span><br>
 
 
@@ -203,7 +254,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Generation/">Generation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Generative-Model/">Generative Model</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Generation/">Generation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Generative-Model/">Generative Model</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Style-Transfer/">Style Transfer</a></li></ul>
 
 
             
@@ -213,7 +264,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2017/11/08/Conditional-GAN/&title=《Conditional GAN - 條件式生成對抗網路》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2017/12/01/zi2zi/&title=《zi2zi: Master Chinese Calligraphy with Conditional Adversarial Networks》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -223,22 +274,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2017/11/08/Conditional-GAN/&title=《Conditional GAN - 條件式生成對抗網路》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2017/12/01/zi2zi/&title=《zi2zi: Master Chinese Calligraphy with Conditional Adversarial Networks》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2017/11/08/Conditional-GAN/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2017/12/01/zi2zi/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Conditional GAN - 條件式生成對抗網路》 — world4jason&url=https://world4jason.github.io/2017/11/08/Conditional-GAN/&via=https://world4jason.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《zi2zi: Master Chinese Calligraphy with Conditional Adversarial Networks》 — world4jason&url=https://world4jason.github.io/2017/12/01/zi2zi/&via=https://world4jason.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2017/11/08/Conditional-GAN/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2017/12/01/zi2zi/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -261,18 +312,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2017/11/10/untitled-1510251239231/" id="post-prev" class="post-nav-link">
+      <a href="/2017/12/13/python-note/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Mask R-CNN</h4>
+        <h4 class="title">Python 筆記</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/11/07/GAN-Generative-Adversarial-Network/" id="post-next" class="post-nav-link">
+      <a href="/2017/11/10/untitled-1510251239231/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">GAN - Generative Adversarial Network</h4>
+        <h4 class="title">Mask R-CNN</h4>
       </a>
     </div>
   
@@ -353,7 +404,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2017/11/08/Conditional-GAN/&title=《Conditional GAN - 條件式生成對抗網路》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2017/12/01/zi2zi/&title=《zi2zi: Master Chinese Calligraphy with Conditional Adversarial Networks》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -363,22 +414,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2017/11/08/Conditional-GAN/&title=《Conditional GAN - 條件式生成對抗網路》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2017/12/01/zi2zi/&title=《zi2zi: Master Chinese Calligraphy with Conditional Adversarial Networks》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2017/11/08/Conditional-GAN/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2017/12/01/zi2zi/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Conditional GAN - 條件式生成對抗網路》 — world4jason&url=https://world4jason.github.io/2017/11/08/Conditional-GAN/&via=https://world4jason.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《zi2zi: Master Chinese Calligraphy with Conditional Adversarial Networks》 — world4jason&url=https://world4jason.github.io/2017/12/01/zi2zi/&via=https://world4jason.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2017/11/08/Conditional-GAN/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2017/12/01/zi2zi/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -389,7 +440,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://world4jason.github.io/2017/11/08/Conditional-GAN/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://world4jason.github.io/2017/12/01/zi2zi/" alt="微信分享二维码">
 </div>
 
 
