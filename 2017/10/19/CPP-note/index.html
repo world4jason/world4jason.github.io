@@ -20,18 +20,18 @@
     
     
     <meta name="keywords" content="code,CPP,C++">
-    <meta name="description" content="##C++中cin、cin.get()、cin.getline()、getline()、gets()等函数的用法学C++的时候，这几个输入函数弄的有点迷糊；这里做个小结，为了自己复习，也希望对后来者能有所帮助，如果有差错的地方还请各位多多指教（本文所有程序均通过VC 6.0运行） 1、cin2、cin.get()3、cin.getline()4、getline()5、gets()6、getchar">
+    <meta name="description" content="##C++中cin、cin.get()、cin.getline()、getline()、gets()等函数的用法学C++的时候，这几个输入函数弄的有点迷糊；这里做个小结，为了自己复习，也希望对后来者能有所帮助，如果有差错的地方还请各位多多指教 1、cin2、cin.get()3、cin.getline()4、getline()5、gets()6、getchar() 附:cin.ignore();c">
 <meta name="keywords" content="code,CPP,C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CPP 筆記">
 <meta property="og:url" content="https://world4jason.github.io/2017/10/19/CPP-note/index.html">
 <meta property="og:site_name" content="world4jason">
-<meta property="og:description" content="##C++中cin、cin.get()、cin.getline()、getline()、gets()等函数的用法学C++的时候，这几个输入函数弄的有点迷糊；这里做个小结，为了自己复习，也希望对后来者能有所帮助，如果有差错的地方还请各位多多指教（本文所有程序均通过VC 6.0运行） 1、cin2、cin.get()3、cin.getline()4、getline()5、gets()6、getchar">
+<meta property="og:description" content="##C++中cin、cin.get()、cin.getline()、getline()、gets()等函数的用法学C++的时候，这几个输入函数弄的有点迷糊；这里做个小结，为了自己复习，也希望对后来者能有所帮助，如果有差错的地方还请各位多多指教 1、cin2、cin.get()3、cin.getline()4、getline()5、gets()6、getchar() 附:cin.ignore();c">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2017-12-19T04:11:55.000Z">
+<meta property="og:updated_time" content="2017-12-19T04:41:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CPP 筆記">
-<meta name="twitter:description" content="##C++中cin、cin.get()、cin.getline()、getline()、gets()等函数的用法学C++的时候，这几个输入函数弄的有点迷糊；这里做个小结，为了自己复习，也希望对后来者能有所帮助，如果有差错的地方还请各位多多指教（本文所有程序均通过VC 6.0运行） 1、cin2、cin.get()3、cin.getline()4、getline()5、gets()6、getchar">
+<meta name="twitter:description" content="##C++中cin、cin.get()、cin.getline()、getline()、gets()等函数的用法学C++的时候，这几个输入函数弄的有点迷糊；这里做个小结，为了自己复习，也希望对后来者能有所帮助，如果有差错的地方还请各位多多指教 1、cin2、cin.get()3、cin.getline()4、getline()5、gets()6、getchar() 附:cin.ignore();c">
     
         <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
     
@@ -177,7 +177,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>##C++中cin、cin.get()、cin.getline()、getline()、gets()等函数的用法<br>学C++的时候，这几个输入函数弄的有点迷糊；这里做个小结，为了自己复习，也希望对后来者能有所帮助，如果有差错的地方还请各位多多指教（本文所有程序均通过VC 6.0运行）</p>
+            <p>##C++中cin、cin.get()、cin.getline()、getline()、gets()等函数的用法<br>学C++的时候，这几个输入函数弄的有点迷糊；这里做个小结，为了自己复习，也希望对后来者能有所帮助，如果有差错的地方还请各位多多指教</p>
 <p>1、cin<br>2、cin.get()<br>3、cin.getline()<br>4、getline()<br>5、gets()<br>6、getchar()</p>
 <p>附:cin.ignore();cin.get()//跳过一个字符,例如不想要的回车,空格等字符</p>
 <p>1、cin&gt;&gt;         </p>
@@ -217,6 +217,9 @@
 <p>输入：jkljkljkl<br>输出：jkljkljkl</p>
 <p>输入：jkl jfksldfj jklsjfl<br>输出：jkl jfksldfj jklsjfl</p>
 <p>和cin.getline()类似，但是cin.getline()属于istream流，而getline()属于string流，是不一样的两个函数</p>
+<p>在寫程式的時候遇到這個問題<br>因為atoi函式只吃char*<br>上網GOOGLE一下找到了解決之法</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">string</span> x;</div><div class="line"><span class="keyword">int</span> temp=atoi(x.c_str());</div><div class="line">c_str()可以轉換<span class="built_in">string</span>成為<span class="keyword">char</span>*</div></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span> ;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">string</span> s ;</div><div class="line">    <span class="keyword">int</span> a;</div><div class="line">    <span class="keyword">while</span> (getline(<span class="built_in">cin</span>,s))</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> n=s.length();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) </div><div class="line">        &#123;</div><div class="line">            a=s.at(i);</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">" "</span>;</div><div class="line">         &#125;</div><div class="line">         <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
         </div>
 
@@ -224,7 +227,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-12-19T04:11:55.000Z" itemprop="dateUpdated">2017-12-19 12:11:55</time>
+    最後更新時間：<time datetime="2017-12-19T04:41:11.000Z" itemprop="dateUpdated">2017-12-19 12:41:11</time>
 </span><br>
 
 
