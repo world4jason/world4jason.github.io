@@ -13,31 +13,27 @@
     
     
     
-    <title>Object Detection with Convolution Neural Network Series | world4jason | 菜鳥搬磚日常</title>
+    <title>PYTHON中如何使用*ARGS和**KWARGS | world4jason | 菜鳥搬磚日常</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Deep Learning,R-CNN,CNN,Object Detection">
-    <meta name="description" content="Object Detection with Convolution Neural Network SeriesOutline  檢測任務? R-CNN Fast R-CNN Faster R-CNN SSD YOLO  檢測任務">
-<meta name="keywords" content="Deep Learning,R-CNN,CNN,Object Detection">
+    <meta name="keywords" content="code">
+    <meta name="description" content="範例與翻譯理解自連結與連結 *args跟 **kwargs是類似的東西，是可有可無的參數。 一顆星的*args是tuple，可以接受很多的值。兩顆星的**kwargs一樣是可以接受很多值，但是是接受dictionary。###一顆星用法 範例 123456def test_var_args(farg, *args):    print &quot;formal arg:&quot;, farg    for arg">
+<meta name="keywords" content="code">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Object Detection with Convolution Neural Network Series">
-<meta property="og:url" content="https://world4jason.github.io/2017/11/06/Object-Detection-with-Convolution-Neural-Network/index.html">
+<meta property="og:title" content="PYTHON中如何使用*ARGS和**KWARGS">
+<meta property="og:url" content="https://world4jason.github.io/2017/12/24/PYTHON中如何使用-ARGS和-KWARGS/index.html">
 <meta property="og:site_name" content="world4jason">
-<meta property="og:description" content="Object Detection with Convolution Neural Network SeriesOutline  檢測任務? R-CNN Fast R-CNN Faster R-CNN SSD YOLO  檢測任務">
+<meta property="og:description" content="範例與翻譯理解自連結與連結 *args跟 **kwargs是類似的東西，是可有可無的參數。 一顆星的*args是tuple，可以接受很多的值。兩顆星的**kwargs一樣是可以接受很多值，但是是接受dictionary。###一顆星用法 範例 123456def test_var_args(farg, *args):    print &quot;formal arg:&quot;, farg    for arg">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://world4jason.github.io/media/15100388874028.png">
-<meta property="og:image" content="https://world4jason.github.io/media/15099707654238.jpg">
-<meta property="og:image" content="https://world4jason.github.io/media/15100371122830.jpg">
-<meta property="og:image" content="https://world4jason.github.io/media/15100371249624.jpg">
-<meta property="og:image" content="https://world4jason.github.io/media/15100374296902.jpg">
-<meta property="og:updated_time" content="2017-12-25T10:53:01.000Z">
+<meta property="og:image" content="https://world4jason.github.io/media/15141999823321.png">
+<meta property="og:updated_time" content="2017-12-25T11:13:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Object Detection with Convolution Neural Network Series">
-<meta name="twitter:description" content="Object Detection with Convolution Neural Network SeriesOutline  檢測任務? R-CNN Fast R-CNN Faster R-CNN SSD YOLO  檢測任務">
-<meta name="twitter:image" content="https://world4jason.github.io/media/15100388874028.png">
+<meta name="twitter:title" content="PYTHON中如何使用*ARGS和**KWARGS">
+<meta name="twitter:description" content="範例與翻譯理解自連結與連結 *args跟 **kwargs是類似的東西，是可有可無的參數。 一顆星的*args是tuple，可以接受很多的值。兩顆星的**kwargs一樣是可以接受很多值，但是是接受dictionary。###一顆星用法 範例 123456def test_var_args(farg, *args):    print &quot;formal arg:&quot;, farg    for arg">
+<meta name="twitter:image" content="https://world4jason.github.io/media/15141999823321.png">
     
         <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
     
@@ -118,7 +114,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Object Detection with Convolution Neural Network Series</div>
+        <div class="flex-col header-title ellipsis">PYTHON中如何使用*ARGS和**KWARGS</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -140,15 +136,15 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">Object Detection with Convolution Neural Network Series</h1>
+        <h1 class="title">PYTHON中如何使用*ARGS和**KWARGS</h1>
         <h5 class="subtitle">
             
-                <time datetime="2017-11-05T18:51:33.000Z" itemprop="datePublished" class="page-time">
-  2017-11-06
+                <time datetime="2017-12-24T10:48:14.000Z" itemprop="datePublished" class="page-time">
+  2017-12-24
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Detection/">Detection</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
 
             
         </h5>
@@ -165,20 +161,20 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Object-Detection-with-Convolution-Neural-Network-Series"><span class="post-toc-number">1.</span> <span class="post-toc-text">Object Detection with Convolution Neural Network Series</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#檢測任務"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">檢測任務</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#R-CNN"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">R-CNN</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Fast-R-CNN"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Fast R-CNN</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SSD"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">SSD</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#args跟-kwargs是類似的東西，是可有可無的參數。-一顆星的-args是tuple，可以接受很多的值。兩顆星的-kwargs一樣是可以接受很多值，但是是接受dictionary。"><span class="post-toc-number">1.</span> <span class="post-toc-text">*args跟 **kwargs是類似的東西，是可有可無的參數。 一顆星的*args是tuple，可以接受很多的值。兩顆星的**kwargs一樣是可以接受很多值，但是是接受dictionary。</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#順序問題"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">順序問題</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
-<article id="post-Object-Detection-with-Convolution-Neural-Network"
+<article id="post-PYTHON中如何使用-ARGS和-KWARGS"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">Object Detection with Convolution Neural Network Series</h1>
+        <h1 class="post-card-title">PYTHON中如何使用*ARGS和**KWARGS</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017-11-06 02:51:33" datetime="2017-11-05T18:51:33.000Z"  itemprop="datePublished">2017-11-06</time>
+            <time class="post-time" title="2017-12-24 18:48:14" datetime="2017-12-24T10:48:14.000Z"  itemprop="datePublished">2017-12-24</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Detection/">Detection</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
 
 
 
@@ -190,70 +186,25 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="Object-Detection-with-Convolution-Neural-Network-Series"><a href="#Object-Detection-with-Convolution-Neural-Network-Series" class="headerlink" title="Object Detection with Convolution Neural Network Series"></a>Object Detection with Convolution Neural Network Series</h1><p>Outline</p>
-<ul>
-<li>檢測任務?</li>
-<li>R-CNN</li>
-<li>Fast R-CNN</li>
-<li>Faster R-CNN</li>
-<li>SSD</li>
-<li>YOLO</li>
-</ul>
-<h2 id="檢測任務"><a href="#檢測任務" class="headerlink" title="檢測任務"></a>檢測任務</h2><figure class="image-bubble">
+            <p>範例與翻譯理解自<a href="http://www.saltycrane.com/blog/2008/01/how-to-use-args-and-kwargs-in-python/" target="_blank" rel="external">連結</a>與<a href="http://appsgaga.com/python%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-init%E6%96%B9%E6%B3%95%E4%B8%AD%EF%BC%8Cargs-kwargs%E9%80%99%E5%85%A9%E5%80%8B%E5%8F%83%E6%95%B8%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F/" target="_blank" rel="external">連結</a></p>
+<h2 id="args跟-kwargs是類似的東西，是可有可無的參數。-一顆星的-args是tuple，可以接受很多的值。兩顆星的-kwargs一樣是可以接受很多值，但是是接受dictionary。"><a href="#args跟-kwargs是類似的東西，是可有可無的參數。-一顆星的-args是tuple，可以接受很多的值。兩顆星的-kwargs一樣是可以接受很多值，但是是接受dictionary。" class="headerlink" title="*args跟 **kwargs是類似的東西，是可有可無的參數。 一顆星的*args是tuple，可以接受很多的值。兩顆星的**kwargs一樣是可以接受很多值，但是是接受dictionary。"></a>*args跟 **kwargs是類似的東西，是可有可無的參數。 一顆星的*args是tuple，可以接受很多的值。兩顆星的**kwargs一樣是可以接受很多值，但是是接受dictionary。</h2><p>###一顆星用法</p>
+<p>範例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_var_args</span><span class="params">(farg, *args)</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"formal arg:"</span>, farg</div><div class="line">    <span class="keyword">for</span> arg <span class="keyword">in</span> args:</div><div class="line">        <span class="keyword">print</span> <span class="string">"another arg:"</span>, arg</div><div class="line">        </div><div class="line">test_var_args(<span class="number">1</span>, <span class="string">"two"</span>, <span class="number">3</span>)</div></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">formal arg: <span class="number">1</span></div><div class="line">another arg: two</div><div class="line">another arg: <span class="number">3</span></div></pre></td></tr></table></figure>
+<p>###兩顆星用法</p>
+<p>範例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_var_kwargs</span><span class="params">(farg, **kwargs)</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"formal arg:"</span>, farg</div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> kwargs:</div><div class="line">        <span class="keyword">print</span> <span class="string">"another keyword arg: %s: %s"</span> % (key, kwargs[key])</div><div class="line"></div><div class="line">test_var_kwargs(farg=<span class="number">1</span>, myarg2=<span class="string">"two"</span>, myarg3=<span class="number">3</span>)</div></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">formal arg: <span class="number">1</span></div><div class="line">another keyword arg: myarg2: two</div><div class="line">another keyword arg: myarg3: <span class="number">3</span></div></pre></td></tr></table></figure>
+<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/media/15100388874028.png" alt="" title="">
+                    <img src="/media/15141999823321.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>
-<h2 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h2><center><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/media/15099707654238.jpg" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></center>
-
-<p>步驟 </p>
-<ol>
-<li>候選區域生成： 一張圖像生成1K~2K個候選區域（採用Selective Search 方法） </li>
-<li>特徵提取： 對每個候選區域，使用深度卷積網絡提取特徵（CNN） </li>
-<li>類別判斷： 特徵送入每一類的SVM 分類器，判別是否屬於該類 </li>
-<li>位置精修： 使用回歸器精細修正候選框位置 </li>
-<li>用Non-Maximum Selection 合併後選框</li>
-</ol>
-<h2 id="Fast-R-CNN"><a href="#Fast-R-CNN" class="headerlink" title="Fast R-CNN"></a>Fast R-CNN</h2><center><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/media/15100371122830.jpg" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></center><br>步驟<br>1. 候選區域生成： 一張圖像生成1K~2K個候選區域（採用Selective Search 方法）<br>2. 特徵提取： 該張圖片，使用深度卷積網絡提取特徵（CNN）<br>3. ROI Pooling：<br>4. 類別判斷： 特徵送入每一類的SVM 分類器，判別是否屬於該類<br>5. 位置精修： 使用回歸器精細修正候選框位置<br>6. 用Non-Maximum Selection 合併後選框<br><br>## Faster R-CNN<br><center><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/media/15100371249624.jpg" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></center>
-
-<h2 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h2><center><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/media/15100374296902.jpg" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure><br></center>
-
-
-
-
-
-
-
-<p>Reference:</p>
-<ol>
-<li><a href="http://zh.gluon.ai/" target="_blank" rel="external">http://zh.gluon.ai/</a></li>
-</ol>
+<h3 id="順序問題"><a href="#順序問題" class="headerlink" title="順序問題"></a>順序問題</h3><p>如果function定義時如上圖先放了tuple才是dictionary，呼叫時參數先放dictionary再放tuple會跳error。</p>
 
         </div>
 
@@ -261,7 +212,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-12-25T10:53:01.000Z" itemprop="dateUpdated">2017-12-25 18:53:01</time>
+    最後更新時間：<time datetime="2017-12-25T11:13:10.000Z" itemprop="dateUpdated">2017-12-25 19:13:10</time>
 </span><br>
 
 
@@ -280,7 +231,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R-CNN/">R-CNN</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code/">code</a></li></ul>
 
 
             
@@ -290,7 +241,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2017/11/06/Object-Detection-with-Convolution-Neural-Network/&title=《Object Detection with Convolution Neural Network Series》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2017/12/24/PYTHON中如何使用-ARGS和-KWARGS/&title=《PYTHON中如何使用*ARGS和**KWARGS》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -300,22 +251,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2017/11/06/Object-Detection-with-Convolution-Neural-Network/&title=《Object Detection with Convolution Neural Network Series》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2017/12/24/PYTHON中如何使用-ARGS和-KWARGS/&title=《PYTHON中如何使用*ARGS和**KWARGS》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2017/11/06/Object-Detection-with-Convolution-Neural-Network/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2017/12/24/PYTHON中如何使用-ARGS和-KWARGS/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Object Detection with Convolution Neural Network Series》 — world4jason&url=https://world4jason.github.io/2017/11/06/Object-Detection-with-Convolution-Neural-Network/&via=https://world4jason.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《PYTHON中如何使用*ARGS和**KWARGS》 — world4jason&url=https://world4jason.github.io/2017/12/24/PYTHON中如何使用-ARGS和-KWARGS/&via=https://world4jason.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2017/11/06/Object-Detection-with-Convolution-Neural-Network/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2017/12/24/PYTHON中如何使用-ARGS和-KWARGS/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -335,21 +286,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/11/06/R-CNN/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">R-CNN:Region proposals+CNN</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/10/19/CPP-note/" id="post-next" class="post-nav-link">
+      <a href="/2017/12/13/python-note/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">CPP 筆記</h4>
+        <h4 class="title">Python 筆記</h4>
       </a>
     </div>
   
@@ -430,7 +374,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2017/11/06/Object-Detection-with-Convolution-Neural-Network/&title=《Object Detection with Convolution Neural Network Series》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2017/12/24/PYTHON中如何使用-ARGS和-KWARGS/&title=《PYTHON中如何使用*ARGS和**KWARGS》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -440,22 +384,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2017/11/06/Object-Detection-with-Convolution-Neural-Network/&title=《Object Detection with Convolution Neural Network Series》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2017/12/24/PYTHON中如何使用-ARGS和-KWARGS/&title=《PYTHON中如何使用*ARGS和**KWARGS》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2017/11/06/Object-Detection-with-Convolution-Neural-Network/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2017/12/24/PYTHON中如何使用-ARGS和-KWARGS/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Object Detection with Convolution Neural Network Series》 — world4jason&url=https://world4jason.github.io/2017/11/06/Object-Detection-with-Convolution-Neural-Network/&via=https://world4jason.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《PYTHON中如何使用*ARGS和**KWARGS》 — world4jason&url=https://world4jason.github.io/2017/12/24/PYTHON中如何使用-ARGS和-KWARGS/&via=https://world4jason.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2017/11/06/Object-Detection-with-Convolution-Neural-Network/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2017/12/24/PYTHON中如何使用-ARGS和-KWARGS/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -466,7 +410,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://world4jason.github.io/2017/11/06/Object-Detection-with-Convolution-Neural-Network/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://world4jason.github.io/2017/12/24/PYTHON中如何使用-ARGS和-KWARGS/" alt="微信分享二维码">
 </div>
 
 
