@@ -20,21 +20,22 @@
     
     
     <meta name="keywords" content="Deep Learning,R-CNN,Segmentation,Pose Estimation">
-    <meta name="description" content="ConceptMask R-CNN 利用了相當簡潔與彈性的方法進行實例分割, 主要跟 Faster R-CNN 不同的地方在於原架構有 2 個分支   Classification branch  Bounding box branch   而 Mask R-CNN 的方法則是多加了另一個分支  — Mask branch。 Mask branchLoss functionLtotal = Lcl">
+    <meta name="description" content="Overview                                                                                                           ConceptMask R-CNN 利用了相當簡潔與彈性的方法進行實例分割, 主要跟 Faster R-CNN 不同的地方在於原架構有 2 個分支   Classific">
 <meta name="keywords" content="Deep Learning,R-CNN,Segmentation,Pose Estimation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mask R-CNN">
 <meta property="og:url" content="https://world4jason.github.io/2017/11/10/Mask R-CNN/index.html">
 <meta property="og:site_name" content="world4jason">
-<meta property="og:description" content="ConceptMask R-CNN 利用了相當簡潔與彈性的方法進行實例分割, 主要跟 Faster R-CNN 不同的地方在於原架構有 2 個分支   Classification branch  Bounding box branch   而 Mask R-CNN 的方法則是多加了另一個分支  — Mask branch。 Mask branchLoss functionLtotal = Lcl">
+<meta property="og:description" content="Overview                                                                                                           ConceptMask R-CNN 利用了相當簡潔與彈性的方法進行實例分割, 主要跟 Faster R-CNN 不同的地方在於原架構有 2 個分支   Classific">
 <meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://world4jason.github.io/media/15144439857026.jpg">
 <meta property="og:image" content="https://world4jason.github.io/media/15137535435975.png">
 <meta property="og:image" content="https://world4jason.github.io/media/15137536007979.gif">
-<meta property="og:updated_time" content="2017-12-20T07:41:37.000Z">
+<meta property="og:updated_time" content="2017-12-28T06:53:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mask R-CNN">
-<meta name="twitter:description" content="ConceptMask R-CNN 利用了相當簡潔與彈性的方法進行實例分割, 主要跟 Faster R-CNN 不同的地方在於原架構有 2 個分支   Classification branch  Bounding box branch   而 Mask R-CNN 的方法則是多加了另一個分支  — Mask branch。 Mask branchLoss functionLtotal = Lcl">
-<meta name="twitter:image" content="https://world4jason.github.io/media/15137535435975.png">
+<meta name="twitter:description" content="Overview                                                                                                           ConceptMask R-CNN 利用了相當簡潔與彈性的方法進行實例分割, 主要跟 Faster R-CNN 不同的地方在於原架構有 2 個分支   Classific">
+<meta name="twitter:image" content="https://world4jason.github.io/media/15144439857026.jpg">
     
         <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
     
@@ -162,7 +163,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Concept"><span class="post-toc-number">1.</span> <span class="post-toc-text">Concept</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Mask-branch"><span class="post-toc-number">2.</span> <span class="post-toc-text">Mask branch</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Loss-function"><span class="post-toc-number">3.</span> <span class="post-toc-text">Loss function</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ROI-POOLING"><span class="post-toc-number">4.</span> <span class="post-toc-text">ROI POOLING</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Overview"><span class="post-toc-number">1.</span> <span class="post-toc-text">Overview</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Concept"><span class="post-toc-number">2.</span> <span class="post-toc-text">Concept</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Mask-branch"><span class="post-toc-number">3.</span> <span class="post-toc-text">Mask branch</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Loss-function"><span class="post-toc-number">4.</span> <span class="post-toc-text">Loss function</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ROI-POOLING"><span class="post-toc-number">5.</span> <span class="post-toc-text">ROI POOLING</span></a></li></ol>
         </nav>
     </aside>
     
@@ -187,7 +188,14 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h2><p>Mask R-CNN 利用了相當簡潔與彈性的方法進行實例分割, 主要跟 Faster R-CNN 不同的地方在於原架構有 2 個分支 </p>
+            <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15144439857026.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h2><p>Mask R-CNN 利用了相當簡潔與彈性的方法進行實例分割, 主要跟 Faster R-CNN 不同的地方在於原架構有 2 個分支 </p>
 <ol>
 <li>Classification branch </li>
 <li>Bounding box branch </li>
@@ -217,7 +225,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2017-12-20T07:41:37.000Z" itemprop="dateUpdated">2017-12-20 15:41:37</time>
+    最後更新時間：<time datetime="2017-12-28T06:53:26.000Z" itemprop="dateUpdated">2017-12-28 14:53:26</time>
 </span><br>
 
 
@@ -368,7 +376,7 @@
         </p>
     </div>
     <div class="bottom">
-        <p><span>Jason Yeh &copy; 2015 - 2017</span>
+        <p><span>Jason Yeh &copy; 2015 - 2018</span>
             <span>
                 
                 Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
