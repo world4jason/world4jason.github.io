@@ -43,7 +43,8 @@
 <meta property="og:image" content="https://world4jason.github.io/media/15150492644360.jpg">
 <meta property="og:image" content="https://world4jason.github.io/media/15150490021821.jpg">
 <meta property="og:image" content="https://world4jason.github.io/media/15150490274695.jpg">
-<meta property="og:updated_time" content="2018-01-04T07:04:41.000Z">
+<meta property="og:image" content="https://world4jason.github.io/media/15150495642066.jpg">
+<meta property="og:updated_time" content="2018-01-04T07:08:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Person re-ID 綜述">
 <meta name="twitter:description" content="目標難度 目標遮擋（Occlusion）導致部分特徵丟失 不同的 View，Illumination 導致同一目標的特徵差異 不同目標衣服顏色近似、特徵近似導致區分度下降  解決方案1.">
@@ -287,13 +288,14 @@
                 </div>
                 <div class="image-caption"></div>
             </figure></p>
-<p>為了處理不同數據集，甚至是不同camera所造成bias的問題，論文[7]是利用cycleGAN based的設計，利用遷移學習來處理兩個數同數據集的問題，先切割分前景跟背景，在轉換過去。<br><figure class="image-bubble">
+<p>為了處理不同數據集，甚至是不同camera所造成bias的問題，論文[7]是利用cycleGAN based的設計，利用遷移學習來處理兩個數同數據集的問題，先切割分前景跟背景，在轉換過去。<br>D有兩個loss(還是有兩個D不確定，paper內沒架構圖)一個是前景的絕對誤差loss，一個是正常的判別器loss。判別器loss是用來判斷生成的圖屬於哪個domain，前景的loss是為了保證行人前景儘可能逼真不變。mask用PSPnet來找的。</p>
+<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/media/15150492644360.jpg" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
-            </figure></p>
+            </figure>
 <p>Pose Normalization[8]<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -304,6 +306,12 @@
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/media/15150490274695.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15150495642066.jpg" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure></p>
@@ -355,7 +363,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2018-01-04T07:04:41.000Z" itemprop="dateUpdated">2018-01-04 15:04:41</time>
+    最後更新時間：<time datetime="2018-01-04T07:08:52.000Z" itemprop="dateUpdated">2018-01-04 15:08:52</time>
 </span><br>
 
 
