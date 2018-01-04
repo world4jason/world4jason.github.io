@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://world4jason.github.io/2017/12/24/PYTHON%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-ARGS%E5%92%8C-KWARGS/</loc>
+    
+    <lastmod>2018-01-04T07:24:09.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://world4jason.github.io/2018/01/02/person_re-ID_summary/</loc>
     
-    <lastmod>2018-01-04T07:22:16.000Z</lastmod>
+    <lastmod>2018-01-04T07:23:20.000Z</lastmod>
     
   </url>
   
@@ -26,13 +33,6 @@
     <loc>https://world4jason.github.io/2017/11/10/Mask%20R-CNN/</loc>
     
     <lastmod>2017-12-28T06:53:26.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://world4jason.github.io/2017/12/24/PYTHON%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-ARGS%E5%92%8C-KWARGS/</loc>
-    
-    <lastmod>2017-12-25T11:13:10.000Z</lastmod>
     
   </url>
   
