@@ -44,7 +44,7 @@
 <meta property="og:image" content="https://world4jason.github.io/media/15150490021821.jpg">
 <meta property="og:image" content="https://world4jason.github.io/media/15150490274695.jpg">
 <meta property="og:image" content="https://world4jason.github.io/media/15150495642066.jpg">
-<meta property="og:updated_time" content="2018-01-04T07:23:20.000Z">
+<meta property="og:updated_time" content="2018-01-04T10:02:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Person re-ID 綜述">
 <meta name="twitter:description" content="目標難度 目標遮擋（Occlusion）導致部分特徵丟失 不同的 View，Illumination 導致同一目標的特徵差異 不同目標衣服顏色近似、特徵近似導致區分度下降  解決方案1.">
@@ -176,7 +176,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目標"><span class="post-toc-number">1.</span> <span class="post-toc-text">目標</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#難度"><span class="post-toc-number">2.</span> <span class="post-toc-text">難度</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解決方案"><span class="post-toc-number">3.</span> <span class="post-toc-text">解決方案</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-Representation-learning-ReID"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1. Representation learning + ReID</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-Metric-learning-ReID"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2. Metric learning + ReID</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-基于局部特征的ReID方法"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3. 基于局部特征的ReID方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-Video-Sequence-ReID"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">4. Video Sequence + ReID</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-GAN-ReID"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">5. GAN + ReID</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#資料種類"><span class="post-toc-number">4.</span> <span class="post-toc-text">資料種類</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#資料庫"><span class="post-toc-number">5.</span> <span class="post-toc-text">資料庫</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#程式碼"><span class="post-toc-number">6.</span> <span class="post-toc-text">程式碼</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ICCV-2017"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">ICCV 2017</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CVPR-2017"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">CVPR 2017</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Paper-List"><span class="post-toc-number">7.</span> <span class="post-toc-text">Paper List</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目標"><span class="post-toc-number">1.</span> <span class="post-toc-text">目標</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#難度"><span class="post-toc-number">2.</span> <span class="post-toc-text">難度</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解決方案"><span class="post-toc-number">3.</span> <span class="post-toc-text">解決方案</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-Representation-learning-ReID"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1. Representation learning + ReID</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-Metric-learning-ReID"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2. Metric learning + ReID</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-Local-Feature-ReID"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3. Local Feature + ReID</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-Video-Sequence-ReID"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">4. Video Sequence + ReID</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-GAN-ReID"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">5. GAN + ReID</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#資料種類"><span class="post-toc-number">4.</span> <span class="post-toc-text">資料種類</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#資料庫"><span class="post-toc-number">5.</span> <span class="post-toc-text">資料庫</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#程式碼"><span class="post-toc-number">6.</span> <span class="post-toc-text">程式碼</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ICCV-2017"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">ICCV 2017</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CVPR-2017"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">CVPR 2017</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Paper-List"><span class="post-toc-number">7.</span> <span class="post-toc-text">Paper List</span></a></li></ol>
         </nav>
     </aside>
     
@@ -250,20 +250,21 @@
                 </div>
                 <div class="image-caption"></div>
             </figure></p>
-<h3 id="3-基于局部特征的ReID方法"><a href="#3-基于局部特征的ReID方法" class="headerlink" title="3. 基于局部特征的ReID方法"></a>3. 基于局部特征的ReID方法</h3><p>論文[3]用local feature而不用global feature，切割好以後送到LSTM去學<br><figure class="image-bubble">
+<h3 id="3-Local-Feature-ReID"><a href="#3-Local-Feature-ReID" class="headerlink" title="3. Local Feature + ReID"></a>3. Local Feature + ReID</h3><p>論文[3]用local feature而不用global feature，切割好以後送到LSTM去學<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/media/15150481401848.jpg" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure></p>
-<p>但論文[3]會有對齊問題，所以論文[4]用pose跟skeleton來做姿勢預測，再通過仿射變換對齊<br><figure class="image-bubble">
+<p>但論文[3]會有對齊問題，所以論文[4]用pose跟skeleton來做姿勢預測，再通過仿射變換對齊</p>
+<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/media/15150485085441.jpg" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
-            </figure></p>
+            </figure>
 <p>論文[5]直接拿關節點切出ROI，14個人體關節點，得到7個ROI區域，(頭、上身、下身和四肢)<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -369,7 +370,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2018-01-04T07:23:20.000Z" itemprop="dateUpdated">2018-01-04 15:23:20</time>
+    最後更新時間：<time datetime="2018-01-04T10:02:59.000Z" itemprop="dateUpdated">2018-01-04 18:02:59</time>
 </span><br>
 
 
