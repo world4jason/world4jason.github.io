@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>world4jason | 菜鳥搬磚日常</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="undefined">
+    <meta name="description" content="Deep Learning Tutorial45 Papers + TF implementationsTopics (papers)Modern CNNs Alex Krizhevsky, et al. “ImageNet Classification with Deep Convolutional Neural Networks”, NIPS, 2012 Christian Szegedy,">
+<meta property="og:type" content="website">
+<meta property="og:title" content="world4jason">
+<meta property="og:url" content="https://world4jason.github.io/external/dl_tutorials_10weeks-master/README.html">
+<meta property="og:site_name" content="world4jason">
+<meta property="og:description" content="Deep Learning Tutorial45 Papers + TF implementationsTopics (papers)Modern CNNs Alex Krizhevsky, et al. “ImageNet Classification with Deep Convolutional Neural Networks”, NIPS, 2012 Christian Szegedy,">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2017-07-28T11:44:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="world4jason">
+<meta name="twitter:description" content="Deep Learning Tutorial45 Papers + TF implementationsTopics (papers)Modern CNNs Alex Krizhevsky, et al. “ImageNet Classification with Deep Convolutional Neural Networks”, NIPS, 2012 Christian Szegedy,">
+    
+        <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Jason Yeh</h5>
+          <a href="mailto:world4jason@gmail.com" title="world4jason@gmail.com" class="mail">world4jason@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/world4jason" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis"></div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header page-header">
+
+    <div class="container fade-scale">
+        <h1 class="title"></h1>
+        <h5 class="subtitle">
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    <article class="page-article fade" itemprop="blogPage">
+        <div class="post-content page-content" id="page-content" itemprop="pageContent">
+            <h1 id="Deep-Learning-Tutorial"><a href="#Deep-Learning-Tutorial" class="headerlink" title="Deep Learning Tutorial"></a>Deep Learning Tutorial</h1><h3 id="45-Papers-TF-implementations"><a href="#45-Papers-TF-implementations" class="headerlink" title="45 Papers + TF implementations"></a>45 Papers + TF implementations</h3><h2 id="Topics-papers"><a href="#Topics-papers" class="headerlink" title="Topics (papers)"></a>Topics (papers)</h2><h3 id="Modern-CNNs"><a href="#Modern-CNNs" class="headerlink" title="Modern CNNs"></a>Modern CNNs</h3><ul>
+<li>Alex Krizhevsky, et al. “ImageNet Classification with Deep Convolutional Neural Networks”, NIPS, 2012</li>
+<li>Christian Szegedy, et al. “Going Deeper with Convolutions”, CVPR, 2015</li>
+<li>Christian Szegedy, et al. “Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning”, ArXiv, 2016</li>
+<li>Kaiming He, et al. “Deep Residual Learning for Image Recognition”, CVPR, 2016</li>
+<li>Andreas Veit, et al. “Residual Networks are Exponential Ensembles of Relatively Shallow Networks”, ArXiv, 2016</li>
+<li>Sergey Zagoruyko and Nikos Komodakis “Wide Residual Networks”, ArXiv, 2016</li>
+</ul>
+<h3 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h3><ul>
+<li>Nitish Srivastava, et al. “Dropout- A Simple Way to Prevent Neural Networks from Overfitting”, JMLR, 2014</li>
+<li>Sergey Ioffe and Christian Szegedy “Batch Normalization- Accelerating Deep Network Training by Reducing Internal Covariate Shift, ArXiv, 2015</li>
+</ul>
+<h3 id="Algorithms-behind-AlphaGo"><a href="#Algorithms-behind-AlphaGo" class="headerlink" title="Algorithms behind AlphaGo"></a>Algorithms behind AlphaGo</h3><ul>
+<li>David Silver et al. “Mastering the game of Go with deep neural networks and tree search”, Nature, 2016</li>
+</ul>
+<h3 id="Optimization-Methods"><a href="#Optimization-Methods" class="headerlink" title="Optimization Methods"></a>Optimization Methods</h3><ul>
+<li>Momentum, NAG, AdaGrad, AdaDelta, RMSprop, ADAM</li>
+<li>Diederik Kingma and Jimmy Bam “ADAM: A Method For Stochastic Optimization”, ICLR, 2015</li>
+</ul>
+<h3 id="Restricted-Boltzmann-Machine"><a href="#Restricted-Boltzmann-Machine" class="headerlink" title="Restricted Boltzmann Machine"></a>Restricted Boltzmann Machine</h3><ul>
+<li>Geoffrey Hinton, “A Practical Guide to Training Restricted Boltzmann Machines”, 2010</li>
+</ul>
+<h3 id="Semantic-Segmentation"><a href="#Semantic-Segmentation" class="headerlink" title="Semantic Segmentation"></a>Semantic Segmentation</h3><ul>
+<li>Jonathan Long et al. “Fully Convolutional Networks for Semantic Segmentation”, CVPR, 2015</li>
+<li>Liang-Chieh Chen et al. “Semantic Image Segmentation with Deep Convolutional Nets and Fully Connected CRFs”, CVPR, 2015</li>
+<li>Hyeonwoo Noh et al. “Learning Deconvolution Network for Semantic Segmentation”, ICCV, 2015</li>
+<li>Liang-Chieh Chen et al. “DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs”, ArXiv, 2016</li>
+</ul>
+<h3 id="Weakly-Supervised-Localization"><a href="#Weakly-Supervised-Localization" class="headerlink" title="Weakly Supervised Localization"></a>Weakly Supervised Localization</h3><ul>
+<li>Maxime Oquab et al. “Is object localization for free? – Weakly-supervised learning with convolutional neural networks”, CVPR, 2015</li>
+<li>Bolei Zhou et al. “Learning Deep Features for Discriminative Localization”, CVPR, 2016</li>
+</ul>
+<h3 id="Image-detection-methods"><a href="#Image-detection-methods" class="headerlink" title="Image detection methods"></a>Image detection methods</h3><ul>
+<li>Ross Girshick et al. “Rich feature hierarchies for accurate object detection and semantic segmentation”, CVPR, 2014</li>
+<li>Kaiming He et al. “Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition”, CVPR, 2015</li>
+<li>Ross Girshick, “Fast R-CNN”, ICCV, 2015</li>
+<li>Shaoqing Ren et al. “Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks”, NIPS, 2015</li>
+<li>Joseph Redmon et al. “You Only Look Once: Unified, Real-Time Object Detection”, CVPR, 2016</li>
+<li>Donggeun Yoo et al. “AttentionNet: Aggregating Weak Directions for Accurate Object Detection”, ICCV, 2015</li>
+<li>Wei Liu et al. “SSD: Single Shot MultiBox Detector”, ECCV, 2016</li>
+<li>Joseph Redmon, Ali Farhadi, “YOLO9000: Better, Faster, Stronger”, ArXiv, 2017</li>
+</ul>
+<h3 id="Visual-Q-amp-A"><a href="#Visual-Q-amp-A" class="headerlink" title="Visual Q&amp;A"></a>Visual Q&amp;A</h3><ul>
+<li>Hyeonwoo Noh et al. “Image Question Answering using Convolutional Neural Network with Dynamic Parameter Prediction”, CVPR, 2015</li>
+<li>Akira Fukui et al. “Multimodal Compact Bilinear Pooling for VQA”, CVPR, 2016</li>
+</ul>
+<h3 id="Deep-reinforcement-learning"><a href="#Deep-reinforcement-learning" class="headerlink" title="Deep reinforcement learning"></a>Deep reinforcement learning</h3><ul>
+<li>Volodymyr Mnih et al. “Playing Atari with Deep Reinforcement Learning”, NIPS, 2013</li>
+<li>Hado van Hasselt et al. “Deep Reinforcement Learning with Double Q-learning”, AAAI, 2016</li>
+</ul>
+<h3 id="Recurrent-Neural-Networks"><a href="#Recurrent-Neural-Networks" class="headerlink" title="Recurrent Neural Networks"></a>Recurrent Neural Networks</h3><ul>
+<li>Alex Graves, “Generating Sequences With Recurrent Neural Networks”, ArXiv, 2013</li>
+</ul>
+<h3 id="Word-embedding"><a href="#Word-embedding" class="headerlink" title="Word embedding"></a>Word embedding</h3><ul>
+<li>Tomas Mikolov et al. “Distributed Representations of Words and Phrases and their Compositionality”, NIPS, 2013</li>
+</ul>
+<h3 id="Image-captioning"><a href="#Image-captioning" class="headerlink" title="Image captioning"></a>Image captioning</h3><ul>
+<li>Oriol Vinyals et al. “Show and Tell: A Neural Image Caption Generator”, CVPR, 2015</li>
+<li>Kelvin Xu et al. “Show, Attend and Tell: Neural Image Caption Generation with Visual Attention”, ICML, 2015</li>
+<li>Justin Johnson et al. “DenseCap: Fully Convolutional Localization Networks for Dense Captioning”, CVPR, 2016</li>
+</ul>
+<h3 id="Neural-Styles"><a href="#Neural-Styles" class="headerlink" title="Neural Styles"></a>Neural Styles</h3><ul>
+<li>Leon A. Gatys et al. “Texture Synthesis Using Convolutional Neural Networks”, NIPS, 2015</li>
+<li>Aravindh Mahendran and Andrea Vedaldi, “Understanding Deep Image Representations by Inverting Them”, CVPR, 2015</li>
+<li>Leon A. Gatys et al. “A Neural Algorithm of Artistic Style”, ArXiv, 2015</li>
+</ul>
+<h3 id="Generative-adversarial-networks"><a href="#Generative-adversarial-networks" class="headerlink" title="Generative adversarial networks"></a>Generative adversarial networks</h3><ul>
+<li>Ian J. Goodfellow et al. “Generative Adversarial Networks”, NIPS, 2015</li>
+<li>Alec Radford et al. “Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks”, ICLR, 2016</li>
+<li>Scott Reed et al. “Generative Adversarial Text to Image Synthesis”, ICML, 2016</li>
+<li>Donggeun Yoo et al. “Pixel Level Domain Transfer”, ECCV, 2016</li>
+<li>Phillip Isola et al, “Image-to-Image Translation with Conditional Adversarial Networks”, ArXiv, 2016</li>
+<li>Anh Nguyen et al. “Plug &amp; Play Generative Networks: Conditional Iterative Generation of Images in Latent Space”, ArXiv, 2016</li>
+<li>Scott Reed et al. “Learning What and Where to Draw”, NIPS, 2016</li>
+</ul>
+<h2 id="and-implementations-which-can-be-found-in-TF-101"><a href="#and-implementations-which-can-be-found-in-TF-101" class="headerlink" title="and implementations (which can be found in TF-101)"></a>and implementations (which can be found in <a href="https://github.com/sjchoi86/Tensorflow-101" target="_blank" rel="external">TF-101</a>)</h2><ul>
+<li>Basic Python usage (numpy, matplotlib, ..)</li>
+<li>Handling MNIST</li>
+<li>Logistic regression</li>
+<li>Multilayer Perceptron</li>
+<li>Convolutional Neural Network </li>
+<li>Denoising Autoencoders (+Convolutional)</li>
+<li>Class Activation Map</li>
+<li>Semantic Segmentation </li>
+<li>Using Custom Dataset</li>
+<li>Recurrent Neural Network</li>
+<li>Char-RNN</li>
+<li>Word2Vec</li>
+<li>Neural Style</li>
+</ul>
+
+        </div>
+
+        
+        <div class="card page-about-me flex-row">
+            <a href="/" class="avatar waves-effect waves-circle waves-light"><img src="/img/avatar.jpg"></a>
+            <div class="content flex-col">
+                <p><strong>Jason Yeh</strong></p>
+                <p><em>菜鳥搬磚日常</em></p>
+                <p>用户页面中作者相关的描述性文字，如不需要设为 false</p>
+            </div>
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/external/dl_tutorials_10weeks-master/README.html&title=world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/external/dl_tutorials_10weeks-master/README.html&title=world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/external/dl_tutorials_10weeks-master/README.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=world4jason&url=https://world4jason.github.io/external/dl_tutorials_10weeks-master/README.html&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/external/dl_tutorials_10weeks-master/README.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+        
+
+        
+
+
+        
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+    </article>
+    
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        總訪客數：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        總訪問量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Jason Yeh &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/external/dl_tutorials_10weeks-master/README.html&title=world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/external/dl_tutorials_10weeks-master/README.html&title=world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/external/dl_tutorials_10weeks-master/README.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=world4jason&url=https://world4jason.github.io/external/dl_tutorials_10weeks-master/README.html&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/external/dl_tutorials_10weeks-master/README.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://world4jason.github.io/external/dl_tutorials_10weeks-master/README.html" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '持續搬磚中';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又回來了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
