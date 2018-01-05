@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>world4jason | 菜鳥搬磚日常</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="undefined">
+    <meta name="description" content="Deep learning tutorials Deep learning tutorials (2nd ed.) Week1 Deep learning intro. Python basics.pptx) Let’s play with images &amp;amp; MNIST%20and%20image%20processing%20(basic_imgprocess).pptx) Termin">
+<meta property="og:type" content="website">
+<meta property="og:title" content="world4jason">
+<meta property="og:url" content="https://world4jason.github.io/external/dl_tutorials-master/README.html">
+<meta property="og:site_name" content="world4jason">
+<meta property="og:description" content="Deep learning tutorials Deep learning tutorials (2nd ed.) Week1 Deep learning intro. Python basics.pptx) Let’s play with images &amp;amp; MNIST%20and%20image%20processing%20(basic_imgprocess).pptx) Termin">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2016-07-26T01:31:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="world4jason">
+<meta name="twitter:description" content="Deep learning tutorials Deep learning tutorials (2nd ed.) Week1 Deep learning intro. Python basics.pptx) Let’s play with images &amp;amp; MNIST%20and%20image%20processing%20(basic_imgprocess).pptx) Termin">
+    
+        <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Jason Yeh</h5>
+          <a href="mailto:world4jason@gmail.com" title="world4jason@gmail.com" class="mail">world4jason@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/world4jason" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis"></div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header page-header">
+
+    <div class="container fade-scale">
+        <h1 class="title"></h1>
+        <h5 class="subtitle">
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    <article class="page-article fade" itemprop="blogPage">
+        <div class="post-content page-content" id="page-content" itemprop="pageContent">
+            <h1 id="Deep-learning-tutorials"><a href="#Deep-learning-tutorials" class="headerlink" title="Deep learning tutorials"></a>Deep learning tutorials</h1><p> Deep learning tutorials (2nd ed.)</p>
+<h2 id="Week1"><a href="#Week1" class="headerlink" title="Week1"></a>Week1</h2><ol>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week1-1b%20Deep%20learning%20intro.pptx" target="_blank" rel="external">Deep learning intro.</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week1-1c%20Python%20basic%20(basic_python" target="_blank" rel="external">Python basics</a>.pptx)</li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week1-1d%20MNIST%20(basic_mnist" target="_blank" rel="external">Let’s play with images &amp; MNIST</a>%20and%20image%20processing%20(basic_imgprocess).pptx)</li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week1-2a%20Terminologies.pptx" target="_blank" rel="external">Terminologies</a></li>
+</ol>
+<h2 id="Week2-Do-you-know-deep-learning"><a href="#Week2-Do-you-know-deep-learning" class="headerlink" title="Week2 - Do you know deep learning?"></a>Week2 - Do you know deep learning?</h2><ol>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week1-2b%20CNN%20and%20AlexNet.pptx" target="_blank" rel="external">CNN and AlexNet</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week1-2c%20TensorFlow%20basic%20(basic_tensorflow" target="_blank" rel="external">TensorFlow basics</a>.pptx)</li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week1-2d%20Logistic%20regression%20(logistic_regression_mnist" target="_blank" rel="external">Logistic regression</a>.pptx)</li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week2-1b%20GoogLeNet.pptx" target="_blank" rel="external">GoogLeNet</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week2-1c%20AlphaGo.pptx" target="_blank" rel="external">AlphaGo: MCTS+CNN</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week2-1d%20Multi-layer%20perceptron%20(mlp_mnist_simple" target="_blank" rel="external">Let’s implement MLP!</a>.pptx)</li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week2-1e%20Generate%20your%20own%20dataset%20(basic_gendataset" target="_blank" rel="external">Let’s play with you OWN DATASET</a>.pptx)</li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week2-1f%20Regulaziation.pptx" target="_blank" rel="external">Regularization methods</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week2-2a%20Optimizaiton%20methods.pptx" target="_blank" rel="external">Optimization methods</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week2-2b%20Restricted%20Boltzmann%20machine.pptx" target="_blank" rel="external">Restricted Boltzmann Machine</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week2-2c%20Denoising%20auto-encoder%20(dae_mnist" target="_blank" rel="external">Let’s implement denoising autoencoder</a>.pptx)</li>
+</ol>
+<h2 id="Week3-CNN-basics"><a href="#Week3-CNN-basics" class="headerlink" title="Week3 - CNN basics"></a>Week3 - CNN basics</h2><ol>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week3-1b%20Semantic%20segmentation%20details%2BSOTA.pptx" target="_blank" rel="external">Semantic segmentation: FCN, DeconvNet, DeepLab with atrous conv</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week3-1c%20What%20is%20CNN%20(cnn_mnist_simple" target="_blank" rel="external">Let’s implement a simple CNN</a>.pptx)</li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week3-1d%20Powerful%20CNN%20(cnn_mnist_basic" target="_blank" rel="external">Let’s implement a basic CNN</a>.pptx)</li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week3-1e%20Implementing%20semantic%20segmentation%20(semseg_basic" target="_blank" rel="external">Let’s implement semantic segmentation</a>.pptx) </li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week3-2a%20Weakly%20supervised%20learning.pptx" target="_blank" rel="external">Weakly supervised localization: Global average pooling</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week3-2b%20Use%20your%20own%20dataset%20(basic_gendataset%2C%20lr%2C%20mlp%2C%20cnn" target="_blank" rel="external">Implement MLP and CNN on your OWN DATASET</a>.pptx)</li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week3-2c%20Denoising%20deconvolutional%20network.pptx" target="_blank" rel="external">Denoising deconvolutional neural network</a></li>
+</ol>
+<h2 id="Week4-CNN-applications-RNN-basics"><a href="#Week4-CNN-applications-RNN-basics" class="headerlink" title="Week4 - CNN applications + RNN basics"></a>Week4 - CNN applications + RNN basics</h2><ol>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week4-1a%20Image%20detection%20(RCNN%2C%20SPPnet%2C%20FastRCNN%2C%20FasterRCNN" target="_blank" rel="external">Image detection (RCNN, SPPnet, FastRCNN, FasterRCNN)</a>.pptx)</li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week4-1b%20Other%20dections%20(YOLO%2C%20AttentionNet" target="_blank" rel="external">Other detections (YOLO, AttentionNet)</a>.pptx)</li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week4-1c%20TensorBoard.pptx" target="_blank" rel="external">Let’s use TensorBoards</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week4-2a%20RNN%20(colah%20blog" target="_blank" rel="external">RNN from Colah’s blog</a>.pptx)</li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week4-2b%20Visual%20QnA.pptx" target="_blank" rel="external">Visual QnA: DPPnet + MCBP!</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week4-2c%20Super%20resolution.pptx" target="_blank" rel="external">Super resolution</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week4-2d%20Deep%20reinforcement%20learning.pptx" target="_blank" rel="external">Deep reinforcement learning</a></li>
+</ol>
+<h2 id="Week5-RNN-applications"><a href="#Week5-RNN-applications" class="headerlink" title="Week5 - RNN applications"></a>Week5 - RNN applications</h2><ol>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week5-1a%20RNN%20%2B%20LSTM%20%2B%20Handwrting%20Gen.pptx" target="_blank" rel="external">RNN basic + handwriting generation</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week5-1b%20Implementing%20RNN%20(rnn_mnist_simple" target="_blank" rel="external">Let’s implement RNNs</a>.pptx)</li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week5-2a%20Word2Vec%20again.pptx" target="_blank" rel="external">Let’s implement Word2vec</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week5-2b%20Image%20Captioning.pptx" target="_blank" rel="external">Image captioning: Show and Tell + Show, attend and tell</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week5-2c%20Hangul-RNN.pptx" target="_blank" rel="external">char-rnn + how can we use Hangul?</a></li>
+</ol>
+<h2 id="Week6-Deep-learning-is-so-FUN"><a href="#Week6-Deep-learning-is-so-FUN" class="headerlink" title="Week6 - Deep learning is so FUN!"></a>Week6 - Deep learning is so FUN!</h2><ol>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week6-1a%20Residual%20Networks%20and%20Analysis.pptx" target="_blank" rel="external">Residual network and some analysis</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week6-1b%20Neural%20Style.pptx" target="_blank" rel="external">Neural Style: Texture synsthesis+Inverting CNN</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week6-1c%20Neural%20Style%20Code.pptx" target="_blank" rel="external">Let’s implement neural style</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week6-2a%20Bayesian%20Optimization.pptx" target="_blank" rel="external">Bayesian optimization</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week6-2b%20Adversarial%20Attack.pptx" target="_blank" rel="external">Adversaral attack?</a></li>
+<li><a href="https://github.com/sjchoi86/dl_tutorials/blob/master/presentations/Week6-2c%20Generative%20Adversarial%20Network.pptx" target="_blank" rel="external">Generative adversarial network</a></li>
+</ol>
+
+        </div>
+
+        
+        <div class="card page-about-me flex-row">
+            <a href="/" class="avatar waves-effect waves-circle waves-light"><img src="/img/avatar.jpg"></a>
+            <div class="content flex-col">
+                <p><strong>Jason Yeh</strong></p>
+                <p><em>菜鳥搬磚日常</em></p>
+                <p>用户页面中作者相关的描述性文字，如不需要设为 false</p>
+            </div>
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/external/dl_tutorials-master/README.html&title=world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/external/dl_tutorials-master/README.html&title=world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/external/dl_tutorials-master/README.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=world4jason&url=https://world4jason.github.io/external/dl_tutorials-master/README.html&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/external/dl_tutorials-master/README.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+        
+
+        
+
+
+        
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+    </article>
+    
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        總訪客數：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        總訪問量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Jason Yeh &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/external/dl_tutorials-master/README.html&title=world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/external/dl_tutorials-master/README.html&title=world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/external/dl_tutorials-master/README.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=world4jason&url=https://world4jason.github.io/external/dl_tutorials-master/README.html&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/external/dl_tutorials-master/README.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://world4jason.github.io/external/dl_tutorials-master/README.html" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '持續搬磚中';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又回來了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
