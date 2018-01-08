@@ -16,6 +16,8 @@
     <title>world4jason | 菜鳥搬磚日常</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
+    <meta name="theme-color" content="#3F51B5">
+    
     
     <meta name="keywords" content="undefined">
     <meta name="description" content="菜鳥搬磚日常">
@@ -31,8 +33,8 @@
     
         <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
     
-    <link rel="shortcut icon" href="/">
-    <link rel="stylesheet" href="/css/style.css?v=1.6.17">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
     <script>window.lazyScripts=[]</script>
 
     <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
@@ -48,19 +50,75 @@
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap" style="background-image:url(/)">
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/">
+          <img src="/img/avatar.jpg">
         </a>
         <hgroup class="introduce">
           <h5 class="nickname">Jason Yeh</h5>
-          <a href="mailto:undefined" class="mail">
+          <a href="mailto:world4jason@gmail.com" title="world4jason@gmail.com" class="mail">world4jason@gmail.com</a>
         </hgroup>
       </div>
     </div>
     <div class="scroll-wrap flex-col">
       <ul class="nav">
+        
+            <li class="waves-block waves-effect active">
+              <a href="/"  >
+                <i class="icon icon-lg icon-Home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/world4jason" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-research"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-about"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cv"  >
+                <i class="icon icon-lg icon-CV"></i>
+                CV
+              </a>
+            </li>
         
       </ul>
     </div>
@@ -75,6 +133,20 @@
         </a>
         <div class="flex-col header-title ellipsis">world4jason</div>
         
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
         
     </div>
 </header>
@@ -129,7 +201,17 @@
     
         
                 
-         ...
+                    
+                    
+                
+                
+            
+目標難度
+目標遮擋（Occlusion）導致部分特徵丟失
+不同的 View，Illumination 導致同一目標的特徵差異
+不同目標衣服顏色近似、特徵近似導致區分度下降
+
+解決方...
     
 
         <a href="/2018/01/02/person_re-ID_summary/" class="post-more waves-effect waves-button">
@@ -177,7 +259,9 @@
 
     
         範例與翻譯理解自連結與連結
-*args跟 **kwar...
+*args跟 **kwargs是類似的東西，是可有可無的參數。 一顆星的*args是tuple，可以接受很多的值。兩顆星的**kwargs一樣是可以接受很多值，但是是接受dictionary。###一顆星用法
+範例
+123456def test_var_args(farg, *args):    print "formal arg:", farg    for a...
     
 
         <a href="/2017/12/24/PYTHON中如何使用-ARGS和-KWARGS/" class="post-more waves-effect waves-button">
@@ -225,7 +309,9 @@
 
     
         Different in Py2 and Py3
-Pi...
+Pickle module
+12345import sysif sys.version_info[0]&lt;3:    import cPickle as pickleelse    import _pickle as pickle
+
     
 
         <a href="/2017/12/13/python-note/" class="post-more waves-effect waves-button">
@@ -274,7 +360,15 @@ Pi...
     
         
                 
-         ...
+                    
+                    
+                
+                
+            
+Generated samples. Related code can be found here
+目標字體風格轉換
+                
+              ...
     
 
         <a href="/2017/12/01/zi2zi/" class="post-more waves-effect waves-button">
@@ -323,7 +417,14 @@ Pi...
     
         Overview
                 
- ...
+                    
+                    
+                
+                
+            
+ConceptMask R-CNN 利用了相當簡潔與彈性的方法進行實例分割, 主要跟 Faster R-CNN 不同的地方在於原架構有 2 個分支 
+
+Classi...
     
 
         <a href="/2017/11/10/Mask R-CNN/" class="post-more waves-effect waves-button">
@@ -417,7 +518,53 @@ Pi...
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Generative Adversarial Netw...
+        Generative Adversarial Networks (GANs)Lists
+
+
+Name
+Paper Link
+Value Function
+
+
+
+
+GAN
+Arxiv
+
+
+
+LSGAN
+Arxiv
+
+
+
+WGAN
+Arxiv
+
+
+
+WGAN-GP
+Arxiv
+
+
+
+DRAGAN
+Arxiv
+
+
+
+CGAN
+Arxiv
+
+
+
+infoGAN
+Arxiv
+
+
+
+ACGAN
+Arxi...
     
 
         <a href="/2017/11/07/GAN-Generative-Adversarial-Network/" class="post-more waves-effect waves-button">
@@ -463,7 +610,17 @@ Pi...
 
     
         學習路程
-Python  政大 or MIT pyth...
+Python  政大 or MIT python都好 後者比較舊但作業比較多
+ML  先看莫凡 看完再看NTU基礎的 剩下就看要看進階的還是standford的
+
+Basic Concept of Machine Learning
+Morvan莫凡
+有趣的機器學習
+
+
+
+Machine Learning-Udacity ud120
+Machine Learning + Deep L...
     
 
         <a href="/2017/11/07/Self-Study-Courses-List/" class="post-more waves-effect waves-button">
@@ -510,7 +667,7 @@ Python  政大 or MIT pyth...
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        paperListhttps://github.com...
+        paperListhttps://github.com/zhangqianhui/AdversarialNetsPapershttps://github.com/hindupuravinash/the-gan-zoohttps://github.com/nightrome/really-awesome-ganhttps://github.com/nashory/gans-awesome-ap...
     
 
         <a href="/2017/11/07/GAN-Github-List/" class="post-more waves-effect waves-button">
@@ -558,7 +715,14 @@ Python  政大 or MIT pyth...
 
     
         RCNN- 將CNN引入目標檢測的開山之作
-     ...
+                
+                    
+                    
+                
+                
+            
+CS231n lecture8
+RCNN (論文：Rich feature hierarchies for accurate object...
     
 
         <a href="/2017/11/06/R-CNN/" class="post-more waves-effect waves-button">
@@ -591,6 +755,15 @@ Python  政大 or MIT pyth...
         <footer class="footer">
     <div class="top">
         
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        總訪客數：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        總訪問量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
 
         <p>
             
@@ -600,7 +773,7 @@ Python  政大 or MIT pyth...
         </p>
     </div>
     <div class="bottom">
-        <p><span>Jason Yeh &copy; 2018</span>
+        <p><span>Jason Yeh &copy; 2015 - 2018</span>
             <span>
                 
                 Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
@@ -614,21 +787,144 @@ Python  政大 or MIT pyth...
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
 
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/&title=world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/&title=world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=world4jason&url=https://world4jason.github.io/&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://world4jason.github.io/" alt="微信分享二维码">
+</div>
+
+
+
+
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: , REWARD: false };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>
 
-<script src="/js/main.min.js?v=1.6.17"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 
 
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '持續搬磚中';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又回來了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 
