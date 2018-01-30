@@ -47,7 +47,7 @@
 <meta property="og:image" content="https://world4jason.github.io/media/15172827737568.png">
 <meta property="og:image" content="https://world4jason.github.io/media/15172838466580.png">
 <meta property="og:image" content="https://world4jason.github.io/media/15172845289475.jpg">
-<meta property="og:updated_time" content="2018-01-30T03:56:10.000Z">
+<meta property="og:updated_time" content="2018-01-30T04:21:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ICNET for Real-Time Semantic Segmentation on High-Resolution Images">
 <meta name="twitter:description" content="RecapQuote:其實很討厭這作者的paper效果都很好, 但是每次都是用matlab, 而且PSPNet作者還說training code因為公司問題不能發布, 傻眼                                                                                                          https://">
@@ -233,6 +233,7 @@
                 <div class="image-caption"></div>
             </figure><br><a href="https://www.zhihu.com/question/53356671" target="_blank" rel="external">https://www.zhihu.com/question/53356671</a></p>
 <p>Paper<br><a href="https://arxiv.org/pdf/1704.08545.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1704.08545.pdf</a><br>Code<br><a href="https://github.com/hszhao/ICNet" target="_blank" rel="external">https://github.com/hszhao/ICNet</a><br><a href="https://github.com/aitorzip/Keras-ICNet" target="_blank" rel="external">https://github.com/aitorzip/Keras-ICNet</a><br><a href="https://github.com/hellochick/ICNet-tensorflow" target="_blank" rel="external">https://github.com/hellochick/ICNet-tensorflow</a></p>
+<p>Key Difference<br>之前的那些方法，如FCN、SegNet、UNet、RefineNet等，用高解析度圖片當input以後，強調Single scale或是Multi Scale在不同層之間的特徵融合，所有的Data需要在整個網絡中運行，因為高解析度的輸入而導致了昂貴的計算費用.而本文的方法，使用低解析度圖片作為主要輸入，採用高解析度圖片進行refine，保留細節的同時減少了開銷.</p>
 <p>##Abstract</p>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">We</span> propose an compressed-PSPNet-<span class="keyword">based </span>image cascade network (ICNet) that incorporates <span class="keyword">multi-resolution </span><span class="keyword">branches </span>under proper label guidance to <span class="keyword">address </span>this challenge.</div></pre></td></tr></table></figure>
 <p>ICNet是一個基於PSPNet的real-time semantic segmentation network，論文內對PSPNet做深入的分析，並且找出影響inference speed*的缺點。並且用搭配multi-resolution cascade combination。</p>
@@ -369,11 +370,11 @@
 </ul>
 <p>針對以上的分析，發現，低解析度的圖片能夠有效降低運行時間，但是失去很多細節，而且邊界模糊；但是高解析度的計算時間難以忍受，ICNet總結了上述幾個問題，提出了一個綜合性的方法：使用低解析度加速捕捉語義，使用高解析度獲取細節，使用特徵融合(CFF)結合，同時使用guide label來監督，在限制的時間內獲得有效的結果。</p>
 <p><img src="/media/15172827737568.png" alt=""></p>
-<p>圖中用了原尺寸,1/2尺寸,1/4尺寸當input，低解析度分支超过50层，提取更多的语义信息(inference 18 ms)，中解析度分支有17层conv，但是由于权重共享，只有inference 6ms，而高解析度分支是3 conv，有inference 9ms.<br>与其他网络的不同 </p>
+<p>圖中用了原尺寸,1/2尺寸,1/4尺寸當input，低解析度分枝超过50层，提取更多的语义信息(inference 18 ms)，中解析度分枝有17层conv，但是由于权重共享，只有inference 6ms，而高解析度分枝是3 conv，有inference 9ms.<br>与其他网络的不同 </p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">分支</th>
+<th style="text-align:center">分枝</th>
 <th>過程</th>
 <th>耗時</th>
 </tr>
@@ -382,12 +383,12 @@
 <tr>
 <td style="text-align:center">低解析</td>
 <td>在中解析度的1/16輸出的基礎上，再縮放到1/32.經過Convolution後，然後使用幾個dilated convolution擴展接受野但不縮小尺寸，最終以原圖的1/32大小輸出feature map。</td>
-<td>雖然層數較多，但是解析度低，速度快，且與分支二共享一部分權重，耗時為18 ms</td>
+<td>雖然層數較多，但是解析度低，速度快，且與分枝二共享一部分權重，耗時為18 ms</td>
 </tr>
 <tr>
 <td style="text-align:center">中解析</td>
-<td>以原圖的1/2的解析度作為輸入，經過Convolution後以1/8縮放，得到原圖的1/16大小feature map，再將低解析度分支的輸出feature map通過CFF(cascade feature fusion )單元相融合得到最終輸出。值得注意的是：低解析度和中解析度的捲積參數是共享的。</td>
-<td>有17個Convolution層，與分支一共享一部分權重，與分支一一起一共耗時6ms</td>
+<td>以原圖的1/2的解析度作為輸入，經過Convolution後以1/8縮放，得到原圖的1/16大小feature map，再將低解析度分枝的輸出feature map通過CFF(cascade feature fusion )單元相融合得到最終輸出。值得注意的是：低解析度和中解析度的捲積參數是共享的。</td>
+<td>有17個Convolution層，與分枝一共享一部分權重，與分枝一一起一共耗時6ms</td>
 </tr>
 <tr>
 <td style="text-align:center">高解析</td>
@@ -396,17 +397,17 @@
 </tr>
 </tbody>
 </table>
-<p>對於每個分支的輸出特徵，首先會上採樣2倍做輸出，在訓練的時候，會以Ground truth的1/16、1/8/、1/4來指導各個分支的訓練，這樣的輔助訓練使得梯度優化更為平滑，便於訓練收斂，隨著每個分支學習能力的增強，預測沒有被任何一個分支主導。利用這樣的漸變的特徵融合和級聯引導結構可以產生合理的預測結果。</p>
-<p>ICNet使用低分辨率完成語義分割，使用高分辨率幫助細化結果。在結構上，產生的feature大大減少，同時仍然保持必要的細節。</p>
-<p>不同分支的預測效果如下:<br><figure class="image-bubble">
+<p>對於每個分枝的輸出特徵，首先會上採樣2倍做輸出，在訓練的時候，會以Ground truth的1/16、1/8/、1/4來指導各個分枝的訓練，這樣的輔助訓練使得梯度優化更為平滑，便於訓練收斂，隨著每個分枝學習能力的增強，預測沒有被任何一個分枝主導。利用這樣的漸變的特徵融合和級聯引導結構可以產生合理的預測結果。</p>
+<p>ICNet使用低解析度完成語義分割，使用高解析度幫助細化結果。在結構上，產生的feature大大減少，同時仍然保持必要的細節。</p>
+<p>不同分枝的預測效果如下:<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/media/15172838466580.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure></p>
-<p>可以看到第三個分支輸出效果無疑是最好的。在測試時，只保留第三分支的結果。</p>
-<h2 id="Cascade-Feature-Fusion"><a href="#Cascade-Feature-Fusion" class="headerlink" title="Cascade Feature Fusion"></a>Cascade Feature Fusion</h2><p><img src="/media/15172845289475.jpg" alt=""><br>圖中的Loss是輔助Loss,</p>
+<p>可以看到第三個分枝輸出效果無疑是最好的。在測試時，只保留第三分枝的結果。</p>
+<h2 id="Cascade-Feature-Fusion"><a href="#Cascade-Feature-Fusion" class="headerlink" title="Cascade Feature Fusion"></a>Cascade Feature Fusion</h2><p><img src="/media/15172845289475.jpg" alt=""><br>圖中的Loss是輔助Loss,F1是較低解析的分枝, F2是較高解析的分枝，</p>
 <p>L=λ1L1+λ2L2+λ3L3</p>
 
         </div>
@@ -415,7 +416,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2018-01-30T03:56:10.000Z" itemprop="dateUpdated">2018-01-30 11:56:10</time>
+    最後更新時間：<time datetime="2018-01-30T04:21:13.000Z" itemprop="dateUpdated">2018-01-30 12:21:13</time>
 </span><br>
 
 
