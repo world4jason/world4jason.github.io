@@ -47,7 +47,11 @@
 <meta property="og:image" content="https://world4jason.github.io/media/15172827737568.png">
 <meta property="og:image" content="https://world4jason.github.io/media/15172838466580.png">
 <meta property="og:image" content="https://world4jason.github.io/media/15172845289475.jpg">
-<meta property="og:updated_time" content="2018-01-30T04:21:13.000Z">
+<meta property="og:image" content="https://world4jason.github.io/media/15173712115585.png">
+<meta property="og:image" content="https://world4jason.github.io/media/15173713226717.png">
+<meta property="og:image" content="https://world4jason.github.io/media/15173715003744.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15173715775469.jpg">
+<meta property="og:updated_time" content="2018-01-31T04:13:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ICNET for Real-Time Semantic Segmentation on High-Resolution Images">
 <meta name="twitter:description" content="RecapQuote:其實很討厭這作者的paper效果都很好, 但是每次都是用matlab, 而且PSPNet作者還說training code因為公司問題不能發布, 傻眼                                                                                                          https://">
@@ -200,7 +204,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Recap"><span class="post-toc-number">1.</span> <span class="post-toc-text">Recap</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Speed-Analysis"><span class="post-toc-number">2.</span> <span class="post-toc-text">Speed Analysis</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Intuitive-Speedup"><span class="post-toc-number">3.</span> <span class="post-toc-text">Intuitive Speedup</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#加速方法-1-輸入向下採樣-Downsampling-Input"><span class="post-toc-number">3.0.1.</span> <span class="post-toc-text">加速方法 1: 輸入向下採樣(Downsampling Input)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#加速方法-2-利用較小的feature-map來做inference-Downsampling-Feature"><span class="post-toc-number">3.0.2.</span> <span class="post-toc-text">加速方法 2 : 利用較小的feature map來做inference(Downsampling Feature)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#加速方法-3-減少模型複雜度-Model-Compression"><span class="post-toc-number">3.0.3.</span> <span class="post-toc-text">加速方法 3 : 減少模型複雜度(Model Compression)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#FCN-Fully-Convolutional-Networks-for-Fully-Convolutional-Networks"><span class="post-toc-number">3.0.4.</span> <span class="post-toc-text">FCN:Fully Convolutional Networks for Fully Convolutional Networks</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Step-1"><span class="post-toc-number">3.0.4.1.</span> <span class="post-toc-text">Step 1:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Step-2"><span class="post-toc-number">3.0.4.2.</span> <span class="post-toc-text">Step 2:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Step-3"><span class="post-toc-number">3.0.4.3.</span> <span class="post-toc-text">Step 3:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Step-4"><span class="post-toc-number">3.0.4.4.</span> <span class="post-toc-text">Step 4:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Upsampling"><span class="post-toc-number">3.0.4.5.</span> <span class="post-toc-text">Upsampling</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Skip-Architecture"><span class="post-toc-number">3.0.4.6.</span> <span class="post-toc-text">Skip Architecture</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Architecture"><span class="post-toc-number">4.</span> <span class="post-toc-text">Architecture</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Cascade-Feature-Fusion"><span class="post-toc-number">5.</span> <span class="post-toc-text">Cascade Feature Fusion</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Recap"><span class="post-toc-number">1.</span> <span class="post-toc-text">Recap</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Speed-Analysis"><span class="post-toc-number">2.</span> <span class="post-toc-text">Speed Analysis</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Intuitive-Speedup"><span class="post-toc-number">3.</span> <span class="post-toc-text">Intuitive Speedup</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#加速方法-1-輸入向下採樣-Downsampling-Input"><span class="post-toc-number">3.0.1.</span> <span class="post-toc-text">加速方法 1: 輸入向下採樣(Downsampling Input)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#加速方法-2-利用較小的feature-map來做inference-Downsampling-Feature"><span class="post-toc-number">3.0.2.</span> <span class="post-toc-text">加速方法 2 : 利用較小的feature map來做inference(Downsampling Feature)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#加速方法-3-減少模型複雜度-Model-Compression"><span class="post-toc-number">3.0.3.</span> <span class="post-toc-text">加速方法 3 : 減少模型複雜度(Model Compression)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#FCN-Fully-Convolutional-Networks-for-Fully-Convolutional-Networks"><span class="post-toc-number">3.0.4.</span> <span class="post-toc-text">FCN:Fully Convolutional Networks for Fully Convolutional Networks</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#例如-K-4096-的全連接層，輸入是7x7x512，這個全連接層可以被等效地看做一個F-7-Padding-0-Stride-1-Filter-Number-4096-的Conv層。換句話說，就是將Filter-Size設置的和Input-Data-Size一致了。輸出將變成-1x1x4096，這個結果就和使用初始的那個全連接層一樣了。"><span class="post-toc-number">3.0.4.0.1.</span> <span class="post-toc-text">例如 K=4096 的全連接層，輸入是7x7x512，這個全連接層可以被等效地看做一個F=7,Padding=0,Stride=1,Filter Number=4096 的Conv層。換句話說，就是將Filter Size設置的和Input Data Size一致了。輸出將變成 1x1x4096，這個結果就和使用初始的那個全連接層一樣了。</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Step-1"><span class="post-toc-number">3.0.4.1.</span> <span class="post-toc-text">Step 1:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Step-2"><span class="post-toc-number">3.0.4.2.</span> <span class="post-toc-text">Step 2:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Step-3"><span class="post-toc-number">3.0.4.3.</span> <span class="post-toc-text">Step 3:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Step-4"><span class="post-toc-number">3.0.4.4.</span> <span class="post-toc-text">Step 4:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Upsampling"><span class="post-toc-number">3.0.4.5.</span> <span class="post-toc-text">Upsampling</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Skip-Architecture"><span class="post-toc-number">3.0.4.6.</span> <span class="post-toc-text">Skip Architecture</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Architecture"><span class="post-toc-number">4.</span> <span class="post-toc-text">Architecture</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Branch-Analysis"><span class="post-toc-number">4.0.1.</span> <span class="post-toc-text">Branch Analysis</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Cascade-Label-Guidance"><span class="post-toc-number">4.0.2.</span> <span class="post-toc-text">Cascade Label Guidance</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Branch-Output"><span class="post-toc-number">4.0.3.</span> <span class="post-toc-text">Branch Output</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Cascade-Feature-Fusion"><span class="post-toc-number">5.</span> <span class="post-toc-text">Cascade Feature Fusion</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Loss-Function"><span class="post-toc-number">6.</span> <span class="post-toc-text">Loss Function</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Experiment"><span class="post-toc-number">7.</span> <span class="post-toc-text">Experiment</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#model-Compression"><span class="post-toc-number">7.0.1.</span> <span class="post-toc-text">model Compression</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Cascade-Structure-Experiment"><span class="post-toc-number">7.0.2.</span> <span class="post-toc-text">Cascade Structure Experiment</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Visualization"><span class="post-toc-number">7.0.3.</span> <span class="post-toc-text">Visualization</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Cityscape-Comparison"><span class="post-toc-number">7.0.4.</span> <span class="post-toc-text">Cityscape Comparison</span></a></li></ol></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -265,15 +269,14 @@
 <li>網路寬度越大速度越慢</li>
 <li>Kernel越多速度越慢, 以圖中例子來說stage4跟stage5在解析同樣的input時, inference speed差距十分驚人, 因為這部分的kernel number差距了一倍。</li>
 </ul>
-<h2 id="Intuitive-Speedup"><a href="#Intuitive-Speedup" class="headerlink" title="Intuitive Speedup"></a>Intuitive Speedup</h2><h4 id="加速方法-1-輸入向下採樣-Downsampling-Input"><a href="#加速方法-1-輸入向下採樣-Downsampling-Input" class="headerlink" title="加速方法 1: 輸入向下採樣(Downsampling Input)"></a>加速方法 1: 輸入向下採樣(Downsampling Input)</h4><figure class="image-bubble">
+<h2 id="Intuitive-Speedup"><a href="#Intuitive-Speedup" class="headerlink" title="Intuitive Speedup"></a>Intuitive Speedup</h2><h4 id="加速方法-1-輸入向下採樣-Downsampling-Input"><a href="#加速方法-1-輸入向下採樣-Downsampling-Input" class="headerlink" title="加速方法 1: 輸入向下採樣(Downsampling Input)"></a>加速方法 1: 輸入向下採樣(Downsampling Input)</h4><p>在resolution只有原本的0.5跟0.25的狀況下雖然速度變快但精准度如上圖所示可以看出效果很差。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/media/15172353341447.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
-            </figure>
-<p>在resolution只有原本的0.5跟0.25的狀況下雖然速度變快但精准度如上圖所示可以看出效果很差。</p>
-<h4 id="加速方法-2-利用較小的feature-map來做inference-Downsampling-Feature"><a href="#加速方法-2-利用較小的feature-map來做inference-Downsampling-Feature" class="headerlink" title="加速方法 2 : 利用較小的feature map來做inference(Downsampling Feature)"></a>加速方法 2 : 利用較小的feature map來做inference(Downsampling Feature)</h4><p>FCN Downsampling到32倍, Deep Lab到 8倍, 而用作者之前的PSPNet50, 縮小到了1:8, 1:16, 1:32整理的Table, 但可以看到最快的速度也只有132ms, 不太能符合real-time的標準。<br><figure class="image-bubble">
+            </figure></p>
+<h4 id="加速方法-2-利用較小的feature-map來做inference-Downsampling-Feature"><a href="#加速方法-2-利用較小的feature-map來做inference-Downsampling-Feature" class="headerlink" title="加速方法 2 : 利用較小的feature map來做inference(Downsampling Feature)"></a>加速方法 2 : 利用較小的feature map來做inference(Downsampling Feature)</h4><p>FCN Downsampling到32倍, Deep Lab到 8倍, 而下方是用作者之前的PSPNet50, 縮小到了1:8, 1:16, 1:32整理的Table, 但可以看到最快的速度也只有132ms, 不太能符合real-time的標準。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/media/15172758974357.png" alt="" title="">
@@ -295,8 +298,8 @@
                 <div class="image-caption"></div>
             </figure></p>
 <p>CNN要如何轉FCN? 以此篇paper為例，input是一個224x224x3的圖，經過一系列Conv跟Downsampling之後是7x7x512。<br>AlexNet使用了兩個4096的全連接層，最後一個有1000個神經元的全連接層用於計算分類評分。我們可以將這3個全連接層轉化為Convolution層。</p>
-<p>任一全連結層轉化為Conv的方式以以下為例：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">例如 K=<span class="number">4096</span> 的全連接層，輸入是<span class="number">7</span>x7x512，這個全連接層可以被等效地看做一個F=<span class="number">7</span>,Padding=<span class="number">0</span>,Stride=<span class="number">1</span>,Filter Number=<span class="number">4096</span> 的Conv層。換句話說，就是將Filter Size設置的和Input Data Size一致了。輸出將變成 <span class="number">1</span>x1x4096，這個結果就和使用初始的那個全連接層一樣了。</div></pre></td></tr></table></figure></p>
-<p>針對第一個連接區域是[7x7x512]的全連接層，令其Filter Size為F=7<strong>（Filter Size為7x7）</strong>，這樣輸出為[1x1x4096]。<br>針對第二個全連接層，令其Filter Size為F=1<strong>（Filter Size為1x1）</strong>，這樣輸出為[1x1x4096]。<br>對最後一個全連接層也做類似的，令其F=1<strong>（Filter Size為1x1）</strong>，最終輸出為[1x1x1000]</p>
+<p>任一全連結層轉化為Conv的方式以以下為例：</p>
+<h6 id="例如-K-4096-的全連接層，輸入是7x7x512，這個全連接層可以被等效地看做一個F-7-Padding-0-Stride-1-Filter-Number-4096-的Conv層。換句話說，就是將Filter-Size設置的和Input-Data-Size一致了。輸出將變成-1x1x4096，這個結果就和使用初始的那個全連接層一樣了。"><a href="#例如-K-4096-的全連接層，輸入是7x7x512，這個全連接層可以被等效地看做一個F-7-Padding-0-Stride-1-Filter-Number-4096-的Conv層。換句話說，就是將Filter-Size設置的和Input-Data-Size一致了。輸出將變成-1x1x4096，這個結果就和使用初始的那個全連接層一樣了。" class="headerlink" title="例如 K=4096 的全連接層，輸入是7x7x512，這個全連接層可以被等效地看做一個F=7,Padding=0,Stride=1,Filter Number=4096 的Conv層。換句話說，就是將Filter Size設置的和Input Data Size一致了。輸出將變成 1x1x4096，這個結果就和使用初始的那個全連接層一樣了。"></a>例如 K=4096 的全連接層，輸入是7x7x512，這個全連接層可以被等效地看做一個F=7,Padding=0,Stride=1,Filter Number=4096 的Conv層。換句話說，就是將Filter Size設置的和Input Data Size一致了。輸出將變成 1x1x4096，這個結果就和使用初始的那個全連接層一樣了。</h6><p>針對第一個連接區域是[7x7x512]的全連接層，令其Filter Size為F=7<strong>（Filter Size為7x7）</strong>，這樣輸出為[1x1x4096]。<br>針對第二個全連接層，令其Filter Size為F=1<strong>（Filter Size為1x1）</strong>，這樣輸出為[1x1x4096]。<br>對最後一個全連接層也做類似的，令其F=1<strong>（Filter Size為1x1）</strong>，最終輸出為[1x1x1000]</p>
 <h5 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1:"></a>Step 1:</h5><p>下圖是是原始CNN結構，CNN中輸入的圖像大小是統一固定resize成227x227大小的圖像，第一層pooling後為55x55，第二層pooling後為27x27，第五層pooling後的圖像大小為13*13。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -370,7 +373,7 @@
 </ul>
 <p>針對以上的分析，發現，低解析度的圖片能夠有效降低運行時間，但是失去很多細節，而且邊界模糊；但是高解析度的計算時間難以忍受，ICNet總結了上述幾個問題，提出了一個綜合性的方法：使用低解析度加速捕捉語義，使用高解析度獲取細節，使用特徵融合(CFF)結合，同時使用guide label來監督，在限制的時間內獲得有效的結果。</p>
 <p><img src="/media/15172827737568.png" alt=""></p>
-<p>圖中用了原尺寸,1/2尺寸,1/4尺寸當input，低解析度分枝超过50层，提取更多的语义信息(inference 18 ms)，中解析度分枝有17层conv，但是由于权重共享，只有inference 6ms，而高解析度分枝是3 conv，有inference 9ms.<br>与其他网络的不同 </p>
+<h4 id="Branch-Analysis"><a href="#Branch-Analysis" class="headerlink" title="Branch Analysis"></a>Branch Analysis</h4><p>圖中用了原尺寸,1/2,1/4當input，低解析度分枝超過50層Convolution，來提取更多的語義信息(inference 18 ms)，中解析度分枝有17層Convolution，但是由於權重共享，只有inference 6ms，而高解析度分枝是3 Convolution，有inference 9ms.</p>
 <table>
 <thead>
 <tr>
@@ -382,24 +385,24 @@
 <tbody>
 <tr>
 <td style="text-align:center">低解析</td>
-<td>在中解析度的1/16輸出的基礎上，再縮放到1/32.經過Convolution後，然後使用幾個dilated convolution擴展接受野但不縮小尺寸，最終以原圖的1/32大小輸出feature map。</td>
+<td>低解析是FCN-based PSPNet的架構，總和有超過50層的Convolution，在中解析度的1/16輸出的基礎上，再縮放到1/32.經過Convolution後，然後使用幾個dilated convolution擴展接受野但不縮小尺寸，最終以原圖的1/32大小輸出feature map。</td>
 <td>雖然層數較多，但是解析度低，速度快，且與分枝二共享一部分權重，耗時為18 ms</td>
 </tr>
 <tr>
 <td style="text-align:center">中解析</td>
-<td>以原圖的1/2的解析度作為輸入，經過Convolution後以1/8縮放，得到原圖的1/16大小feature map，再將低解析度分枝的輸出feature map通過CFF(cascade feature fusion )單元相融合得到最終輸出。值得注意的是：低解析度和中解析度的捲積參數是共享的。</td>
+<td>以原圖的1/2的解析度作為輸入，經過17層Convolution後以1/8縮放，得到原圖的1/16大小feature map，再將低解析度分枝的輸出feature map通過CFF(cascade feature fusion )單元相融合得到最終輸出。值得注意的是：低解析度和中解析度的捲積參數是共享的。</td>
 <td>有17個Convolution層，與分枝一共享一部分權重，與分枝一一起一共耗時6ms</td>
 </tr>
 <tr>
 <td style="text-align:center">高解析</td>
-<td>原圖輸入，經過Convolution後以1/8縮放，得到原圖的1/8大小的feature map，再將中解析度處理後的輸出通過CFF單元融合</td>
+<td>原圖輸入，經過三層的Convolution(Stride=2,Size=3x3)得到原圖的1/8大小的feature map，再將中解析度處理後的輸出通過CFF單元融合</td>
 <td>有3個卷積層，雖然解析度高，因為少，耗時為9ms</td>
 </tr>
 </tbody>
 </table>
 <p>對於每個分枝的輸出特徵，首先會上採樣2倍做輸出，在訓練的時候，會以Ground truth的1/16、1/8/、1/4來指導各個分枝的訓練，這樣的輔助訓練使得梯度優化更為平滑，便於訓練收斂，隨著每個分枝學習能力的增強，預測沒有被任何一個分枝主導。利用這樣的漸變的特徵融合和級聯引導結構可以產生合理的預測結果。</p>
 <p>ICNet使用低解析度完成語義分割，使用高解析度幫助細化結果。在結構上，產生的feature大大減少，同時仍然保持必要的細節。</p>
-<p>不同分枝的預測效果如下:<br><figure class="image-bubble">
+<h4 id="Cascade-Label-Guidance"><a href="#Cascade-Label-Guidance" class="headerlink" title="Cascade Label Guidance"></a>Cascade Label Guidance</h4><h4 id="Branch-Output"><a href="#Branch-Output" class="headerlink" title="Branch Output"></a>Branch Output</h4><p>不同分枝的預測效果如下:<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/media/15172838466580.png" alt="" title="">
@@ -408,7 +411,81 @@
             </figure></p>
 <p>可以看到第三個分枝輸出效果無疑是最好的。在測試時，只保留第三分枝的結果。</p>
 <h2 id="Cascade-Feature-Fusion"><a href="#Cascade-Feature-Fusion" class="headerlink" title="Cascade Feature Fusion"></a>Cascade Feature Fusion</h2><p><img src="/media/15172845289475.jpg" alt=""><br>圖中的Loss是輔助Loss,F1是較低解析的分枝, F2是較高解析的分枝，</p>
-<p>L=λ1L1+λ2L2+λ3L3</p>
+<h2 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h2><p>L=λ1L1+λ2L2+λ3L3<br>Loss是對應到每個downsampled score maps使用cross-entropy loss</p>
+<p>依據CFF的設置，下分枝的lossL3的佔比λ3設置為1的話,則中分枝的lossL2的佔比λ2設置為0.4，上分枝的lossL1的佔比λ1設置為0.16</p>
+<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">項目</th>
+<th style="text-align:center">設置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">平台</td>
+<td style="text-align:center">Caffe，CUDA7.5 cudnnV5，TitanX一張</td>
+</tr>
+<tr>
+<td style="text-align:center">測量時間</td>
+<td style="text-align:center">Caffe Time 100次取平均</td>
+</tr>
+<tr>
+<td style="text-align:center">Batch Size</td>
+<td style="text-align:center">16</td>
+</tr>
+<tr>
+<td style="text-align:center">學習速率</td>
+<td style="text-align:center">Poly, Learning Rate 0.01, Momentum 0.9</td>
+</tr>
+<tr>
+<td style="text-align:center">迭代次數</td>
+<td style="text-align:center">30K</td>
+</tr>
+<tr>
+<td style="text-align:center">權重衰減</td>
+<td style="text-align:center">0.0001</td>
+</tr>
+<tr>
+<td style="text-align:center">數據增強</td>
+<td style="text-align:center">Random flip, 0.5 to 2 random scale</td>
+</tr>
+<tr>
+<td style="text-align:center">資料集</td>
+<td style="text-align:center">Cityscapes</td>
+</tr>
+</tbody>
+</table>
+<h4 id="model-Compression"><a href="#model-Compression" class="headerlink" title="model Compression"></a>model Compression</h4><p>以PSPNet50為例，直接壓縮結果如下表Baseline：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15173712115585.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>mIoU降低了，但時間170ms達不到realtime。這表明只有模型壓縮是達不到有良好分割結果的實時性能。對比ICNet，有類似的分割結果，但速度提升了5倍多。</p>
+<h4 id="Cascade-Structure-Experiment"><a href="#Cascade-Structure-Experiment" class="headerlink" title="Cascade Structure Experiment"></a>Cascade Structure Experiment</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15173713226717.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>sub4代表只有低解析度輸入的結果，sub24代表前兩個分枝，sub124全部分枝。注意到全部分枝的速度很快，並且性能接近PSPNet了，且能保持30fps。而且Ram消耗也明顯減少了。</p>
+<h4 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15173715003744.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h4 id="Cityscape-Comparison"><a href="#Cityscape-Comparison" class="headerlink" title="Cityscape Comparison"></a>Cityscape Comparison</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15173715775469.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 
         </div>
 
@@ -416,7 +493,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2018-01-30T04:21:13.000Z" itemprop="dateUpdated">2018-01-30 12:21:13</time>
+    最後更新時間：<time datetime="2018-01-31T04:13:11.000Z" itemprop="dateUpdated">2018-01-31 12:13:11</time>
 </span><br>
 
 
