@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>Tensorflow Function Usage And Example | world4jason | 菜鳥搬磚日常</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="Mini Tensorflow example12345678import tensorflow as tf a = tf.placeholder(&quot;float&quot;) b = tf.placeholder(&quot;float&quot;) y = tf.mul(a, b)  sess = tf.Session()print sess.run(y, feed_dict=&amp;#123;a: 3, b: 3&amp;#125;)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tensorflow Function Usage And Example">
+<meta property="og:url" content="https://world4jason.github.io/2018/03/16/Tensorflow-Function-Usage-And-Example/index.html">
+<meta property="og:site_name" content="world4jason">
+<meta property="og:description" content="Mini Tensorflow example12345678import tensorflow as tf a = tf.placeholder(&quot;float&quot;) b = tf.placeholder(&quot;float&quot;) y = tf.mul(a, b)  sess = tf.Session()print sess.run(y, feed_dict=&amp;#123;a: 3, b: 3&amp;#125;)">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://world4jason.github.io/media/15225714198554.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15225714248800.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15225714762104.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15225714795456.jpg">
+<meta property="og:updated_time" content="2018-04-01T08:31:28.387Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tensorflow Function Usage And Example">
+<meta name="twitter:description" content="Mini Tensorflow example12345678import tensorflow as tf a = tf.placeholder(&quot;float&quot;) b = tf.placeholder(&quot;float&quot;) y = tf.mul(a, b)  sess = tf.Session()print sess.run(y, feed_dict=&amp;#123;a: 3, b: 3&amp;#125;)">
+<meta name="twitter:image" content="https://world4jason.github.io/media/15225714198554.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Jason Yeh</h5>
+          <a href="mailto:world4jason@gmail.com" title="world4jason@gmail.com" class="mail">world4jason@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-Home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/world4jason" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-research"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-about"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cv"  >
+                <i class="icon icon-lg icon-CV"></i>
+                CV
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Tensorflow Function Usage And Example</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Tensorflow Function Usage And Example</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-16T05:53:47.000Z" itemprop="datePublished" class="page-time">
+  2018-03-16
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#張量操作Tensor-Transformations"><span class="post-toc-number">1.</span> <span class="post-toc-text">張量操作Tensor Transformations</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#形狀操作Shapes-and-Shaping"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">形狀操作Shapes and Shaping</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#tf-reshape"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">tf.reshape</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#tf-split"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">tf.split</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#tf-nn-max-pool"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">tf.nn.max_pool</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Tensorflow-Function-Usage-And-Example"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Tensorflow Function Usage And Example</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-16 13:53:47" datetime="2018-03-16T05:53:47.000Z"  itemprop="datePublished">2018-03-16</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Mini Tensorflow example<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line"> a = tf.placeholder(<span class="string">"float"</span>)</div><div class="line"> b = tf.placeholder(<span class="string">"float"</span>)</div><div class="line"></div><div class="line"> y = tf.mul(a, b) </div><div class="line"> sess = tf.Session()</div><div class="line"><span class="keyword">print</span> sess.run(y, feed_dict=&#123;a: <span class="number">3</span>, b: <span class="number">3</span>&#125;)</div><div class="line"> sess.close()</div></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>操作組</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maths</td>
+<td>Add, Sub, Mul, Div, Exp, Log, Greater, Less, Equal</td>
+</tr>
+<tr>
+<td>Array</td>
+<td>Concat, Slice, Split, Constant, Rank, Shape, Shuffle</td>
+</tr>
+<tr>
+<td>Matrix</td>
+<td>MatMul, MatrixInverse, MatrixDeterminant</td>
+</tr>
+<tr>
+<td>Neuronal Network</td>
+<td>SoftMax, Sigmoid, ReLU, Convolution2D, MaxPool</td>
+</tr>
+<tr>
+<td>Checkpointing</td>
+<td>Save, Restore</td>
+</tr>
+<tr>
+<td>Queues and syncronizations</td>
+<td>Enqueue, Dequeue, MutexAcquire, MutexRelease</td>
+</tr>
+<tr>
+<td>Flow control</td>
+<td>Merge, Switch, Enter, Leave, NextIteration</td>
+</tr>
+</tbody>
+</table>
+<p>TensorFlow的算術操作如下：</p>
+<table>
+<thead>
+<tr>
+<th>操作組</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tf.add(x, y, name=None)</td>
+<td>求和</td>
+</tr>
+<tr>
+<td>tf.sub(x, y, name=None)</td>
+<td>減法</td>
+</tr>
+<tr>
+<td>tf.mul(x, y, name=None)</td>
+<td>乘法</td>
+</tr>
+<tr>
+<td>tf.div(x, y, name=None)</td>
+<td>除法</td>
+</tr>
+<tr>
+<td>tf.mod(x, y, name=None)</td>
+<td>取模</td>
+</tr>
+<tr>
+<td>tf.abs(x, name=None)</td>
+<td>求絕對值</td>
+</tr>
+<tr>
+<td>tf.neg(x, name=None)</td>
+<td>取負 (y = -x).</td>
+</tr>
+<tr>
+<td>tf.sign(x, name=None)</td>
+<td>返回符號 y = sign(x) = -1 if x &lt; 0; 0 if x == 0; 1 if x &gt; 0.</td>
+</tr>
+<tr>
+<td>tf.inv(x, name=None)</td>
+<td>取反</td>
+</tr>
+<tr>
+<td>tf.square(x, name=None)</td>
+<td>計算平方 (y = x * x = x^2).</td>
+</tr>
+<tr>
+<td>tf.round(x, name=None)</td>
+<td>舍入最接近的整數      <br># ‘a’ is [0.9, 2.5, 2.3, -4.4]       <br> tf.round(a) ==&gt; [ 1.0, 3.0, 2.0, -4.0 ]</td>
+</tr>
+<tr>
+<td>tf.sqrt(x, name=None)</td>
+<td><br>開根號 (y = \sqrt{x} = x^{1/2}).</td>
+</tr>
+<tr>
+<td>tf.pow(x, y, name=None)</td>
+<td>冪次方                                                     <br># tensor ‘x’ is [[2, 2], [3, 3]]          <br># tensor ‘y’ is [[8, 16], [2, 3]] <br>tf.pow(x, y) ==&gt; [[256, 65536], [9, 27]]</td>
+<td></td>
+</tr>
+<tr>
+<td>tf.exp(x, name=None)</td>
+<td>計算e的次方</td>
+</tr>
+<tr>
+<td>tf.log(x, name=None)</td>
+<td>計算log，一個輸入計算e的ln，兩輸入以第二輸入為底</td>
+</tr>
+<tr>
+<td>tf.maximum(x, y, name=None)</td>
+<td>返回最大值 (x &gt; y ? x : y)</td>
+</tr>
+<tr>
+<td>tf.minimum(x, y, name=None)</td>
+<td>返回最小值 (x &lt; y ? x : y)</td>
+</tr>
+<tr>
+<td>tf.cos(x, name=None)</td>
+<td>三角函數cosine</td>
+</tr>
+<tr>
+<td>tf.sin(x, name=None)</td>
+<td>三角函數sine</td>
+</tr>
+<tr>
+<td>tf.tan(x, name=None)</td>
+<td>三角函數tan</td>
+</tr>
+<tr>
+<td>tf.atan(x, name=None)</td>
+<td>三角函數ctan</td>
+</tr>
+</tbody>
+</table>
+<h2 id="張量操作Tensor-Transformations"><a href="#張量操作Tensor-Transformations" class="headerlink" title="張量操作Tensor Transformations"></a>張量操作Tensor Transformations</h2><p>####數據類型轉換Casting<br>| 操作組                        | 操作       |<br>|—————————-|——————————————————|<br>| tf.string_to_number                              |                      |<br>| (string_tensor, out_type=None, name=None)        | 字符串轉為數字              |<br>| tf.to_double(x, name=’ToDouble’)                 | 轉為64位浮點類型–float64    |<br>| tf.to_float(x, name=’ToFloat’)                   | 轉為32位浮點類型–float32    |<br>| tf.to_int32(x, name=’ToInt32’)                   | 轉為32位整型–int32        |<br>| tf.to_int64(x, name=’ToInt64’)                   | 轉為64位整型–int64        |<br>| tf.cast(x, dtype, name=None)                     | 將x或者x.values轉換為dtype |<br>| # tensor a is [1.8, 2.2], dtype=tf.float         |                      |<br>| tf.cast(a, tf.int32) ==&gt; [1, 2] # dtype=tf.int32 |                      | </p>
+<h4 id="形狀操作Shapes-and-Shaping"><a href="#形狀操作Shapes-and-Shaping" class="headerlink" title="形狀操作Shapes and Shaping"></a>形狀操作Shapes and Shaping</h4><table>
+<thead>
+<tr>
+<th>操作組</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tf.shape(input, name=None)</td>
+<td>返回數據的shape       <br> # ‘t’ is [[[1, 1, 1], [2, 2, 2]], [[3, 3, 3], [4, 4, 4]]]  <br> shape(t) ==&gt; [2, 2, 3]</td>
+<td></td>
+</tr>
+<tr>
+<td>tf.size(input, name=None)</td>
+<td>返回數據的元素數量 <br> # ‘t’ is [[[1, 1, 1], [2, 2, 2]], [[3, 3, 3], [4, 4, 4]]]]  <br> size(t) ==&gt; 12</td>
+<td></td>
+</tr>
+<tr>
+<td>tf.rank(input, name=None)</td>
+<td>返回tensor的rank    <br> 注意：此rank不同於矩陣的rank， <br> tensor的rank表示一個tensor需要的索引數目來唯一表示任何一個元素 <br> 也就是通常所説的 “order”, “degree”或”ndims”   <br> #’t’ is [[[1, 1, 1], [2, 2, 2]], [[3, 3, 3], [4, 4, 4]]]  <br> # shape of tensor ‘t’ is [2, 2, 3]                          <br> rank(t) ==&gt; 3</td>
+<td></td>
+</tr>
+<tr>
+<td>tf.reshape(tensor, shape, name=None)</td>
+<td>改變tensor的形狀      <br> # tensor ‘t’ is [1, 2, 3, 4, 5, 6, 7, 8, 9] <br> # tensor ‘t’ has shape [9]   <br> reshape(t, [3, 3]) ==&gt;                                      <br> [[1, 2, 3],                                                 <br> [4, 5, 6],                                                  <br> [7, 8, 9]]                                                  <br> #如果shape有元素[-1],表示在該維度打平至一維                                 <br> # -1 將自動推導得為 9:                                             <br> reshape(t, [2, -1]) ==&gt;                                     <br> [[1, 1, 1, 2, 2, 2, 3, 3, 3],                               <br> [4, 4, 4, 5, 5, 5, 6, 6, 6]]</td>
+<td></td>
+</tr>
+<tr>
+<td>tf.expand_dims(input, dim, name=None)</td>
+<td>插入維度1進入一個tensor中 <br> #該操作要求-1-input.dims()                                       <br> # ‘t’ is a tensor of shape [2]                              <br> shape(expand_dims(t, 0)) ==&gt; [1, 2]                         <br> shape(expand_dims(t, 1)) ==&gt; [2, 1]                         <br>shape(expand_dims(t, -1)) ==&gt; [2, 1] &lt;= dim &lt;= input.dims()</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://hk.saowen.com/a/2766b13f38b54ab09e6d478975f5feca8abbf01d842e2ca8f5111160fcbb0e36" target="_blank" rel="external">https://hk.saowen.com/a/2766b13f38b54ab09e6d478975f5feca8abbf01d842e2ca8f5111160fcbb0e36</a></p>
+<h3 id="tf-reshape"><a href="#tf-reshape" class="headerlink" title="tf.reshape"></a>tf.reshape</h3><p>tf.reshape(tensor,shape, name=None) </p>
+<p>重組</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># tensor </div><div class="line">'t' is [1, 2, 3, 4, 5, 6, 7, 8, 9]</div><div class="line"># tensor </div><div class="line">'t'has shape [9]</div><div class="line"></div><div class="line">reshape(t, [3, 3]) </div><div class="line">==&gt; </div><div class="line">[[1, 2, 3],</div><div class="line">[4, 5, 6],</div><div class="line">[7, 8, 9]]</div></pre></td></tr></table></figure>
+<p>降為</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># tensor </div><div class="line">'t'is </div><div class="line">[[[1, 1], [2, 2]],                </div><div class="line">[[3, 3], [4, 4]]]</div><div class="line"># tensor </div><div class="line">'t'has shape [2, 2, 2]</div><div class="line">reshape(t, [2, 4]) </div><div class="line">==&gt; </div><div class="line">[[1, 1, 2, 2],</div><div class="line">[3, 3, 4, 4]]</div></pre></td></tr></table></figure>
+<p>平坦</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># tensor </div><div class="line">'t' has shape [3, 2, 3]</div><div class="line"># pass </div><div class="line">'[-1]'</div><div class="line"> to flatten </div><div class="line">'t'</div><div class="line">reshape(t, [-1]) </div><div class="line">==&gt; [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6]</div></pre></td></tr></table></figure>
+<h3 id="tf-split"><a href="#tf-split" class="headerlink" title="tf.split"></a>tf.split</h3><p>tf.split(split_dim, num_split, value, name=’split’)<br>將大的tensor分割成更小的tensor，第一個參數代表沿著那一維開始分割，第二個參數代表切成幾段</p>
+<h3 id="tf-nn-max-pool"><a href="#tf-nn-max-pool" class="headerlink" title="tf.nn.max_pool"></a>tf.nn.max_pool</h3><p>max pooling 是CNN 當中的最大值池化操作，其實用法和卷積很類似</p>
+<p>tf.nn.max_pool(value,ksize, strides, padding, name=None)</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">參數是四個，和卷積很類似：</div><div class="line"></div><div class="line">第一個參數value ：需要池化的輸入，一般池化層接在卷積層後面，所以輸入通常是<span class="built_in">feature</span> <span class="built_in">map</span> ，依然是[<span class="built_in">batch</span>, <span class="built_in">height</span>, <span class="built_in">width</span>, channels] 這樣的shape</div><div class="line"></div><div class="line">第二個參數ksize ：池化窗口的大小，取一個四維向量，一般是[<span class="number">1</span>, <span class="built_in">height</span>, <span class="built_in">width</span>, <span class="number">1</span>] ，因為我們不想在<span class="built_in">batch</span> 和channels 上做池化，所以這兩個維度設為了<span class="number">1</span></div><div class="line"></div><div class="line">第三個參數strides ：和卷積類似，窗口在每一個維度上滑動的步長，一般也是[<span class="number">1</span>, stride, stride ,<span class="number">1</span>]</div><div class="line"></div><div class="line">第四個參數padding ：和卷積類似，可以取'VALID' 或者'SAME'</div><div class="line">返回一個Tensor ，類型不變，shape 仍然是[<span class="built_in">batch</span>, <span class="built_in">height</span>, <span class="built_in">width</span>, channels] 這種形式</div></pre></td></tr></table></figure>
+<p>假設有這樣一張圖，雙通道<br>第一個通道：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15225714198554.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>第二個通道：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15225714248800.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line"></div><div class="line">a=tf.constant([</div><div class="line"></div><div class="line">        [[<span class="number">1.0</span>,<span class="number">2.0</span>,<span class="number">3.0</span>,<span class="number">4.0</span>],</div><div class="line"></div><div class="line">       [<span class="number">5.0</span>,<span class="number">6.0</span>,<span class="number">7.0</span>,<span class="number">8.0</span>],</div><div class="line"></div><div class="line">       [<span class="number">8.0</span>,<span class="number">7.0</span>,<span class="number">6.0</span>,<span class="number">5.0</span>],</div><div class="line"></div><div class="line">       [<span class="number">4.0</span>,<span class="number">3.0</span>,<span class="number">2.0</span>,<span class="number">1.0</span>]],</div><div class="line"></div><div class="line">       [[<span class="number">4.0</span>,<span class="number">3.0</span>,<span class="number">2.0</span>,<span class="number">1.0</span>],</div><div class="line"></div><div class="line">        [<span class="number">8.0</span>,<span class="number">7.0</span>,<span class="number">6.0</span>,<span class="number">5.0</span>],</div><div class="line"></div><div class="line">        [<span class="number">1.0</span>,<span class="number">2.0</span>,<span class="number">3.0</span>,<span class="number">4.0</span>],</div><div class="line"></div><div class="line">        [<span class="number">5.0</span>,<span class="number">6.0</span>,<span class="number">7.0</span>,<span class="number">8.0</span>]]</div><div class="line"></div><div class="line">    ])</div><div class="line"></div><div class="line">a=tf.reshape(a,[<span class="number">1</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">2</span>])</div><div class="line">pooling=tf.nn.max_pool(a,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],padding=<span class="string">'VALID'</span>)</div><div class="line"></div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">   print(<span class="string">"image:"</span>)</div><div class="line">   image=sess.run(a)</div><div class="line">   <span class="keyword">print</span> (image)</div><div class="line">   print(<span class="string">"reslut:"</span>)</div><div class="line">   result=sess.run(pooling)</div><div class="line">   <span class="keyword">print</span> (result)</div></pre></td></tr></table></figure>
+<p>這裡步長為1 ，窗口大小2×2 ，輸出結果：</p>
+<p>image:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">[[</div><div class="line">[[ <span class="number">1.</span> <span class="number">2.</span>]</div><div class="line">[ <span class="number">3.</span> <span class="number">4.</span>]</div><div class="line">[ <span class="number">5.</span> <span class="number">6.</span>]</div><div class="line">[ <span class="number">7.</span> <span class="number">8.</span>]]</div><div class="line"></div><div class="line">[[ <span class="number">8.</span> <span class="number">7.</span>]</div><div class="line">[ <span class="number">6.</span> <span class="number">5.</span>]</div><div class="line">[ <span class="number">4.</span> <span class="number">3.</span>]</div><div class="line">[ <span class="number">2.</span> <span class="number">1.</span>]]</div><div class="line"></div><div class="line">[[ <span class="number">4.</span> <span class="number">3.</span>]</div><div class="line">[ <span class="number">2.</span> <span class="number">1.</span>]</div><div class="line">[ <span class="number">8.</span> <span class="number">7.</span>]</div><div class="line">[ <span class="number">6.</span> <span class="number">5.</span>]]</div><div class="line"></div><div class="line">[[ <span class="number">1.</span> <span class="number">2.</span>]</div><div class="line">[ <span class="number">3.</span> <span class="number">4.</span>]</div><div class="line">[ <span class="number">5.</span> <span class="number">6.</span>]</div><div class="line">[ <span class="number">7.</span> <span class="number">8.</span>]]]]</div><div class="line"></div><div class="line">reslut:</div><div class="line"></div><div class="line">[[</div><div class="line">[[ <span class="number">8.</span> <span class="number">7.</span>]</div><div class="line">[ <span class="number">6.</span> <span class="number">6.</span>]</div><div class="line">[ <span class="number">7.</span> <span class="number">8.</span>]]</div><div class="line"></div><div class="line">[[ <span class="number">8.</span> <span class="number">7.</span>]</div><div class="line">[ <span class="number">8.</span> <span class="number">7.</span>]</div><div class="line">[ <span class="number">8.</span> <span class="number">7.</span>]]</div><div class="line"></div><div class="line">[[ <span class="number">4.</span> <span class="number">4.</span>]</div><div class="line">[ <span class="number">8.</span> <span class="number">7.</span>]</div><div class="line">[ <span class="number">8.</span> <span class="number">8.</span>]]]]</div></pre></td></tr></table></figure>
+<p>池化後的圖就是：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15225714762104.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15225714795456.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>證明了程序的結果是正確的。<br>我們還可以改變步長</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">pooling=tf.nn.max_pool(a,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>],padding=<span class="string">'VALID'</span>)</div><div class="line"></div><div class="line">最後的result 就變成：</div><div class="line"></div><div class="line">reslut:</div><div class="line">[[[[ <span class="number">8.</span> <span class="number">7.</span>]</div><div class="line">[ <span class="number">7.</span> <span class="number">8.</span>]]</div><div class="line">[[ <span class="number">4.</span> <span class="number">4.</span>]</div><div class="line">[ <span class="number">8.</span> <span class="number">8.</span>]]]]</div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最後更新時間：<time datetime="2018-04-01T08:31:28.387Z" itemprop="dateUpdated">2018-04-01 16:31:28</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://world4jason.github.io">
+            <img src="/img/avatar.jpg" alt="Jason Yeh">
+            Jason Yeh
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2018/03/16/Tensorflow-Function-Usage-And-Example/&title=《Tensorflow Function Usage And Example》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2018/03/16/Tensorflow-Function-Usage-And-Example/&title=《Tensorflow Function Usage And Example》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2018/03/16/Tensorflow-Function-Usage-And-Example/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Tensorflow Function Usage And Example》 — world4jason&url=https://world4jason.github.io/2018/03/16/Tensorflow-Function-Usage-And-Example/&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2018/03/16/Tensorflow-Function-Usage-And-Example/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/16/Light Head R-CNN/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Light Head R-CNN</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: '',
+            repo: '',
+            oauth: {
+                client_id: '',
+                client_secret: '',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        總訪客數：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        總訪問量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Jason Yeh &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2018/03/16/Tensorflow-Function-Usage-And-Example/&title=《Tensorflow Function Usage And Example》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2018/03/16/Tensorflow-Function-Usage-And-Example/&title=《Tensorflow Function Usage And Example》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2018/03/16/Tensorflow-Function-Usage-And-Example/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Tensorflow Function Usage And Example》 — world4jason&url=https://world4jason.github.io/2018/03/16/Tensorflow-Function-Usage-And-Example/&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2018/03/16/Tensorflow-Function-Usage-And-Example/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://world4jason.github.io/2018/03/16/Tensorflow-Function-Usage-And-Example/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '持續搬磚中';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又回來了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
