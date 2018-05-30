@@ -27,7 +27,7 @@
 <meta property="og:site_name" content="world4jason">
 <meta property="og:description" content="Mask_RCNN V2.1版本 檔案：Model.py Resnet的程式碼是由下面這專案參考改來的https://github.com/fchollet/deep-learning-models/blob/master/resnet50.py identity_block這function主要是為了後面的resnet_graph做準備的, 主要是為了重複利用,對應到的就是Resnet裡面的id">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2018-05-30T00:44:20.633Z">
+<meta property="og:updated_time" content="2018-05-30T09:40:24.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mask-RCNN-Code-Reading-ResNet">
 <meta name="twitter:description" content="Mask_RCNN V2.1版本 檔案：Model.py Resnet的程式碼是由下面這專案參考改來的https://github.com/fchollet/deep-learning-models/blob/master/resnet50.py identity_block這function主要是為了後面的resnet_graph做準備的, 主要是為了重複利用,對應到的就是Resnet裡面的id">
@@ -201,7 +201,7 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>Mask_RCNN V2.1版本</p>
-<p>檔案：<a href="https://github.com/matterport/Mask_RCNN/blob/master/mrcnn/model.py" target="_blank" rel="external">Model.py</a></p>
+<p>檔案：<a href="https://github.com/matterport/Mask_RCNN/blob/master/mrcnn/model.py#L85" target="_blank" rel="external">Model.py</a></p>
 <p>Resnet的程式碼是由下面這專案參考改來的<br><a href="https://github.com/fchollet/deep-learning-models/blob/master/resnet50.py" target="_blank" rel="external">https://github.com/fchollet/deep-learning-models/blob/master/resnet50.py</a></p>
 <h3 id="identity-block"><a href="#identity-block" class="headerlink" title="identity_block"></a>identity_block</h3><p>這function主要是為了後面的resnet_graph做準備的, 主要是為了重複利用,對應到的就是Resnet裡面的identity_block,然後這是純粹的Resnet版本,在shortcut上沒有操作</p>
 <p>input_tensor: 其實就是接上一層的output<br>kernel_size : 基本上是3,<br>filters:程式碼中filters通常是一個list, 而通常是三個, 像是[128,128,512],代表三層分別的filter數量<br>stage: 命名用,知道是哪一個stage的<br>block: 命名用,知道是stage中的第幾個idenity_block<br>use_bias: conv layer需不需要bias<br>train_bn: 這個identity_block要freeze還是train</p>
@@ -227,7 +227,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2018-05-30T00:44:20.633Z" itemprop="dateUpdated">2018-05-30 08:44:20</time>
+    最後更新時間：<time datetime="2018-05-30T09:40:24.794Z" itemprop="dateUpdated">2018-05-30 17:40:24</time>
 </span><br>
 
 
@@ -299,7 +299,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/30/Mask-RCNN-Code-Reading-RPN/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Mask-RCNN-Code-Reading-RPN</h4>
+      </a>
+    </div>
   
 
   
