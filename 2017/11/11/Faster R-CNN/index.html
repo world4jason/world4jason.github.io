@@ -20,21 +20,25 @@
     
     
     <meta name="keywords" content="Deep Learning,R-CNN,CNN,Object Detection">
-    <meta name="description" content="R-CNN, Fast R-CNN, Faster R-CNN 關係   網路架構 使用方法 流程 缺點 重點貢獻     R-CNN 1.使用Selective Search 提取 Region Propose 2. 利用在ImageNet 訓練的CNN網路提取特徵 3.Bounding Box regression做邊框計算 4.由K個二分類SVM做分類(Ｋ= 任務分類數量) 1.先利用SS提">
+    <meta name="description" content="#Outline  R-CNN, Fast R-CNN, Faster R-CNN 關係 流程圖 BackBone RPN Anchor ROI Pooling Bounding box regression   訓練 測試   R-CNN, Fast R-CNN, Faster R-CNN 關係   網路架構 使用方法 流程 缺點 重點貢獻     R-CNN 1.使用Selective Sea">
 <meta name="keywords" content="Deep Learning,R-CNN,CNN,Object Detection">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Faster R-CNN">
 <meta property="og:url" content="https://world4jason.github.io/2017/11/11/Faster R-CNN/index.html">
 <meta property="og:site_name" content="world4jason">
-<meta property="og:description" content="R-CNN, Fast R-CNN, Faster R-CNN 關係   網路架構 使用方法 流程 缺點 重點貢獻     R-CNN 1.使用Selective Search 提取 Region Propose 2. 利用在ImageNet 訓練的CNN網路提取特徵 3.Bounding Box regression做邊框計算 4.由K個二分類SVM做分類(Ｋ= 任務分類數量) 1.先利用SS提">
+<meta property="og:description" content="#Outline  R-CNN, Fast R-CNN, Faster R-CNN 關係 流程圖 BackBone RPN Anchor ROI Pooling Bounding box regression   訓練 測試   R-CNN, Fast R-CNN, Faster R-CNN 關係   網路架構 使用方法 流程 缺點 重點貢獻     R-CNN 1.使用Selective Sea">
 <meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://world4jason.github.io/media/15231974376489.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15232012344585.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15231978666930.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15232012107286.jpg">
 <meta property="og:image" content="https://world4jason.github.io/media/15137535435975.png">
 <meta property="og:image" content="https://world4jason.github.io/media/15137536007979.gif">
-<meta property="og:updated_time" content="2018-04-06T09:29:30.732Z">
+<meta property="og:updated_time" content="2018-04-10T07:52:36.627Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Faster R-CNN">
-<meta name="twitter:description" content="R-CNN, Fast R-CNN, Faster R-CNN 關係   網路架構 使用方法 流程 缺點 重點貢獻     R-CNN 1.使用Selective Search 提取 Region Propose 2. 利用在ImageNet 訓練的CNN網路提取特徵 3.Bounding Box regression做邊框計算 4.由K個二分類SVM做分類(Ｋ= 任務分類數量) 1.先利用SS提">
-<meta name="twitter:image" content="https://world4jason.github.io/media/15137535435975.png">
+<meta name="twitter:description" content="#Outline  R-CNN, Fast R-CNN, Faster R-CNN 關係 流程圖 BackBone RPN Anchor ROI Pooling Bounding box regression   訓練 測試   R-CNN, Fast R-CNN, Faster R-CNN 關係   網路架構 使用方法 流程 缺點 重點貢獻     R-CNN 1.使用Selective Sea">
+<meta name="twitter:image" content="https://world4jason.github.io/media/15231974376489.jpg">
     
         <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
     
@@ -183,7 +187,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#R-CNN-Fast-R-CNN-Faster-R-CNN-關係"><span class="post-toc-number">1.</span> <span class="post-toc-text">R-CNN, Fast R-CNN, Faster R-CNN 關係</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Overview"><span class="post-toc-number">2.</span> <span class="post-toc-text">Overview</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Method"><span class="post-toc-number">3.</span> <span class="post-toc-text">Method</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ROI-POOLING"><span class="post-toc-number">4.</span> <span class="post-toc-text">ROI POOLING</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#R-CNN-Fast-R-CNN-Faster-R-CNN-關係"><span class="post-toc-number">1.</span> <span class="post-toc-text">R-CNN, Fast R-CNN, Faster R-CNN 關係</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#流程圖"><span class="post-toc-number">2.</span> <span class="post-toc-text">流程圖</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Backbone"><span class="post-toc-number">3.</span> <span class="post-toc-text">Backbone</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#RPN"><span class="post-toc-number">4.</span> <span class="post-toc-text">RPN</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Anchor"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Anchor</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ROI-POOLING"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">ROI POOLING</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -208,7 +212,22 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="R-CNN-Fast-R-CNN-Faster-R-CNN-關係"><a href="#R-CNN-Fast-R-CNN-Faster-R-CNN-關係" class="headerlink" title="R-CNN, Fast R-CNN, Faster R-CNN 關係"></a>R-CNN, Fast R-CNN, Faster R-CNN 關係</h2><table>
+            <p>#Outline</p>
+<ul>
+<li>R-CNN, Fast R-CNN, Faster R-CNN 關係</li>
+<li>流程圖</li>
+<li>BackBone</li>
+<li>RPN<ul>
+<li>Anchor</li>
+<li>ROI Pooling</li>
+<li>Bounding box regression</li>
+</ul>
+</li>
+<li>訓練</li>
+<li>測試</li>
+<li></li>
+</ul>
+<h2 id="R-CNN-Fast-R-CNN-Faster-R-CNN-關係"><a href="#R-CNN-Fast-R-CNN-Faster-R-CNN-關係" class="headerlink" title="R-CNN, Fast R-CNN, Faster R-CNN 關係"></a>R-CNN, Fast R-CNN, Faster R-CNN 關係</h2><table>
 <thead>
 <tr>
 <th><center>網路架構</center></th>
@@ -242,13 +261,40 @@
 </tr>
 </tbody>
 </table>
-<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>1）輸入測試圖像;</p>
-<p>（2）將整張圖片輸入CNN，進行特徵提取;</p>
-<p>（3）用RPN生成建議窗口（建議），每張圖片生成300個建議窗口;</p>
-<p>（4）把建議窗口映射到CNN的最後一層卷積feature map上;</p>
-<p>（5）通過RoI pooling層使每個RoI生成固定尺寸的特徵圖;</p>
-<p>（6）利用Softmax Loss（探測分類概率）和Smooth L1 Loss（探測邊框回歸）對分類概率和邊框回歸（Bounding box regression）聯合訓練。</p>
-<h2 id="ROI-POOLING"><a href="#ROI-POOLING" class="headerlink" title="ROI POOLING"></a>ROI POOLING</h2><p>ROI POOLING 概念如下圖所示<br><figure class="image-bubble">
+<h2 id="流程圖"><a href="#流程圖" class="headerlink" title="流程圖"></a>流程圖</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15231974376489.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15232012344585.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>(1）輸入測試圖像;<br>(2）將整張圖片輸入CNN，進行特徵提取;<br>(3）用RPN生成建議窗口(建議)，每張圖片生成300個建議窗口;<br>(4）把建議窗口映射到CNN的最後一層卷積feature map上;<br>(5）通過RoI pooling層使每個RoI生成固定尺寸的特徵圖;<br>(6）利用Softmax Loss（探測分類概率）和Smooth L1 Loss（探測邊框回歸）對分類概率和邊框回歸（Bounding box regression）聯合訓練。</p>
+<h2 id="Backbone"><a href="#Backbone" class="headerlink" title="Backbone"></a>Backbone</h2><p>原論文沒有特別提網路架構 一般來說是用ZF Net後來都是用VGG架構，甚至是後來用RESNET或是FPN<br>這裡就VGG16來討論，此結構中需要注意的是<br><strong>所有的Conv層都是：kernel_size = 3，pad= 1</strong><br><strong>所有的Pooling都是：kernel_size = 2，stride= 2</strong><br>Faster RCNN 中Conv層對所有的捲積都做了擴邊處理（pad = 1，即填充一圈0），導致原圖變為（M+2）x（N+2）大小，再做3x3卷積後輸出MxN </p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">輸出圖片大小計算：[（M + <span class="number">2</span>） -  <span class="number">3</span> +<span class="number">1</span>] x [（N + <span class="number">2</span>） -  <span class="number">3</span> +<span class="number">1</span> ]</div></pre></td></tr></table></figure>
+<p>因此Conv層中的轉換次數層不改變輸入和輸出矩陣大小</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15231978666930.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>說明：卷積核mxm，輸入圖片WxH（擴邊之後的尺寸），則輸出圖片的尺寸是（W-m + 1）x（H-m + 1）</p>
+<h2 id="RPN"><a href="#RPN" class="headerlink" title="RPN"></a>RPN</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15232012107286.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="Anchor"><a href="#Anchor" class="headerlink" title="Anchor"></a>Anchor</h3><h3 id="ROI-POOLING"><a href="#ROI-POOLING" class="headerlink" title="ROI POOLING"></a>ROI POOLING</h3><p>ROI POOLING 概念如下圖所示<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/media/15137535435975.png" alt="" title="">
@@ -269,7 +315,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2018-04-06T09:29:30.732Z" itemprop="dateUpdated">2018-04-06 17:29:30</time>
+    最後更新時間：<time datetime="2018-04-10T07:52:36.627Z" itemprop="dateUpdated">2018-04-10 15:52:36</time>
 </span><br>
 
 
