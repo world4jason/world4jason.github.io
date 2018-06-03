@@ -20,17 +20,20 @@
     
     
     <meta name="keywords" content="">
-    <meta name="description" content="菜鳥搬磚日常">
+    <meta name="description" content="BackBone :  ResNet and FPN FPN的code其實作者寫在了model.py的Class MaskRCNN裡面並沒有獨立出來, 而其餘ResNet有  Region Proposal Network:  Anchor Boxes Generate 產生anchor boxes的code RPN RPN網路架構的code Proposal Layer 將Anchor Boxe">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mask RCNN Code Reading">
 <meta property="og:url" content="https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading/index.html">
 <meta property="og:site_name" content="world4jason">
-<meta property="og:description" content="菜鳥搬磚日常">
+<meta property="og:description" content="BackBone :  ResNet and FPN FPN的code其實作者寫在了model.py的Class MaskRCNN裡面並沒有獨立出來, 而其餘ResNet有  Region Proposal Network:  Anchor Boxes Generate 產生anchor boxes的code RPN RPN網路架構的code Proposal Layer 將Anchor Boxe">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2018-06-03T09:33:11.513Z">
+<meta property="og:image" content="https://world4jason.github.io/media/15280598887927.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15280601089173.jpg">
+<meta property="og:updated_time" content="2018-06-03T22:31:34.775Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mask RCNN Code Reading">
-<meta name="twitter:description" content="菜鳥搬磚日常">
+<meta name="twitter:description" content="BackBone :  ResNet and FPN FPN的code其實作者寫在了model.py的Class MaskRCNN裡面並沒有獨立出來, 而其餘ResNet有  Region Proposal Network:  Anchor Boxes Generate 產生anchor boxes的code RPN RPN網路架構的code Proposal Layer 將Anchor Boxe">
+<meta name="twitter:image" content="https://world4jason.github.io/media/15280598887927.jpg">
     
         <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
     
@@ -193,14 +196,75 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            
+            <p>BackBone :</p>
+<ul>
+<li><a href="">ResNet and FPN</a> FPN的code其實作者寫在了model.py的Class MaskRCNN裡面並沒有獨立出來, 而其餘ResNet有</li>
+</ul>
+<p>Region Proposal Network:</p>
+<ul>
+<li><a href="">Anchor Boxes Generate</a> 產生anchor boxes的code</li>
+<li><a href="">RPN</a> RPN網路架構的code</li>
+<li><a href="">Proposal Layer</a> 將Anchor Boxes Generate與RPN結合的部分並會經過NMS</li>
+</ul>
+<p>TASK_HEAD:</p>
+<ul>
+<li><a href="">FPN Classifier Graph</a> 有關於<a href="">ROI Align Layer</a>還有分類的網路架構的部分</li>
+<li><a href="">Build FPN Mask Graph</a> 有關於<a href="">ROI Align Layer</a>還有Mask的網路架構的部分</li>
+<li><a href="">Detection Layer</a> FPN Classifier Graph後,按照confidence還有數量篩選, 算是後處理了</li>
+<li><a href="">Detection Target Layer</a> Proposal Layer後,Training的code</li>
+<li><a href="">Mask RCNN Loss</a>有關於所有的loss</li>
+</ul>
+<p>如果是training的話</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> mode == <span class="string">"training"</span>:</div><div class="line">   <span class="comment"># Class ID mask to mark class IDs supported by the dataset the image</span></div><div class="line">   <span class="comment"># came from.</span></div><div class="line">   active_class_ids = KL.Lambda(</div><div class="line">    <span class="keyword">lambda</span> x: parse_image_meta_graph(x)[<span class="string">"active_class_ids"</span>]</div><div class="line">    )(input_image_meta)</div><div class="line">   </div><div class="line">   <span class="keyword">if</span> <span class="keyword">not</span> config.USE_RPN_ROIS:</div><div class="line">    <span class="comment"># Ignore predicted ROIs and use ROIs provided as an input.</span></div><div class="line">    input_rois = KL.Input(shape=[config.POST_NMS_ROIS_TRAINING, <span class="number">4</span>],</div><div class="line">                          name=<span class="string">"input_roi"</span>, dtype=np.int32)</div><div class="line">    <span class="comment"># Normalize coordinates</span></div><div class="line">    target_rois = KL.Lambda(<span class="keyword">lambda</span> x: norm_boxes_graph(</div><div class="line">        x, K.shape(input_image)[<span class="number">1</span>:<span class="number">3</span>]))(input_rois)</div><div class="line">   <span class="keyword">else</span>:</div><div class="line">    target_rois = rpn_rois</div><div class="line">   </div><div class="line">   <span class="comment"># Generate detection targets</span></div><div class="line">   <span class="comment"># Subsamples proposals and generates target outputs for training</span></div><div class="line">   <span class="comment"># Note that proposal class IDs, gt_boxes, and gt_masks are zero</span></div><div class="line">   <span class="comment"># padded. Equally, returned rois and targets are zero padded.</span></div><div class="line">   rois, target_class_ids, target_bbox, target_mask =\</div><div class="line">    DetectionTargetLayer(config, name=<span class="string">"proposal_targets"</span>)([</div><div class="line">        target_rois, input_gt_class_ids, gt_boxes, input_gt_masks])</div><div class="line">   </div><div class="line">   <span class="comment"># Network Heads</span></div><div class="line">   <span class="comment"># <span class="doctag">TODO:</span> verify that this handles zero padded ROIs</span></div><div class="line">   mrcnn_class_logits, mrcnn_class, mrcnn_bbox =\</div><div class="line">    fpn_classifier_graph(rois, mrcnn_feature_maps, input_image_meta,</div><div class="line">                         config.POOL_SIZE, config.NUM_CLASSES,</div><div class="line">                         train_bn=config.TRAIN_BN)</div><div class="line">   </div><div class="line">   mrcnn_mask = build_fpn_mask_graph(rois, mrcnn_feature_maps,</div><div class="line">                                  input_image_meta,</div><div class="line">                                  config.MASK_POOL_SIZE,</div><div class="line">                                  config.NUM_CLASSES,</div><div class="line">                                  train_bn=config.TRAIN_BN)</div><div class="line">   </div><div class="line">   <span class="comment"># <span class="doctag">TODO:</span> clean up (use tf.identify if necessary)</span></div><div class="line">   output_rois = KL.Lambda(<span class="keyword">lambda</span> x: x * <span class="number">1</span>, name=<span class="string">"output_rois"</span>)(rois)</div><div class="line">   </div><div class="line">   <span class="comment"># Losses</span></div><div class="line">   rpn_class_loss = KL.Lambda(<span class="keyword">lambda</span> x: rpn_class_loss_graph(*x), name=<span class="string">"rpn_class_loss"</span>)(</div><div class="line">    [input_rpn_match, rpn_class_logits])</div><div class="line">   rpn_bbox_loss = KL.Lambda(<span class="keyword">lambda</span> x: rpn_bbox_loss_graph(config, *x), name=<span class="string">"rpn_bbox_loss"</span>)(</div><div class="line">    [input_rpn_bbox, input_rpn_match, rpn_bbox])</div><div class="line">   class_loss = KL.Lambda(<span class="keyword">lambda</span> x: mrcnn_class_loss_graph(*x), name=<span class="string">"mrcnn_class_loss"</span>)(</div><div class="line">    [target_class_ids, mrcnn_class_logits, active_class_ids])</div><div class="line">   bbox_loss = KL.Lambda(<span class="keyword">lambda</span> x: mrcnn_bbox_loss_graph(*x), name=<span class="string">"mrcnn_bbox_loss"</span>)(</div><div class="line">    [target_bbox, target_class_ids, mrcnn_bbox])</div><div class="line">   mask_loss = KL.Lambda(<span class="keyword">lambda</span> x: mrcnn_mask_loss_graph(*x), name=<span class="string">"mrcnn_mask_loss"</span>)(</div><div class="line">    [target_mask, target_class_ids, mrcnn_mask])</div><div class="line">   </div><div class="line">   <span class="comment"># Model</span></div><div class="line">   inputs = [input_image, input_image_meta,</div><div class="line">          input_rpn_match, input_rpn_bbox, input_gt_class_ids, input_gt_boxes, input_gt_masks]</div><div class="line">   <span class="keyword">if</span> <span class="keyword">not</span> config.USE_RPN_ROIS:</div><div class="line">    inputs.append(input_rois)</div><div class="line">   outputs = [rpn_class_logits, rpn_class, rpn_bbox,</div><div class="line">           mrcnn_class_logits, mrcnn_class, mrcnn_bbox, mrcnn_mask,</div><div class="line">           rpn_rois, output_rois,</div><div class="line">           rpn_class_loss, rpn_bbox_loss, class_loss, bbox_loss, mask_loss]</div><div class="line">   model = KM.Model(inputs, outputs, name=<span class="string">'mask_rcnn'</span>)</div></pre></td></tr></table></figure>
+<p>如果是測試的話</p>
+<pre><code class="python"><span class="keyword">else</span>:
+    <span class="comment"># Network Heads</span>
+    <span class="comment"># Proposal classifier and BBox regressor heads</span>
+    mrcnn_class_logits, mrcnn_class, mrcnn_bbox =\
+     fpn_classifier_graph(rpn_rois, mrcnn_feature_maps, input_image_meta,
+                          config.POOL_SIZE, config.NUM_CLASSES,
+                          train_bn=config.TRAIN_BN)
+
+    <span class="comment"># Detections</span>
+    <span class="comment"># output is [batch, num_detections, (y1, x1, y2, x2, class_id, score)] in </span>
+    <span class="comment"># normalized coordinates</span>
+    detections = DetectionLayer(config, name=<span class="string">"mrcnn_detection"</span>)(
+     [rpn_rois, mrcnn_class, mrcnn_bbox, input_image_meta])
+
+    <span class="comment"># Create masks for detections</span>
+    detection_boxes = KL.Lambda(<span class="keyword">lambda</span> x: x[..., :<span class="number">4</span>])(detections)
+    mrcnn_mask = build_fpn_mask_graph(detection_boxes, mrcnn_feature_maps,
+                                   input_image_meta,
+                                   config.MASK_POOL_SIZE,
+                                   config.NUM_CLASSES,
+                                   train_bn=config.TRAIN_BN)
+
+    model = KM.Model([input_image, input_image_meta, input_anchors],
+                  [detections, mrcnn_class, mrcnn_bbox,
+                      mrcnn_mask, rpn_rois, rpn_class, rpn_bbox],
+                  name=<span class="string">'mask_rcnn'</span>)
+</code></pre>
+<p>以下是別人網誌上的舊圖 不太依樣了 build_classfier_grpah拿掉了 上圖是inference下圖是train<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15280598887927.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15280601089173.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+
         </div>
 
         <blockquote class="post-copyright">
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2018-06-03T09:33:11.513Z" itemprop="dateUpdated">2018-06-03 17:33:11</time>
+    最後更新時間：<time datetime="2018-06-03T22:31:34.775Z" itemprop="dateUpdated">2018-06-04 06:31:34</time>
 </span><br>
 
 

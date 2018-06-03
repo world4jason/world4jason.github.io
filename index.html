@@ -171,6 +171,88 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-Mask-RCNN-Code-Reading-DetectionLayer"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-06-04 05:57:33" datetime="2018-06-03T21:57:33.000Z"  itemprop="datePublished">2018-06-04</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/06/04/Mask-RCNN-Code-Reading-DetectionLayer/">Mask RCNNCode Reading - Detection Layer</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        這邊其實主要是因為程式碼撰寫方便 所以才拆成Detection Target Layer與Detection Layer 前者是在訓練時用到的,後者是在測試時用的, 
+Detection Layer
+refine_detections_graph根據rois和probs(每個ROI都有總類別個數的probs)和deltas進行檢測的優化，得到固定數量的優化目標。  
+123456789101...
+    
+
+        <a href="/2018/06/04/Mask-RCNN-Code-Reading-DetectionLayer/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Batch-Normalization-and-Group-Normalization"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-06-04 04:30:09" datetime="2018-06-03T20:30:09.000Z"  itemprop="datePublished">2018-06-04</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/06/04/Batch-Normalization-and-Group-Normalization/">Batch Normalization and Group Normalization</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        #Batch NormalizationBatch Normalization 在深度學習上算是不可或缺的一部分，基本上所有的框架中都會用到它，我記得比較清楚的是，在YOLOV2中作者採用了Batch Normalization 從而提高了4個百分點的Map吧。
+##為何要提出Batch Normalization？在每次給network輸入數據時，都需要進行預處理，比如歸一化之類的，為什麼...
+    
+
+        <a href="/2018/06/04/Batch-Normalization-and-Group-Normalization/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-Mask-RCNN-Code-Reading-ROI_Align"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -197,8 +279,8 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        ROIAlign Layer功能型
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394...
+        ROIAlign Layer這class在兩個地方會被呼叫到
+1234567def build_fpn_mask_graph(rois, feature_maps, image_meta,                         pool_size, num_classes, train_bn=True):    # ROI Pooling    # Shape: [batch, n...
     
 
         <a href="/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/" class="post-more waves-effect waves-button">
@@ -211,7 +293,7 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-Mask-RCNN-Code-Reading-Head-DetectionTargetLayer"
+            <article id="post-Mask-RCNN-Code-Reading-DetectionTargetLayer"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
@@ -227,7 +309,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/">Mask RCNNCode Reading for Network Head - Detection Target Layer</a>
+      <a class="post-title-link" href="/2018/06/03/Mask-RCNN-Code-Reading-DetectionTargetLayer/">Mask RCNNCode Reading - Detection Target Layer</a>
     </h3>
   
 
@@ -238,11 +320,11 @@
 
     
         Detection Target Layer與Detection Layer 前者是在訓練時用到的後者是在測試時用的
-overlaps_graph這邊顧名思義是計算IOU用的
-123456789101112131415161718192021222324252627def overlaps_graph(boxes1, boxes2):    """Computes IoU overlaps ...
+其實對於inference來說,Proposal_Layer已經拿到要的結果了, DetectionTargetLayer最主要是訓練用途需要 所以會有ground truth (gt_box, gt_class_id, gt_mask)
+overlaps_graph這邊顧名...
     
 
-        <a href="/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/" class="post-more waves-effect waves-button">
+        <a href="/2018/06/03/Mask-RCNN-Code-Reading-DetectionTargetLayer/" class="post-more waves-effect waves-button">
             閱讀全文…
         </a>
     </div>
@@ -448,7 +530,15 @@ identity_block這function主要是為了後面的resnet_graph做準備的, 主�
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
+        BackBone :
+
+ResNet and FPN FPN的code其實作者寫在了model.py的Class MaskRCNN裡面並沒有獨立出來, 而其餘ResNet有
+
+Region Proposal Network:
+
+Anchor Boxes Generate 產生anchor boxes的code
+RPN RPN網路架構的code
+Proposal Layer 將Anchor B...
     
 
         <a href="/2018/05/30/Mask-RCNN-Code-Reading/" class="post-more waves-effect waves-button">
@@ -495,102 +585,6 @@ identity_block這function主要是為了後面的resnet_graph做準備的, 主�
         <a href="/2018/04/07/Optimize/" class="post-more waves-effect waves-button">
             閱讀全文…
         </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Resnet-Deep-Residual-Network"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-04-07 21:15:01" datetime="2018-04-07T13:15:01.000Z"  itemprop="datePublished">2018-04-07</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Model-Architecture/">Model Architecture</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Model-Architecture/Classification/">Classification</a></li></ul></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/04/07/Resnet-Deep-Residual-Network/">Deep Residual Network</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        
-    
-
-        <a href="/2018/04/07/Resnet-Deep-Residual-Network/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Classification/">Classification</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Convolution/">Convolution</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Model-Architecture/">Model Architecture</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-VGG-VERY-DEEP-CONVOLUTIONAL-NETWORK-SFOR-LARGE-SCALE-IMAGE-RECOGNITION"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-04-07 21:05:01" datetime="2018-04-07T13:05:01.000Z"  itemprop="datePublished">2018-04-07</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Model-Architecture/">Model Architecture</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Model-Architecture/Classification/">Classification</a></li></ul></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/04/07/VGG-VERY-DEEP-CONVOLUTIONAL-NETWORK-SFOR-LARGE-SCALE-IMAGE-RECOGNITION/">VGG-VERY DEEP CONVOLUTIONAL NETWORK SFOR LARGE-SCALE IMAGE RECOGNITION</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        前言這篇的摘要寫說針對AlexNet的基礎上主要做了兩方面的改進：1.使用了最小的3x3卷積核尺寸和最小間隔。
-
-在整個圖片和multi-scale上訓練和測試圖片。論文原句：1. Use smaller receptive window size and smaller stride of the first convolutional layer.2.Training and testi...
-    
-
-        <a href="/2018/04/07/VGG-VERY-DEEP-CONVOLUTIONAL-NETWORK-SFOR-LARGE-SCALE-IMAGE-RECOGNITION/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Classification/">Classification</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Convolution/">Convolution</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Model-Architecture/">Model Architecture</a></li></ul>
-
     </div>
     
 </article>
