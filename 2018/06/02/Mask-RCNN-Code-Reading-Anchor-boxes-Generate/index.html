@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>Mask RCNNCode Reading for Anchor boxes generate | world4jason | 菜鳥搬磚日常</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="接續上面的RPN output 123456789101112131415161718rpn_class_logits, rpn_class, rpn_bbox = outputs# Generate proposals# Proposals are [batch, N, (y1, x1, y2, x2)] in normalized coordinates# and zero padded.#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mask RCNNCode Reading for Anchor boxes generate">
+<meta property="og:url" content="https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Anchor-boxes-Generate/index.html">
+<meta property="og:site_name" content="world4jason">
+<meta property="og:description" content="接續上面的RPN output 123456789101112131415161718rpn_class_logits, rpn_class, rpn_bbox = outputs# Generate proposals# Proposals are [batch, N, (y1, x1, y2, x2)] in normalized coordinates# and zero padded.#">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2018-06-03T09:34:32.207Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mask RCNNCode Reading for Anchor boxes generate">
+<meta name="twitter:description" content="接續上面的RPN output 123456789101112131415161718rpn_class_logits, rpn_class, rpn_bbox = outputs# Generate proposals# Proposals are [batch, N, (y1, x1, y2, x2)] in normalized coordinates# and zero padded.#">
+    
+        <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Jason Yeh</h5>
+          <a href="mailto:world4jason@gmail.com" title="world4jason@gmail.com" class="mail">world4jason@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-Home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/world4jason" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-research"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-about"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cv"  >
+                <i class="icon icon-lg icon-CV"></i>
+                CV
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Mask RCNNCode Reading for Anchor boxes generate</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Mask RCNNCode Reading for Anchor boxes generate</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-02T12:57:33.000Z" itemprop="datePublished" class="page-time">
+  2018-06-02
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Anchor-boxes-generate"><span class="post-toc-number">1.</span> <span class="post-toc-text">Anchor boxes generate</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#def-get-anchors"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">def get_anchors</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#utils-generate-pyramid-anchors"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">utils.generate_pyramid_anchors</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#utils-generate-anchors"><span class="post-toc-number">1.0.3.</span> <span class="post-toc-text">utils.generate_anchors</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Mask-RCNN-Code-Reading-Anchor-boxes-Generate"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Mask RCNNCode Reading for Anchor boxes generate</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-02 20:57:33" datetime="2018-06-02T12:57:33.000Z"  itemprop="datePublished">2018-06-02</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>接續上面的RPN output</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">rpn_class_logits, rpn_class, rpn_bbox = outputs</div><div class="line"></div><div class="line"><span class="comment"># Generate proposals</span></div><div class="line"><span class="comment"># Proposals are [batch, N, (y1, x1, y2, x2)] in normalized coordinates</span></div><div class="line"><span class="comment"># and zero padded.</span></div><div class="line"></div><div class="line"><span class="comment"># POST_NMS_ROIS_INFERENCE = 1000</span></div><div class="line"><span class="comment"># POST_NMS_ROIS_TRAINING = 2000</span></div><div class="line"></div><div class="line">    proposal_count = config.POST_NMS_ROIS_TRAINING <span class="keyword">if</span> mode == <span class="string">"training"</span>\</div><div class="line">            <span class="keyword">else</span> config.POST_NMS_ROIS_INFERENCE</div><div class="line">        </div><div class="line">rpn_rois = ProposalLayer(</div><div class="line">              proposal_count=proposal_count,</div><div class="line">              nms_threshold=config.RPN_NMS_THRESHOLD,</div><div class="line">              name=<span class="string">"ROI"</span>,</div><div class="line">              config=config)([rpn_class, rpn_bbox, anchors]</div><div class="line">              )</div></pre></td></tr></table></figure>
+<h1 id="Anchor-boxes-generate"><a href="#Anchor-boxes-generate" class="headerlink" title="Anchor boxes generate"></a>Anchor boxes generate</h1><p>而 anchors 的來源呢<br>在主程式碼中有這段</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Anchors</span></div><div class="line"><span class="keyword">if</span> mode == <span class="string">"training"</span>:</div><div class="line">  anchors = self.get_anchors(config.IMAGE_SHAPE)</div><div class="line">  <span class="comment"># Duplicate across the batch dimension because Keras requires it</span></div><div class="line">  <span class="comment"># <span class="doctag">TODO:</span> can this be optimized to avoid duplicating the anchors?</span></div><div class="line">  anchors = np.broadcast_to(anchors, (config.BATCH_SIZE,) + anchors.shape)</div><div class="line">  <span class="comment"># A hack to get around Keras's bad support for constants</span></div><div class="line">  anchors = KL.Lambda(<span class="keyword">lambda</span> x: tf.Variable(anchors), name=<span class="string">"anchors"</span>)(input_image)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">  anchors = input_anchors</div></pre></td></tr></table></figure>
+<h3 id="def-get-anchors"><a href="#def-get-anchors" class="headerlink" title="def get_anchors"></a>def get_anchors</h3><p>compute_backbone_shapes:</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Computes <span class="keyword">the</span> width <span class="keyword">and</span> height <span class="keyword">of</span> <span class="keyword">each</span> stage <span class="keyword">of</span> <span class="keyword">the</span> backbone network.</div><div class="line">Returns:</div><div class="line">  [N, (height, width)]. Where N is <span class="keyword">the</span> <span class="built_in">number</span> <span class="keyword">of</span> stages</div></pre></td></tr></table></figure>
+<p>utils.generate_pyramid_anchors這邊看起來相對於single scale的backbone, 這裡多了backbone_shapes這項變數, 是因為需要知道該層feature_map大小才能回推anchor boxes</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">RPN_ANCHOR_SCALES = (<span class="number">32</span>, <span class="number">64</span>, <span class="number">128</span>, <span class="number">256</span>, <span class="number">512</span>)</div><div class="line">RPN_ANCHOR_RATIOS = [<span class="number">0.5</span>, <span class="number">1</span> ,<span class="number">2</span>]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_anchors</span><span class="params">(self, image_shape)</span>:</span></div><div class="line">   <span class="string">"""Returns anchor pyramid for the given image size."""</span></div><div class="line">   backbone_shapes = compute_backbone_shapes(self.config, image_shape)</div><div class="line">   <span class="comment"># Cache anchors and reuse if image shape is the same</span></div><div class="line">   <span class="keyword">if</span> <span class="keyword">not</span> hasattr(self, <span class="string">"_anchor_cache"</span>):</div><div class="line">       self._anchor_cache = &#123;&#125;</div><div class="line">   <span class="keyword">if</span> <span class="keyword">not</span> tuple(image_shape) <span class="keyword">in</span> self._anchor_cache:</div><div class="line">       <span class="comment"># Generate Anchors</span></div><div class="line">       a = utils.generate_pyramid_anchors(</div><div class="line">           self.config.RPN_ANCHOR_SCALES,</div><div class="line">           self.config.RPN_ANCHOR_RATIOS,</div><div class="line">           backbone_shapes,</div><div class="line">           self.config.BACKBONE_STRIDES,</div><div class="line">           self.config.RPN_ANCHOR_STRIDE)</div><div class="line">       <span class="comment"># Keep a copy of the latest anchors in pixel coordinates because</span></div><div class="line">       <span class="comment"># it's used in inspect_model notebooks.</span></div><div class="line">       <span class="comment"># <span class="doctag">TODO:</span> Remove this after the notebook are refactored to not use it</span></div><div class="line">       self.anchors = a</div><div class="line">       <span class="comment"># Normalize coordinates</span></div><div class="line">       self._anchor_cache[tuple(image_shape)] = utils.norm_boxes(a, image_shape[:<span class="number">2</span>])</div><div class="line">   <span class="keyword">return</span> self._anchor_cache[tuple(image_shape)]</div></pre></td></tr></table></figure>
+<h3 id="utils-generate-pyramid-anchors"><a href="#utils-generate-pyramid-anchors" class="headerlink" title="utils.generate_pyramid_anchors"></a>utils.generate_pyramid_anchors</h3><p>這邊很明顯就是包裝一層, 讓各個stage (P2~P6)的各自去計算以後append<br>後方操作…舉個例子, 順便了解一下IO, 其實只是會了整形而已</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.arange(<span class="number">5</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b=np.array([<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b</div><div class="line">array([<span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>])</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c.append(a)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line">[array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c.append(b)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line">[array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]), array([<span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>])]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.concatenate(c,axis=<span class="number">0</span>)</div><div class="line">array([ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>, <span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>])</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_pyramid_anchors</span><span class="params">(scales, ratios, feature_shapes, feature_strides,anchor_stride)</span>:</span></div><div class="line">    <span class="string">"""Generate anchors at different levels of a feature pyramid. Each scale</span></div><div class="line">    is associated with a level of the pyramid, but each ratio is used in</div><div class="line">    all levels of the pyramid.</div><div class="line"></div><div class="line">    Returns:</div><div class="line">    anchors: [N, (y1, x1, y2, x2)]. All generated anchors in one array. Sorted</div><div class="line">        with the same order of the given scales. So, anchors of scale[0] come</div><div class="line">        first, then anchors of scale[1], and so on.</div><div class="line">    """</div><div class="line">    <span class="comment"># Anchors</span></div><div class="line">    <span class="comment"># [anchor_count, (y1, x1, y2, x2)]</span></div><div class="line">    anchors = []</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(scales)):</div><div class="line">        anchors.append(</div><div class="line">            generate_anchors(</div><div class="line">                    scales[i],  <span class="comment"># self.config.RPN_ANCHOR_SCALES</span></div><div class="line">                    ratios,     <span class="comment"># self.config.RPN_ANCHOR_RATIOS</span></div><div class="line">                    feature_shapes[i],  <span class="comment"># backbone_shapes</span></div><div class="line">                    feature_strides[i], <span class="comment"># self.config.BACKBONE_STRIDES [4, 8, 16, 32, 64]</span></div><div class="line">                    anchor_stride       <span class="comment"># self.config.RPN_ANCHOR_STRIDE</span></div><div class="line">            ))</div><div class="line">    <span class="keyword">return</span> np.concatenate(anchors, axis=<span class="number">0</span>)</div></pre></td></tr></table></figure>
+<h3 id="utils-generate-anchors"><a href="#utils-generate-anchors" class="headerlink" title="utils.generate_anchors"></a>utils.generate_anchors</h3><p>Code內其實有參數說明了<br>scales就是anchor boxes邊長了<br>ratio就是anchor boxes的比例<br>shapes是原圖<br>feature_stride 其實就是原圖與該feature層(例如p3)的縮放倍率, 如果是resnet或是VGG這種就一律都是縮放16倍了<br>anchor_stride 這通常是1吧XD 就是以縮放比切割原圖後可以得到(w/feature_stride)x(h/feature_stride)個grid, 那在此多少區間弄一個anchor?</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_anchors</span><span class="params">(scales, ratios, shape, feature_stride, anchor_stride)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    scales: 1D array of anchor sizes in pixels. Example: [32, 64, 128]</div><div class="line">    ratios: 1D array of anchor ratios of width/height. Example: [0.5, 1, 2]</div><div class="line">    shape: [height, width] spatial shape of the feature map over which</div><div class="line">            to generate anchors.</div><div class="line">    feature_stride: Stride of the feature map relative to the image in pixels.</div><div class="line">    anchor_stride: Stride of anchors on the feature map. For example, if the</div><div class="line">        value is 2 then generate anchors for every other feature map pixel.</div><div class="line">    """</div><div class="line">    <span class="comment"># Get all combinations of scales and ratios</span></div><div class="line">    scales, ratios = np.meshgrid(np.array(scales), np.array(ratios))</div><div class="line">    scales = scales.flatten()</div><div class="line">    ratios = ratios.flatten()</div><div class="line"></div><div class="line">    <span class="comment"># Enumerate heights and widths from scales and ratios</span></div><div class="line">    heights = scales / np.sqrt(ratios)</div><div class="line">    widths = scales * np.sqrt(ratios)</div><div class="line"></div><div class="line">    <span class="comment"># Enumerate shifts in feature space</span></div><div class="line">    shifts_y = np.arange(<span class="number">0</span>, shape[<span class="number">0</span>], anchor_stride) * feature_stride</div><div class="line">    shifts_x = np.arange(<span class="number">0</span>, shape[<span class="number">1</span>], anchor_stride) * feature_stride</div><div class="line">    shifts_x, shifts_y = np.meshgrid(shifts_x, shifts_y)</div><div class="line"></div><div class="line">    <span class="comment"># Enumerate combinations of shifts, widths, and heights</span></div><div class="line">    box_widths, box_centers_x = np.meshgrid(widths, shifts_x)</div><div class="line">    box_heights, box_centers_y = np.meshgrid(heights, shifts_y)</div><div class="line"></div><div class="line">    <span class="comment"># Reshape to get a list of (y, x) and a list of (h, w)</span></div><div class="line">    box_centers = np.stack(</div><div class="line">        [box_centers_y, box_centers_x], axis=<span class="number">2</span>).reshape([<span class="number">-1</span>, <span class="number">2</span>])</div><div class="line">    box_sizes = np.stack([box_heights, box_widths], axis=<span class="number">2</span>).reshape([<span class="number">-1</span>, <span class="number">2</span>])</div><div class="line"></div><div class="line">    <span class="comment"># Convert to corner coordinates (y1, x1, y2, x2)</span></div><div class="line">    boxes = np.concatenate([box_centers - <span class="number">0.5</span> * box_sizes,</div><div class="line">                            box_centers + <span class="number">0.5</span> * box_sizes], axis=<span class="number">1</span>)</div><div class="line">    <span class="keyword">return</span> boxes</div></pre></td></tr></table></figure>
+<p>下面用一組參數示範一下, 到最後widths, heights 就可以得到anchor boxes的所有邊長了<br>np.meshgrid的部分, 要注意傳入參數得需要是一維的, 接著再用flatten()把它變成1xN的array<br>np.stack我覺得挺難理解, 可以看這邊 <a href="https://blog.csdn.net/qq_17550379/article/details/78934529" target="_blank" rel="external">numpy.stack最通俗的理解</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Get all combinations of scales and ratios</span></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>scales = [<span class="number">32</span>, <span class="number">64</span>, <span class="number">128</span>, <span class="number">256</span>, <span class="number">512</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>ratios = [<span class="number">0.5</span>,<span class="number">1</span>,<span class="number">2</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.meshgrid(np.array(scales), np.array(ratios))</div><div class="line">[</div><div class="line">    array([</div><div class="line">        [ <span class="number">32</span>,  <span class="number">64</span>, <span class="number">128</span>, <span class="number">256</span>, <span class="number">512</span>],</div><div class="line">        [ <span class="number">32</span>,  <span class="number">64</span>, <span class="number">128</span>, <span class="number">256</span>, <span class="number">512</span>],</div><div class="line">        [ <span class="number">32</span>,  <span class="number">64</span>, <span class="number">128</span>, <span class="number">256</span>, <span class="number">512</span>]</div><div class="line">    ]), </div><div class="line">    array([</div><div class="line">        [<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>],</div><div class="line">        [<span class="number">1.</span> , <span class="number">1.</span> , <span class="number">1.</span> , <span class="number">1.</span> , <span class="number">1.</span> ],</div><div class="line">        [<span class="number">2.</span> , <span class="number">2.</span> , <span class="number">2.</span> , <span class="number">2.</span> , <span class="number">2.</span> ]</div><div class="line">    ])</div><div class="line">]</div><div class="line"></div><div class="line"><span class="comment">### 反過來傳結果有點不一樣</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.meshgrid(np.array(ratios), np.array(scales))</div><div class="line">[array([[<span class="number">0.5</span>, <span class="number">1.</span> , <span class="number">2.</span> ],</div><div class="line">       [<span class="number">0.5</span>, <span class="number">1.</span> , <span class="number">2.</span> ],</div><div class="line">       [<span class="number">0.5</span>, <span class="number">1.</span> , <span class="number">2.</span> ],</div><div class="line">       [<span class="number">0.5</span>, <span class="number">1.</span> , <span class="number">2.</span> ],</div><div class="line">       [<span class="number">0.5</span>, <span class="number">1.</span> , <span class="number">2.</span> ]]), </div><div class="line">       </div><div class="line"> array([[ <span class="number">32</span>,  <span class="number">32</span>,  <span class="number">32</span>],</div><div class="line">       [ <span class="number">64</span>,  <span class="number">64</span>,  <span class="number">64</span>],</div><div class="line">       [<span class="number">128</span>, <span class="number">128</span>, <span class="number">128</span>],</div><div class="line">       [<span class="number">256</span>, <span class="number">256</span>, <span class="number">256</span>],</div><div class="line">       [<span class="number">512</span>, <span class="number">512</span>, <span class="number">512</span>]])]</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>scales = scales.flatten()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>ratios = ratios.flatten()</div><div class="line"></div><div class="line"><span class="comment"># Enumerate heights and widths from scales and ratios       </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>heights = scales / np.sqrt(ratios)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>widths = scales * np.sqrt(ratios)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>heights</div><div class="line">array([ <span class="number">45.254834</span>  ,  <span class="number">90.50966799</span>, <span class="number">181.01933598</span>, <span class="number">362.03867197</span>,</div><div class="line">       <span class="number">724.07734394</span>,  <span class="number">32.</span>        ,  <span class="number">64.</span>        , <span class="number">128.</span>        ,</div><div class="line">       <span class="number">256.</span>        , <span class="number">512.</span>        ,  <span class="number">22.627417</span>  ,  <span class="number">45.254834</span>  ,</div><div class="line">        <span class="number">90.50966799</span>, <span class="number">181.01933598</span>, <span class="number">362.03867197</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>widths</div><div class="line">array([ <span class="number">22.627417</span>  ,  <span class="number">45.254834</span>  ,  <span class="number">90.50966799</span>, <span class="number">181.01933598</span>,</div><div class="line">       <span class="number">362.03867197</span>,  <span class="number">32.</span>        ,  <span class="number">64.</span>        , <span class="number">128.</span>        ,</div><div class="line">       <span class="number">256.</span>        , <span class="number">512.</span>        ,  <span class="number">45.254834</span>  ,  <span class="number">90.50966799</span>,</div><div class="line">       <span class="number">181.01933598</span>, <span class="number">362.03867197</span>, <span class="number">724.07734394</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>heights.shape, widths.shape</div><div class="line">((<span class="number">15</span>,), (<span class="number">15</span>,))</div><div class="line"></div><div class="line"><span class="comment"># Enumerate shifts in feature space</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>anchor_stride=<span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>shape=[<span class="number">1024</span>,<span class="number">2048</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>feature_strides = [<span class="number">4</span>, <span class="number">8</span>, <span class="number">16</span>, <span class="number">32</span>, <span class="number">64</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>feature_stride = feature_strides[<span class="number">2</span>]</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>shifts_x = np.arange(<span class="number">0</span>, shape[<span class="number">1</span>], anchor_stride) * feature_stride</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>shifts_y = np.arange(<span class="number">0</span>, shape[<span class="number">0</span>], anchor_stride) * feature_stride</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>shifts_x</div><div class="line">array([    <span class="number">0</span>,    <span class="number">16</span>,    <span class="number">32</span>, ..., <span class="number">32720</span>, <span class="number">32736</span>, <span class="number">32752</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>shifts_y</div><div class="line">array([    <span class="number">0</span>,    <span class="number">16</span>,    <span class="number">32</span>, ..., <span class="number">16336</span>, <span class="number">16352</span>, <span class="number">16368</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>len(shifts_x), len(shifts_y)</div><div class="line"><span class="number">2048</span>,<span class="number">1024</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>shifts_x, shifts_y = np.meshgrid(shifts_x, shifts_y)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>shifts_y</div><div class="line">array([[    <span class="number">0</span>,     <span class="number">0</span>,     <span class="number">0</span>, ...,     <span class="number">0</span>,     <span class="number">0</span>,     <span class="number">0</span>],</div><div class="line">       [   <span class="number">16</span>,    <span class="number">16</span>,    <span class="number">16</span>, ...,    <span class="number">16</span>,    <span class="number">16</span>,    <span class="number">16</span>],</div><div class="line">       [   <span class="number">32</span>,    <span class="number">32</span>,    <span class="number">32</span>, ...,    <span class="number">32</span>,    <span class="number">32</span>,    <span class="number">32</span>],</div><div class="line">       ...,</div><div class="line">       [<span class="number">16336</span>, <span class="number">16336</span>, <span class="number">16336</span>, ..., <span class="number">16336</span>, <span class="number">16336</span>, <span class="number">16336</span>],</div><div class="line">       [<span class="number">16352</span>, <span class="number">16352</span>, <span class="number">16352</span>, ..., <span class="number">16352</span>, <span class="number">16352</span>, <span class="number">16352</span>],</div><div class="line">       [<span class="number">16368</span>, <span class="number">16368</span>, <span class="number">16368</span>, ..., <span class="number">16368</span>, <span class="number">16368</span>, <span class="number">16368</span>]])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>shifts_x</div><div class="line">array([[    <span class="number">0</span>,    <span class="number">16</span>,    <span class="number">32</span>, ..., <span class="number">32720</span>, <span class="number">32736</span>, <span class="number">32752</span>],</div><div class="line">       [    <span class="number">0</span>,    <span class="number">16</span>,    <span class="number">32</span>, ..., <span class="number">32720</span>, <span class="number">32736</span>, <span class="number">32752</span>],</div><div class="line">       [    <span class="number">0</span>,    <span class="number">16</span>,    <span class="number">32</span>, ..., <span class="number">32720</span>, <span class="number">32736</span>, <span class="number">32752</span>],</div><div class="line">       ...,</div><div class="line">       [    <span class="number">0</span>,    <span class="number">16</span>,    <span class="number">32</span>, ..., <span class="number">32720</span>, <span class="number">32736</span>, <span class="number">32752</span>],</div><div class="line">       [    <span class="number">0</span>,    <span class="number">16</span>,    <span class="number">32</span>, ..., <span class="number">32720</span>, <span class="number">32736</span>, <span class="number">32752</span>],</div><div class="line">       [    <span class="number">0</span>,    <span class="number">16</span>,    <span class="number">32</span>, ..., <span class="number">32720</span>, <span class="number">32736</span>, <span class="number">32752</span>]])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>shifts_x.shape, shifts_y.shape</div><div class="line">((<span class="number">1024</span>, <span class="number">2048</span>), (<span class="number">1024</span>, <span class="number">2048</span>))</div><div class="line">       </div><div class="line"><span class="comment"># Enumerate combinations of shifts, widths, and heights</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>box_widths, box_centers_x = np.meshgrid(widths, shifts_x)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>box_heights, box_centers_y = np.meshgrid(heights, shifts_y)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>box_heights</div><div class="line">array([[ <span class="number">45.254834</span>  ,  <span class="number">90.50966799</span>, <span class="number">181.01933598</span>, ...,  <span class="number">90.50966799</span>,</div><div class="line">        <span class="number">181.01933598</span>, <span class="number">362.03867197</span>],</div><div class="line">       [ <span class="number">45.254834</span>  ,  <span class="number">90.50966799</span>, <span class="number">181.01933598</span>, ...,  <span class="number">90.50966799</span>,</div><div class="line">        <span class="number">181.01933598</span>, <span class="number">362.03867197</span>],</div><div class="line">       [ <span class="number">45.254834</span>  ,  <span class="number">90.50966799</span>, <span class="number">181.01933598</span>, ...,  <span class="number">90.50966799</span>,</div><div class="line">        <span class="number">181.01933598</span>, <span class="number">362.03867197</span>],</div><div class="line">       ...,</div><div class="line">       [ <span class="number">45.254834</span>  ,  <span class="number">90.50966799</span>, <span class="number">181.01933598</span>, ...,  <span class="number">90.50966799</span>,</div><div class="line">        <span class="number">181.01933598</span>, <span class="number">362.03867197</span>],</div><div class="line">       [ <span class="number">45.254834</span>  ,  <span class="number">90.50966799</span>, <span class="number">181.01933598</span>, ...,  <span class="number">90.50966799</span>,</div><div class="line">        <span class="number">181.01933598</span>, <span class="number">362.03867197</span>],</div><div class="line">       [ <span class="number">45.254834</span>  ,  <span class="number">90.50966799</span>, <span class="number">181.01933598</span>, ...,  <span class="number">90.50966799</span>,</div><div class="line">        <span class="number">181.01933598</span>, <span class="number">362.03867197</span>]])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>box_centers_y</div><div class="line">array([[    <span class="number">0</span>,     <span class="number">0</span>,     <span class="number">0</span>, ...,     <span class="number">0</span>,     <span class="number">0</span>,     <span class="number">0</span>],</div><div class="line">       [    <span class="number">0</span>,     <span class="number">0</span>,     <span class="number">0</span>, ...,     <span class="number">0</span>,     <span class="number">0</span>,     <span class="number">0</span>],</div><div class="line">       [    <span class="number">0</span>,     <span class="number">0</span>,     <span class="number">0</span>, ...,     <span class="number">0</span>,     <span class="number">0</span>,     <span class="number">0</span>],</div><div class="line">       ...,</div><div class="line">       [<span class="number">16368</span>, <span class="number">16368</span>, <span class="number">16368</span>, ..., <span class="number">16368</span>, <span class="number">16368</span>, <span class="number">16368</span>],</div><div class="line">       [<span class="number">16368</span>, <span class="number">16368</span>, <span class="number">16368</span>, ..., <span class="number">16368</span>, <span class="number">16368</span>, <span class="number">16368</span>],</div><div class="line">       [<span class="number">16368</span>, <span class="number">16368</span>, <span class="number">16368</span>, ..., <span class="number">16368</span>, <span class="number">16368</span>, <span class="number">16368</span>]])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>box_centers_x</div><div class="line">array([[    <span class="number">0</span>,     <span class="number">0</span>,     <span class="number">0</span>, ...,     <span class="number">0</span>,     <span class="number">0</span>,     <span class="number">0</span>],</div><div class="line">       [   <span class="number">16</span>,    <span class="number">16</span>,    <span class="number">16</span>, ...,    <span class="number">16</span>,    <span class="number">16</span>,    <span class="number">16</span>],</div><div class="line">       [   <span class="number">32</span>,    <span class="number">32</span>,    <span class="number">32</span>, ...,    <span class="number">32</span>,    <span class="number">32</span>,    <span class="number">32</span>],</div><div class="line">       ...,</div><div class="line">       [<span class="number">32720</span>, <span class="number">32720</span>, <span class="number">32720</span>, ..., <span class="number">32720</span>, <span class="number">32720</span>, <span class="number">32720</span>],</div><div class="line">       [<span class="number">32736</span>, <span class="number">32736</span>, <span class="number">32736</span>, ..., <span class="number">32736</span>, <span class="number">32736</span>, <span class="number">32736</span>],</div><div class="line">       [<span class="number">32752</span>, <span class="number">32752</span>, <span class="number">32752</span>, ..., <span class="number">32752</span>, <span class="number">32752</span>, <span class="number">32752</span>]])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>box_widths</div><div class="line">array([[ <span class="number">22.627417</span>  ,  <span class="number">45.254834</span>  ,  <span class="number">90.50966799</span>, ..., <span class="number">181.01933598</span>,</div><div class="line">        <span class="number">362.03867197</span>, <span class="number">724.07734394</span>],</div><div class="line">       [ <span class="number">22.627417</span>  ,  <span class="number">45.254834</span>  ,  <span class="number">90.50966799</span>, ..., <span class="number">181.01933598</span>,</div><div class="line">        <span class="number">362.03867197</span>, <span class="number">724.07734394</span>],</div><div class="line">       [ <span class="number">22.627417</span>  ,  <span class="number">45.254834</span>  ,  <span class="number">90.50966799</span>, ..., <span class="number">181.01933598</span>,</div><div class="line">        <span class="number">362.03867197</span>, <span class="number">724.07734394</span>],</div><div class="line">       ...,</div><div class="line">       [ <span class="number">22.627417</span>  ,  <span class="number">45.254834</span>  ,  <span class="number">90.50966799</span>, ..., <span class="number">181.01933598</span>,</div><div class="line">        <span class="number">362.03867197</span>, <span class="number">724.07734394</span>],</div><div class="line">       [ <span class="number">22.627417</span>  ,  <span class="number">45.254834</span>  ,  <span class="number">90.50966799</span>, ..., <span class="number">181.01933598</span>,</div><div class="line">        <span class="number">362.03867197</span>, <span class="number">724.07734394</span>],</div><div class="line">       [ <span class="number">22.627417</span>  ,  <span class="number">45.254834</span>  ,  <span class="number">90.50966799</span>, ..., <span class="number">181.01933598</span>,</div><div class="line">        <span class="number">362.03867197</span>, <span class="number">724.07734394</span>]])</div><div class="line"></div><div class="line"><span class="number">3867197</span>,&gt;&gt;&gt; box_widths.shape, box_centers_x.shape, box_heights.shape , box_centers_y.shape</div><div class="line">((<span class="number">2097152</span>, <span class="number">15</span>), (<span class="number">2097152</span>, <span class="number">15</span>), (<span class="number">2097152</span>, <span class="number">15</span>), (<span class="number">2097152</span>, <span class="number">15</span>))</div><div class="line"></div><div class="line"><span class="comment"># Reshape to get a list of (y, x) and a list of (h, w)</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>box_centers</div><div class="line">array([[    <span class="number">0</span>,     <span class="number">0</span>],</div><div class="line">       [    <span class="number">0</span>,     <span class="number">0</span>],</div><div class="line">       [    <span class="number">0</span>,     <span class="number">0</span>],</div><div class="line">       ...,</div><div class="line">       [<span class="number">16368</span>, <span class="number">32752</span>],</div><div class="line">       [<span class="number">16368</span>, <span class="number">32752</span>],</div><div class="line">       [<span class="number">16368</span>, <span class="number">32752</span>]])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>box_sizes</div><div class="line">array([[ <span class="number">45.254834</span>  ,  <span class="number">22.627417</span>  ],</div><div class="line">       [ <span class="number">90.50966799</span>,  <span class="number">45.254834</span>  ],</div><div class="line">       [<span class="number">181.01933598</span>,  <span class="number">90.50966799</span>],</div><div class="line">       ...,</div><div class="line">       [ <span class="number">90.50966799</span>, <span class="number">181.01933598</span>],</div><div class="line">       [<span class="number">181.01933598</span>, <span class="number">362.03867197</span>],</div><div class="line">       [<span class="number">362.03867197</span>, <span class="number">724.07734394</span>]])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>len(box_centers),len(box_sizes)</div><div class="line">(<span class="number">31457280</span>, <span class="number">31457280</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>box_centers.shape, box_sizes.shape</div><div class="line">((<span class="number">31457280</span>, <span class="number">2</span>), (<span class="number">31457280</span>, <span class="number">2</span>))</div><div class="line"></div><div class="line"><span class="comment"># Convert to corner coordinates (y1, x1, y2, x2)</span></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>boxes = np.concatenate([box_centers - <span class="number">0.5</span> * box_sizes,</div><div class="line"><span class="meta">... </span>                            box_centers + <span class="number">0.5</span> * box_sizes], axis=<span class="number">1</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>boxes</div><div class="line">array([[<span class="number">-2.26274170e+01</span>, <span class="number">-1.13137085e+01</span>,  <span class="number">2.26274170e+01</span>,</div><div class="line">         <span class="number">1.13137085e+01</span>],</div><div class="line">       [<span class="number">-4.52548340e+01</span>, <span class="number">-2.26274170e+01</span>,  <span class="number">4.52548340e+01</span>,</div><div class="line">         <span class="number">2.26274170e+01</span>],</div><div class="line">       [<span class="number">-9.05096680e+01</span>, <span class="number">-4.52548340e+01</span>,  <span class="number">9.05096680e+01</span>,</div><div class="line">         <span class="number">4.52548340e+01</span>],</div><div class="line">       ...,</div><div class="line">       [ <span class="number">1.63227452e+04</span>,  <span class="number">3.26614903e+04</span>,  <span class="number">1.64132548e+04</span>,</div><div class="line">         <span class="number">3.28425097e+04</span>],</div><div class="line">       [ <span class="number">1.62774903e+04</span>,  <span class="number">3.25709807e+04</span>,  <span class="number">1.64585097e+04</span>,</div><div class="line">         <span class="number">3.29330193e+04</span>],</div><div class="line">       [ <span class="number">1.61869807e+04</span>,  <span class="number">3.23899613e+04</span>,  <span class="number">1.65490193e+04</span>,</div><div class="line">         <span class="number">3.31140387e+04</span>]])</div><div class="line">         </div><div class="line"><span class="meta">&gt;&gt;&gt; </span>boxes.shape</div><div class="line">(<span class="number">31457280</span>, <span class="number">4</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.broadcast_to(boxes, (<span class="number">4</span>,) + boxes.shape)</div><div class="line">array([[[<span class="number">-2.26274170e+01</span>, <span class="number">-1.13137085e+01</span>,  <span class="number">2.26274170e+01</span>,</div><div class="line">          <span class="number">1.13137085e+01</span>],</div><div class="line">        [<span class="number">-4.52548340e+01</span>, <span class="number">-2.26274170e+01</span>,  <span class="number">4.52548340e+01</span>,</div><div class="line">          <span class="number">2.26274170e+01</span>],</div><div class="line">        [<span class="number">-9.05096680e+01</span>, <span class="number">-4.52548340e+01</span>,  <span class="number">9.05096680e+01</span>,</div><div class="line">          <span class="number">4.52548340e+01</span>],</div><div class="line">        ...,</div><div class="line">        [ <span class="number">1.63227452e+04</span>,  <span class="number">3.26614903e+04</span>,  <span class="number">1.64132548e+04</span>,</div><div class="line">          <span class="number">3.28425097e+04</span>],</div><div class="line">        [ <span class="number">1.62774903e+04</span>,  <span class="number">3.25709807e+04</span>,  <span class="number">1.64585097e+04</span>,</div><div class="line">          <span class="number">3.29330193e+04</span>],</div><div class="line">        [ <span class="number">1.61869807e+04</span>,  <span class="number">3.23899613e+04</span>,  <span class="number">1.65490193e+04</span>,</div><div class="line">          <span class="number">3.31140387e+04</span>]],</div><div class="line"></div><div class="line">       [[<span class="number">-2.26274170e+01</span>, <span class="number">-1.13137085e+01</span>,  <span class="number">2.26274170e+01</span>,</div><div class="line">          <span class="number">1.13137085e+01</span>],</div><div class="line">        [<span class="number">-4.52548340e+01</span>, <span class="number">-2.26274170e+01</span>,  <span class="number">4.52548340e+01</span>,</div><div class="line">          <span class="number">2.26274170e+01</span>],</div><div class="line">        [<span class="number">-9.05096680e+01</span>, <span class="number">-4.52548340e+01</span>,  <span class="number">9.05096680e+01</span>,</div><div class="line">          <span class="number">4.52548340e+01</span>],</div><div class="line">        ...,</div><div class="line">        [ <span class="number">1.63227452e+04</span>,  <span class="number">3.26614903e+04</span>,  <span class="number">1.64132548e+04</span>,</div><div class="line">          <span class="number">3.28425097e+04</span>],</div><div class="line">        [ <span class="number">1.62774903e+04</span>,  <span class="number">3.25709807e+04</span>,  <span class="number">1.64585097e+04</span>,</div><div class="line">          <span class="number">3.29330193e+04</span>],</div><div class="line">        [ <span class="number">1.61869807e+04</span>,  <span class="number">3.23899613e+04</span>,  <span class="number">1.65490193e+04</span>,</div><div class="line">          <span class="number">3.31140387e+04</span>]],</div><div class="line"></div><div class="line">       [[<span class="number">-2.26274170e+01</span>, <span class="number">-1.13137085e+01</span>,  <span class="number">2.26274170e+01</span>,</div><div class="line">          <span class="number">1.13137085e+01</span>],</div><div class="line">        [<span class="number">-4.52548340e+01</span>, <span class="number">-2.26274170e+01</span>,  <span class="number">4.52548340e+01</span>,</div><div class="line">          <span class="number">2.26274170e+01</span>],</div><div class="line">        [<span class="number">-9.05096680e+01</span>, <span class="number">-4.52548340e+01</span>,  <span class="number">9.05096680e+01</span>,</div><div class="line">          <span class="number">4.52548340e+01</span>],</div><div class="line">        ...,</div><div class="line">        [ <span class="number">1.63227452e+04</span>,  <span class="number">3.26614903e+04</span>,  <span class="number">1.64132548e+04</span>,</div><div class="line">          <span class="number">3.28425097e+04</span>],</div><div class="line">        [ <span class="number">1.62774903e+04</span>,  <span class="number">3.25709807e+04</span>,  <span class="number">1.64585097e+04</span>,</div><div class="line">          <span class="number">3.29330193e+04</span>],</div><div class="line">        [ <span class="number">1.61869807e+04</span>,  <span class="number">3.23899613e+04</span>,  <span class="number">1.65490193e+04</span>,</div><div class="line">          <span class="number">3.31140387e+04</span>]],</div><div class="line"></div><div class="line">       [[<span class="number">-2.26274170e+01</span>, <span class="number">-1.13137085e+01</span>,  <span class="number">2.26274170e+01</span>,</div><div class="line">          <span class="number">1.13137085e+01</span>],</div><div class="line">        [<span class="number">-4.52548340e+01</span>, <span class="number">-2.26274170e+01</span>,  <span class="number">4.52548340e+01</span>,</div><div class="line">          <span class="number">2.26274170e+01</span>],</div><div class="line">        [<span class="number">-9.05096680e+01</span>, <span class="number">-4.52548340e+01</span>,  <span class="number">9.05096680e+01</span>,</div><div class="line">          <span class="number">4.52548340e+01</span>],</div><div class="line">        ...,</div><div class="line">        [ <span class="number">1.63227452e+04</span>,  <span class="number">3.26614903e+04</span>,  <span class="number">1.64132548e+04</span>,</div><div class="line">          <span class="number">3.28425097e+04</span>],</div><div class="line">        [ <span class="number">1.62774903e+04</span>,  <span class="number">3.25709807e+04</span>,  <span class="number">1.64585097e+04</span>,</div><div class="line">          <span class="number">3.29330193e+04</span>],</div><div class="line">        [ <span class="number">1.61869807e+04</span>,  <span class="number">3.23899613e+04</span>,  <span class="number">1.65490193e+04</span>,</div><div class="line">          <span class="number">3.31140387e+04</span>]]])</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.broadcast_to(boxes, (<span class="number">4</span>,) + boxes.shape).shape</div><div class="line">(<span class="number">4</span>, <span class="number">31457280</span>, <span class="number">4</span>)</div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最後更新時間：<time datetime="2018-06-03T09:34:32.207Z" itemprop="dateUpdated">2018-06-03 17:34:32</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://world4jason.github.io">
+            <img src="/img/avatar.jpg" alt="Jason Yeh">
+            Jason Yeh
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Anchor-boxes-Generate/&title=《Mask RCNNCode Reading for Anchor boxes generate》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Anchor-boxes-Generate/&title=《Mask RCNNCode Reading for Anchor boxes generate》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Anchor-boxes-Generate/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mask RCNNCode Reading for Anchor boxes generate》 — world4jason&url=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Anchor-boxes-Generate/&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Anchor-boxes-Generate/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Mask RCNNCode Reading for Proposal Layer</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/30/Mask-RCNN-Code-Reading-RPN/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Mask RCNN Code Reading for RPN</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: '',
+            repo: '',
+            oauth: {
+                client_id: '',
+                client_secret: '',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        總訪客數：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        總訪問量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Jason Yeh &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Anchor-boxes-Generate/&title=《Mask RCNNCode Reading for Anchor boxes generate》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Anchor-boxes-Generate/&title=《Mask RCNNCode Reading for Anchor boxes generate》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Anchor-boxes-Generate/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mask RCNNCode Reading for Anchor boxes generate》 — world4jason&url=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Anchor-boxes-Generate/&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Anchor-boxes-Generate/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Anchor-boxes-Generate/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '持續搬磚中';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又回來了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

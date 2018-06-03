@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>Mask RCNN Code Reading for ResNet &amp; FPN | world4jason | 菜鳥搬磚日常</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="Mask_RCNN V2.1版本 檔案：Model.py Resnet的程式碼是由下面這專案參考改來的https://github.com/fchollet/deep-learning-models/blob/master/resnet50.py identity_block這function主要是為了後面的resnet_graph做準備的, 主要是為了重複利用,對應到的就是Resnet裡面的id">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mask RCNN Code Reading for ResNet &amp; FPN">
+<meta property="og:url" content="https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading-ResNet/index.html">
+<meta property="og:site_name" content="world4jason">
+<meta property="og:description" content="Mask_RCNN V2.1版本 檔案：Model.py Resnet的程式碼是由下面這專案參考改來的https://github.com/fchollet/deep-learning-models/blob/master/resnet50.py identity_block這function主要是為了後面的resnet_graph做準備的, 主要是為了重複利用,對應到的就是Resnet裡面的id">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2018-06-03T09:34:17.375Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mask RCNN Code Reading for ResNet &amp; FPN">
+<meta name="twitter:description" content="Mask_RCNN V2.1版本 檔案：Model.py Resnet的程式碼是由下面這專案參考改來的https://github.com/fchollet/deep-learning-models/blob/master/resnet50.py identity_block這function主要是為了後面的resnet_graph做準備的, 主要是為了重複利用,對應到的就是Resnet裡面的id">
+    
+        <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Jason Yeh</h5>
+          <a href="mailto:world4jason@gmail.com" title="world4jason@gmail.com" class="mail">world4jason@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-Home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/world4jason" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-research"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-about"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cv"  >
+                <i class="icon icon-lg icon-CV"></i>
+                CV
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Mask RCNN Code Reading for ResNet &amp; FPN</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Mask RCNN Code Reading for ResNet &amp; FPN</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-29T20:54:24.000Z" itemprop="datePublished" class="page-time">
+  2018-05-30
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#identity-block"><span class="post-toc-number">1.</span> <span class="post-toc-text">identity_block</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Conv-block"><span class="post-toc-number">2.</span> <span class="post-toc-text">Conv_block</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Resnet-Graph"><span class="post-toc-number">3.</span> <span class="post-toc-text">Resnet_Graph</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#FPN-Feature-Pyramid-Network"><span class="post-toc-number">4.</span> <span class="post-toc-text">FPN Feature Pyramid Network</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Mask-RCNN-Code-Reading-ResNet"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Mask RCNN Code Reading for ResNet & FPN</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-30 04:54:24" datetime="2018-05-29T20:54:24.000Z"  itemprop="datePublished">2018-05-30</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Mask_RCNN V2.1版本</p>
+<p>檔案：<a href="https://github.com/matterport/Mask_RCNN/blob/master/mrcnn/model.py#L85" target="_blank" rel="external">Model.py</a></p>
+<p>Resnet的程式碼是由下面這專案參考改來的<br><a href="https://github.com/fchollet/deep-learning-models/blob/master/resnet50.py" target="_blank" rel="external">https://github.com/fchollet/deep-learning-models/blob/master/resnet50.py</a></p>
+<h3 id="identity-block"><a href="#identity-block" class="headerlink" title="identity_block"></a>identity_block</h3><p>這function主要是為了後面的resnet_graph做準備的, 主要是為了重複利用,對應到的就是Resnet裡面的identity_block,然後這是純粹的Resnet版本,在shortcut上沒有操作</p>
+<p>input_tensor: 其實就是接上一層的output<br>kernel_size : 基本上是3,<br>filters:程式碼中filters通常是一個list, 而通常是三個, 像是[128,128,512],代表三層分別的filter數量<br>stage: 命名用,知道是哪一個stage的<br>block: 命名用,知道是stage中的第幾個idenity_block<br>use_bias: conv layer需不需要bias<br>train_bn: 這個identity_block要freeze還是train</p>
+<p>從裡面可以看到一個完整的Identity_Block<br>Input-&gt;(Conv-&gt;BN-&gt;RELU)-&gt;(Conv-&gt;BN-&gt;RELU)-&gt;(Conv-&gt;BN)-&gt;ADD(prev,Input)-&gt;RELU</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">identity_block</span><span class="params">(input_tensor, kernel_size, filters, stage, block,</span></span></div><div class="line">                   use_bias=True, train_bn=True):</div><div class="line">    <span class="string">"""The identity_block is the block that has no conv layer at shortcut</span></div><div class="line">    # Arguments</div><div class="line">        input_tensor: input tensor</div><div class="line">        kernel_size: defualt 3, the kernel size of middle conv layer at main path</div><div class="line">        filters: list of integers, the nb_filters of 3 conv layer at main path</div><div class="line">        stage: integer, current stage label, used for generating layer names</div><div class="line">        block: 'a','b'..., current block label, used for generating layer names</div><div class="line">        use_bias: Boolean. To use or not use a bias in conv layers.</div><div class="line">        train_bn: Boolean. Train or freeze Batch Norm layres</div><div class="line">    """</div><div class="line">    nb_filter1, nb_filter2, nb_filter3 = filters</div><div class="line">    conv_name_base = <span class="string">'res'</span> + str(stage) + block + <span class="string">'_branch'</span></div><div class="line">    bn_name_base = <span class="string">'bn'</span> + str(stage) + block + <span class="string">'_branch'</span></div><div class="line"></div><div class="line">    x = KL.Conv2D(nb_filter1, (<span class="number">1</span>, <span class="number">1</span>), name=conv_name_base + <span class="string">'2a'</span>,</div><div class="line">                  use_bias=use_bias)(input_tensor)</div><div class="line">    x = BatchNorm(name=bn_name_base + <span class="string">'2a'</span>)(x, training=train_bn)</div><div class="line">    x = KL.Activation(<span class="string">'relu'</span>)(x)</div><div class="line"></div><div class="line">    x = KL.Conv2D(nb_filter2, (kernel_size, kernel_size), padding=<span class="string">'same'</span>,</div><div class="line">                  name=conv_name_base + <span class="string">'2b'</span>, use_bias=use_bias)(x)</div><div class="line">    x = BatchNorm(name=bn_name_base + <span class="string">'2b'</span>)(x, training=train_bn)</div><div class="line">    x = KL.Activation(<span class="string">'relu'</span>)(x)</div><div class="line"></div><div class="line">    x = KL.Conv2D(nb_filter3, (<span class="number">1</span>, <span class="number">1</span>), name=conv_name_base + <span class="string">'2c'</span>,</div><div class="line">                  use_bias=use_bias)(x)</div><div class="line">    x = BatchNorm(name=bn_name_base + <span class="string">'2c'</span>)(x, training=train_bn)</div><div class="line"></div><div class="line">    x = KL.Add()([x, input_tensor])</div><div class="line">    x = KL.Activation(<span class="string">'relu'</span>, name=<span class="string">'res'</span> + str(stage) + block + <span class="string">'_out'</span>)(x)</div><div class="line">    <span class="keyword">return</span> x</div></pre></td></tr></table></figure>
+<h3 id="Conv-block"><a href="#Conv-block" class="headerlink" title="Conv_block"></a>Conv_block</h3><p>這邊就是純粹的Conv_block, input參數與上方相仿, 除了從stage3開始第一個Conv有subsample=(2,2), 而shortcut因此也需要subsample=(2,2)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv_block</span><span class="params">(input_tensor, kernel_size, filters, stage, block,</span></span></div><div class="line">               strides=<span class="params">(<span class="number">2</span>, <span class="number">2</span>)</span>, use_bias=True, train_bn=True):</div><div class="line">    <span class="string">"""conv_block is the block that has a conv layer at shortcut</span></div><div class="line">    # Arguments</div><div class="line">        input_tensor: input tensor</div><div class="line">        kernel_size: defualt 3, the kernel size of middle conv layer at main path</div><div class="line">        filters: list of integers, the nb_filters of 3 conv layer at main path</div><div class="line">        stage: integer, current stage label, used for generating layer names</div><div class="line">        block: 'a','b'..., current block label, used for generating layer names</div><div class="line">        use_bias: Boolean. To use or not use a bias in conv layers.</div><div class="line">        train_bn: Boolean. Train or freeze Batch Norm layres</div><div class="line">    Note that from stage 3, the first conv layer at main path is with subsample=(2,2)</div><div class="line">    And the shortcut should have subsample=(2,2) as well</div><div class="line">    """</div><div class="line">    nb_filter1, nb_filter2, nb_filter3 = filters</div><div class="line">    conv_name_base = <span class="string">'res'</span> + str(stage) + block + <span class="string">'_branch'</span></div><div class="line">    bn_name_base = <span class="string">'bn'</span> + str(stage) + block + <span class="string">'_branch'</span></div><div class="line"></div><div class="line">    x = KL.Conv2D(nb_filter1, (<span class="number">1</span>, <span class="number">1</span>), strides=strides,</div><div class="line">                  name=conv_name_base + <span class="string">'2a'</span>, use_bias=use_bias)(input_tensor)</div><div class="line">    x = BatchNorm(name=bn_name_base + <span class="string">'2a'</span>)(x, training=train_bn)</div><div class="line">    x = KL.Activation(<span class="string">'relu'</span>)(x)</div><div class="line"></div><div class="line">    x = KL.Conv2D(nb_filter2, (kernel_size, kernel_size), padding=<span class="string">'same'</span>,</div><div class="line">                  name=conv_name_base + <span class="string">'2b'</span>, use_bias=use_bias)(x)</div><div class="line">    x = BatchNorm(name=bn_name_base + <span class="string">'2b'</span>)(x, training=train_bn)</div><div class="line">    x = KL.Activation(<span class="string">'relu'</span>)(x)</div><div class="line"></div><div class="line">    x = KL.Conv2D(nb_filter3, (<span class="number">1</span>, <span class="number">1</span>), name=conv_name_base +</div><div class="line">                  <span class="string">'2c'</span>, use_bias=use_bias)(x)</div><div class="line">    x = BatchNorm(name=bn_name_base + <span class="string">'2c'</span>)(x, training=train_bn)</div><div class="line"></div><div class="line">    shortcut = KL.Conv2D(nb_filter3, (<span class="number">1</span>, <span class="number">1</span>), strides=strides,</div><div class="line">                         name=conv_name_base + <span class="string">'1'</span>, use_bias=use_bias)(input_tensor)</div><div class="line">    shortcut = BatchNorm(name=bn_name_base + <span class="string">'1'</span>)(shortcut, training=train_bn)</div><div class="line"></div><div class="line">    x = KL.Add()([x, shortcut])</div><div class="line">    x = KL.Activation(<span class="string">'relu'</span>, name=<span class="string">'res'</span> + str(stage) + block + <span class="string">'_out'</span>)(x)</div><div class="line">    <span class="keyword">return</span> x</div></pre></td></tr></table></figure>
+<h3 id="Resnet-Graph"><a href="#Resnet-Graph" class="headerlink" title="Resnet_Graph"></a>Resnet_Graph</h3><p>Resnet主體程式碼 剩下就是call上面的function<br>而ResNet50與ResNet101差異就在於中間使用for來判斷要增加幾個identity_block</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">resnet_graph</span><span class="params">(input_image, architecture, stage5=False, train_bn=True)</span>:</span></div><div class="line">    <span class="string">"""Build a ResNet graph.</span></div><div class="line">        architecture: Can be resnet50 or resnet101</div><div class="line">        stage5: Boolean. If False, stage5 of the network is not created</div><div class="line">        train_bn: Boolean. Train or freeze Batch Norm layres</div><div class="line">    """</div><div class="line">    <span class="keyword">assert</span> architecture <span class="keyword">in</span> [<span class="string">"resnet50"</span>, <span class="string">"resnet101"</span>]</div><div class="line">    <span class="comment"># Stage 1</span></div><div class="line">    x = KL.ZeroPadding2D((<span class="number">3</span>, <span class="number">3</span>))(input_image)</div><div class="line">    x = KL.Conv2D(<span class="number">64</span>, (<span class="number">7</span>, <span class="number">7</span>), strides=(<span class="number">2</span>, <span class="number">2</span>), name=<span class="string">'conv1'</span>, use_bias=<span class="keyword">True</span>)(x)</div><div class="line">    x = BatchNorm(name=<span class="string">'bn_conv1'</span>)(x, training=train_bn)</div><div class="line">    x = KL.Activation(<span class="string">'relu'</span>)(x)</div><div class="line">    C1 = x = KL.MaxPooling2D((<span class="number">3</span>, <span class="number">3</span>), strides=(<span class="number">2</span>, <span class="number">2</span>), padding=<span class="string">"same"</span>)(x)</div><div class="line">    <span class="comment"># Stage 2</span></div><div class="line">    x = conv_block(x, <span class="number">3</span>, [<span class="number">64</span>, <span class="number">64</span>, <span class="number">256</span>], stage=<span class="number">2</span>, block=<span class="string">'a'</span>, strides=(<span class="number">1</span>, <span class="number">1</span>), train_bn=train_bn)</div><div class="line">    x = identity_block(x, <span class="number">3</span>, [<span class="number">64</span>, <span class="number">64</span>, <span class="number">256</span>], stage=<span class="number">2</span>, block=<span class="string">'b'</span>, train_bn=train_bn)</div><div class="line">    C2 = x = identity_block(x, <span class="number">3</span>, [<span class="number">64</span>, <span class="number">64</span>, <span class="number">256</span>], stage=<span class="number">2</span>, block=<span class="string">'c'</span>, train_bn=train_bn)</div><div class="line">    <span class="comment"># Stage 3</span></div><div class="line">    x = conv_block(x, <span class="number">3</span>, [<span class="number">128</span>, <span class="number">128</span>, <span class="number">512</span>], stage=<span class="number">3</span>, block=<span class="string">'a'</span>, train_bn=train_bn)</div><div class="line">    x = identity_block(x, <span class="number">3</span>, [<span class="number">128</span>, <span class="number">128</span>, <span class="number">512</span>], stage=<span class="number">3</span>, block=<span class="string">'b'</span>, train_bn=train_bn)</div><div class="line">    x = identity_block(x, <span class="number">3</span>, [<span class="number">128</span>, <span class="number">128</span>, <span class="number">512</span>], stage=<span class="number">3</span>, block=<span class="string">'c'</span>, train_bn=train_bn)</div><div class="line">    C3 = x = identity_block(x, <span class="number">3</span>, [<span class="number">128</span>, <span class="number">128</span>, <span class="number">512</span>], stage=<span class="number">3</span>, block=<span class="string">'d'</span>, train_bn=train_bn)</div><div class="line">    <span class="comment"># Stage 4</span></div><div class="line">    x = conv_block(x, <span class="number">3</span>, [<span class="number">256</span>, <span class="number">256</span>, <span class="number">1024</span>], stage=<span class="number">4</span>, block=<span class="string">'a'</span>, train_bn=train_bn)</div><div class="line">    block_count = &#123;<span class="string">"resnet50"</span>: <span class="number">5</span>, <span class="string">"resnet101"</span>: <span class="number">22</span>&#125;[architecture]</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(block_count):</div><div class="line">        x = identity_block(x, <span class="number">3</span>, [<span class="number">256</span>, <span class="number">256</span>, <span class="number">1024</span>], stage=<span class="number">4</span>, block=chr(<span class="number">98</span> + i), train_bn=train_bn)</div><div class="line">    C4 = x</div><div class="line">    <span class="comment"># Stage 5</span></div><div class="line">    <span class="keyword">if</span> stage5:</div><div class="line">        x = conv_block(x, <span class="number">3</span>, [<span class="number">512</span>, <span class="number">512</span>, <span class="number">2048</span>], stage=<span class="number">5</span>, block=<span class="string">'a'</span>, train_bn=train_bn)</div><div class="line">        x = identity_block(x, <span class="number">3</span>, [<span class="number">512</span>, <span class="number">512</span>, <span class="number">2048</span>], stage=<span class="number">5</span>, block=<span class="string">'b'</span>, train_bn=train_bn)</div><div class="line">        C5 = x = identity_block(x, <span class="number">3</span>, [<span class="number">512</span>, <span class="number">512</span>, <span class="number">2048</span>], stage=<span class="number">5</span>, block=<span class="string">'c'</span>, train_bn=train_bn)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        C5 = <span class="keyword">None</span></div><div class="line">    <span class="keyword">return</span> [C1, C2, C3, C4, C5]</div></pre></td></tr></table></figure>
+<h3 id="FPN-Feature-Pyramid-Network"><a href="#FPN-Feature-Pyramid-Network" class="headerlink" title="FPN Feature Pyramid Network"></a>FPN Feature Pyramid Network</h3><p>FPN被寫在了下面 並沒有獨立一個function, 但這邊順便連帶一起講</p>
+<p>C5先通過了一個1x1的conv layer調整channel數量,得到P5</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">P5 = KL.Conv2D(<span class="number">256</span>, (<span class="number">1</span>, <span class="number">1</span>), name=<span class="string">'fpn_c5p5'</span>)(C5)</div></pre></td></tr></table></figure>
+<p>接下來P5為了要跟P4層進行運算,所以得resize, 這裡用單純的upsampling, 沒有dialated conv或是transposed conv或是bilinear interpolation.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">KL.UpSampling2D(size=(<span class="number">2</span>, <span class="number">2</span>),name=<span class="string">"fpn_p5upsampled"</span>)(P5)</div></pre></td></tr></table></figure>
+<p>所以P4層就是把原本的C4調整過channel數量以後 跟upsamplinge過後的P5相加</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">P4 = KL.Add(name=<span class="string">"fpn_p4add"</span>)</div><div class="line">    ([KL.UpSampling2D(size=(<span class="number">2</span>, <span class="number">2</span>), name=<span class="string">"fpn_p5upsampled"</span>)(P5),</div><div class="line">      KL.Conv2D(<span class="number">256</span>,(<span class="number">1</span>, <span class="number">1</span>), name=<span class="string">'fpn_c4p4'</span>)(C4)])</div></pre></td></tr></table></figure>
+<p>FPN完整程式碼如下<br>P6是用來給RPN用的, 不是給FPN用的<br>另外P2~P5又做了一次3x3的conv 是為了消除upsampling的混疊效應 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Build the shared convolutional layers.</span></div><div class="line"><span class="comment"># Bottom-up Layers</span></div><div class="line"><span class="comment"># Returns a list of the last layers of each stage, 5 in total.</span></div><div class="line"><span class="comment"># Don't create the thead (stage 5), so we pick the 4th item in the list.</span></div><div class="line">_, C2, C3, C4, C5 = resnet_graph(input_image, config.BACKBONE,</div><div class="line">                                 stage5=<span class="keyword">True</span>, train_bn=config.TRAIN_BN)</div><div class="line"><span class="comment"># Top-down Layers</span></div><div class="line"><span class="comment"># <span class="doctag">TODO:</span> add assert to varify feature map sizes match what's in config</span></div><div class="line">P5 = KL.Conv2D(<span class="number">256</span>, (<span class="number">1</span>, <span class="number">1</span>), name=<span class="string">'fpn_c5p5'</span>)(C5)</div><div class="line">P4 = KL.Add(name=<span class="string">"fpn_p4add"</span>)([</div><div class="line">    KL.UpSampling2D(size=(<span class="number">2</span>, <span class="number">2</span>), name=<span class="string">"fpn_p5upsampled"</span>)(P5),</div><div class="line">    KL.Conv2D(<span class="number">256</span>, (<span class="number">1</span>, <span class="number">1</span>), name=<span class="string">'fpn_c4p4'</span>)(C4)])</div><div class="line">P3 = KL.Add(name=<span class="string">"fpn_p3add"</span>)([</div><div class="line">    KL.UpSampling2D(size=(<span class="number">2</span>, <span class="number">2</span>), name=<span class="string">"fpn_p4upsampled"</span>)(P4),</div><div class="line">    KL.Conv2D(<span class="number">256</span>, (<span class="number">1</span>, <span class="number">1</span>), name=<span class="string">'fpn_c3p3'</span>)(C3)])</div><div class="line">P2 = KL.Add(name=<span class="string">"fpn_p2add"</span>)([</div><div class="line">    KL.UpSampling2D(size=(<span class="number">2</span>, <span class="number">2</span>), name=<span class="string">"fpn_p3upsampled"</span>)(P3),</div><div class="line">    KL.Conv2D(<span class="number">256</span>, (<span class="number">1</span>, <span class="number">1</span>), name=<span class="string">'fpn_c2p2'</span>)(C2)])</div><div class="line"><span class="comment"># Attach 3x3 conv to all P layers to get the final feature maps.</span></div><div class="line">P2 = KL.Conv2D(<span class="number">256</span>, (<span class="number">3</span>, <span class="number">3</span>), padding=<span class="string">"SAME"</span>, name=<span class="string">"fpn_p2"</span>)(P2)</div><div class="line">P3 = KL.Conv2D(<span class="number">256</span>, (<span class="number">3</span>, <span class="number">3</span>), padding=<span class="string">"SAME"</span>, name=<span class="string">"fpn_p3"</span>)(P3)</div><div class="line">P4 = KL.Conv2D(<span class="number">256</span>, (<span class="number">3</span>, <span class="number">3</span>), padding=<span class="string">"SAME"</span>, name=<span class="string">"fpn_p4"</span>)(P4)</div><div class="line">P5 = KL.Conv2D(<span class="number">256</span>, (<span class="number">3</span>, <span class="number">3</span>), padding=<span class="string">"SAME"</span>, name=<span class="string">"fpn_p5"</span>)(P5)</div><div class="line"><span class="comment"># P6 is used for the 5th anchor scale in RPN. Generated by</span></div><div class="line"><span class="comment"># subsampling from P5 with stride of 2.</span></div><div class="line">P6 = KL.MaxPooling2D(pool_size=(<span class="number">1</span>, <span class="number">1</span>), strides=<span class="number">2</span>, name=<span class="string">"fpn_p6"</span>)(P5)</div><div class="line"></div><div class="line"><span class="comment"># Note that P6 is used in RPN, but not in the classifier heads.</span></div><div class="line">rpn_feature_maps = [P2, P3, P4, P5, P6]</div><div class="line">mrcnn_feature_maps = [P2, P3, P4, P5]</div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最後更新時間：<time datetime="2018-06-03T09:34:17.375Z" itemprop="dateUpdated">2018-06-03 17:34:17</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://world4jason.github.io">
+            <img src="/img/avatar.jpg" alt="Jason Yeh">
+            Jason Yeh
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading-ResNet/&title=《Mask RCNN Code Reading for ResNet & FPN》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading-ResNet/&title=《Mask RCNN Code Reading for ResNet & FPN》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading-ResNet/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mask RCNN Code Reading for ResNet & FPN》 — world4jason&url=https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading-ResNet/&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading-ResNet/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/30/Mask-RCNN-Code-Reading-RPN/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Mask RCNN Code Reading for RPN</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/30/Mask-RCNN-Code-Reading/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Mask RCNN Code Reading</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: '',
+            repo: '',
+            oauth: {
+                client_id: '',
+                client_secret: '',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        總訪客數：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        總訪問量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Jason Yeh &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading-ResNet/&title=《Mask RCNN Code Reading for ResNet & FPN》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading-ResNet/&title=《Mask RCNN Code Reading for ResNet & FPN》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading-ResNet/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mask RCNN Code Reading for ResNet & FPN》 — world4jason&url=https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading-ResNet/&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading-ResNet/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading-ResNet/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '持續搬磚中';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又回來了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

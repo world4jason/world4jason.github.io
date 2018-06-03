@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>Mask RCNNCode Reading for Network Head - Detection Target Layer | world4jason | 菜鳥搬磚日常</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="Detection Target Layer與Detection Layer 前者是在訓練時用到的後者是在測試時用的 overlaps_graph這邊顧名思義是計算IOU用的 123456789101112131415161718192021222324252627def overlaps_graph(boxes1, boxes2):    &quot;&quot;&quot;Computes IoU overlaps bet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mask RCNNCode Reading for Network Head - Detection Target Layer">
+<meta property="og:url" content="https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/index.html">
+<meta property="og:site_name" content="world4jason">
+<meta property="og:description" content="Detection Target Layer與Detection Layer 前者是在訓練時用到的後者是在測試時用的 overlaps_graph這邊顧名思義是計算IOU用的 123456789101112131415161718192021222324252627def overlaps_graph(boxes1, boxes2):    &quot;&quot;&quot;Computes IoU overlaps bet">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2018-06-03T09:34:30.094Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mask RCNNCode Reading for Network Head - Detection Target Layer">
+<meta name="twitter:description" content="Detection Target Layer與Detection Layer 前者是在訓練時用到的後者是在測試時用的 overlaps_graph這邊顧名思義是計算IOU用的 123456789101112131415161718192021222324252627def overlaps_graph(boxes1, boxes2):    &quot;&quot;&quot;Computes IoU overlaps bet">
+    
+        <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Jason Yeh</h5>
+          <a href="mailto:world4jason@gmail.com" title="world4jason@gmail.com" class="mail">world4jason@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-Home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/world4jason" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-research"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-about"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cv"  >
+                <i class="icon icon-lg icon-CV"></i>
+                CV
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Mask RCNNCode Reading for Network Head - Detection Target Layer</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Mask RCNNCode Reading for Network Head - Detection Target Layer</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-02T22:57:33.000Z" itemprop="datePublished" class="page-time">
+  2018-06-03
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#overlaps-graph"><span class="post-toc-number">1.</span> <span class="post-toc-text">overlaps_graph</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Mask-RCNN-Code-Reading-Head-DetectionTargetLayer"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Mask RCNNCode Reading for Network Head - Detection Target Layer</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-03 06:57:33" datetime="2018-06-02T22:57:33.000Z"  itemprop="datePublished">2018-06-03</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Detection Target Layer與Detection Layer 前者是在訓練時用到的<br>後者是在測試時用的</p>
+<h3 id="overlaps-graph"><a href="#overlaps-graph" class="headerlink" title="overlaps_graph"></a>overlaps_graph</h3><p>這邊顧名思義是計算IOU用的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">overlaps_graph</span><span class="params">(boxes1, boxes2)</span>:</span></div><div class="line">    <span class="string">"""Computes IoU overlaps between two sets of boxes.</span></div><div class="line">    boxes1, boxes2: [N, (y1, x1, y2, x2)].</div><div class="line">    """</div><div class="line">    <span class="comment"># 1. Tile boxes2 and repeat boxes1. This allows us to compare</span></div><div class="line">    <span class="comment"># every boxes1 against every boxes2 without loops.</span></div><div class="line">    <span class="comment"># TF doesn't have an equivalent to np.repeat() so simulate it</span></div><div class="line">    <span class="comment"># using tf.tile() and tf.reshape.</span></div><div class="line">    b1 = tf.reshape(tf.tile(tf.expand_dims(boxes1, <span class="number">1</span>),</div><div class="line">                            [<span class="number">1</span>, <span class="number">1</span>, tf.shape(boxes2)[<span class="number">0</span>]]), [<span class="number">-1</span>, <span class="number">4</span>])</div><div class="line">    b2 = tf.tile(boxes2, [tf.shape(boxes1)[<span class="number">0</span>], <span class="number">1</span>])</div><div class="line">    <span class="comment"># 2. Compute intersections</span></div><div class="line">    b1_y1, b1_x1, b1_y2, b1_x2 = tf.split(b1, <span class="number">4</span>, axis=<span class="number">1</span>)</div><div class="line">    b2_y1, b2_x1, b2_y2, b2_x2 = tf.split(b2, <span class="number">4</span>, axis=<span class="number">1</span>)</div><div class="line">    y1 = tf.maximum(b1_y1, b2_y1)</div><div class="line">    x1 = tf.maximum(b1_x1, b2_x1)</div><div class="line">    y2 = tf.minimum(b1_y2, b2_y2)</div><div class="line">    x2 = tf.minimum(b1_x2, b2_x2)</div><div class="line">    intersection = tf.maximum(x2 - x1, <span class="number">0</span>) * tf.maximum(y2 - y1, <span class="number">0</span>)</div><div class="line">    <span class="comment"># 3. Compute unions</span></div><div class="line">    b1_area = (b1_y2 - b1_y1) * (b1_x2 - b1_x1)</div><div class="line">    b2_area = (b2_y2 - b2_y1) * (b2_x2 - b2_x1)</div><div class="line">    union = b1_area + b2_area - intersection</div><div class="line">    <span class="comment"># 4. Compute IoU and reshape to [boxes1, boxes2]</span></div><div class="line">    iou = intersection / union</div><div class="line">    overlaps = tf.reshape(iou, [tf.shape(boxes1)[<span class="number">0</span>], tf.shape(boxes2)[<span class="number">0</span>]])</div><div class="line">    <span class="keyword">return</span> overlaps</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">detection_targets_graph</span><span class="params">(proposals, gt_class_ids, gt_boxes, gt_masks, config)</span>:</span></div><div class="line">    <span class="string">"""Generates detection targets for one image. Subsamples proposals and</span></div><div class="line">    generates target class IDs, bounding box deltas, and masks for each.</div><div class="line"></div><div class="line">    Inputs:</div><div class="line">    proposals: [N, (y1, x1, y2, x2)] in normalized coordinates. Might</div><div class="line">               be zero padded if there are not enough proposals.</div><div class="line">    gt_class_ids: [MAX_GT_INSTANCES] int class IDs</div><div class="line">    gt_boxes: [MAX_GT_INSTANCES, (y1, x1, y2, x2)] in normalized coordinates.</div><div class="line">    gt_masks: [height, width, MAX_GT_INSTANCES] of boolean type.</div><div class="line"></div><div class="line">    Returns: Target ROIs and corresponding class IDs, bounding box shifts,</div><div class="line">    and masks.</div><div class="line">    rois: [TRAIN_ROIS_PER_IMAGE, (y1, x1, y2, x2)] in normalized coordinates</div><div class="line">    class_ids: [TRAIN_ROIS_PER_IMAGE]. Integer class IDs. Zero padded.</div><div class="line">    deltas: [TRAIN_ROIS_PER_IMAGE, NUM_CLASSES, (dy, dx, log(dh), log(dw))]</div><div class="line">            Class-specific bbox refinements.</div><div class="line">    masks: [TRAIN_ROIS_PER_IMAGE, height, width). Masks cropped to bbox</div><div class="line">           boundaries and resized to neural network output size.</div><div class="line"></div><div class="line">    Note: Returned arrays might be zero padded if not enough target ROIs.</div><div class="line">    """</div><div class="line">    <span class="comment"># Assertions</span></div><div class="line">    asserts = [ tf.Assert(tf.greater(tf.shape(proposals)[<span class="number">0</span>], <span class="number">0</span>), [proposals],name=<span class="string">"roi_assertion"</span>),]</div><div class="line">    <span class="keyword">with</span> tf.control_dependencies(asserts):</div><div class="line">        proposals = tf.identity(proposals)</div><div class="line"></div><div class="line">    <span class="comment"># Remove zero padding</span></div><div class="line">    proposals, _ = trim_zeros_graph(proposals, name=<span class="string">"trim_proposals"</span>)</div><div class="line">    gt_boxes, non_zeros = trim_zeros_graph(gt_boxes, name=<span class="string">"trim_gt_boxes"</span>)</div><div class="line">    gt_class_ids = tf.boolean_mask(gt_class_ids, non_zeros,</div><div class="line">                                   name=<span class="string">"trim_gt_class_ids"</span>)</div><div class="line">    gt_masks = tf.gather(gt_masks, tf.where(non_zeros)[:, <span class="number">0</span>], axis=<span class="number">2</span>,</div><div class="line">                         name=<span class="string">"trim_gt_masks"</span>)</div><div class="line"></div><div class="line">    <span class="comment"># Handle COCO crowds</span></div><div class="line">    <span class="comment"># A crowd box in COCO is a bounding box around several instances. Exclude</span></div><div class="line">    <span class="comment"># them from training. A crowd box is given a negative class ID.</span></div><div class="line">    crowd_ix = tf.where(gt_class_ids &lt; <span class="number">0</span>)[:, <span class="number">0</span>]</div><div class="line">    non_crowd_ix = tf.where(gt_class_ids &gt; <span class="number">0</span>)[:, <span class="number">0</span>]</div><div class="line">    crowd_boxes = tf.gather(gt_boxes, crowd_ix)</div><div class="line">    crowd_masks = tf.gather(gt_masks, crowd_ix, axis=<span class="number">2</span>)</div><div class="line">    gt_class_ids = tf.gather(gt_class_ids, non_crowd_ix)</div><div class="line">    gt_boxes = tf.gather(gt_boxes, non_crowd_ix)</div><div class="line">    gt_masks = tf.gather(gt_masks, non_crowd_ix, axis=<span class="number">2</span>)</div><div class="line"></div><div class="line">    <span class="comment"># Compute overlaps matrix [proposals, gt_boxes]</span></div><div class="line">    overlaps = overlaps_graph(proposals, gt_boxes)</div><div class="line"></div><div class="line">    <span class="comment"># Compute overlaps with crowd boxes [anchors, crowds]</span></div><div class="line">    crowd_overlaps = overlaps_graph(proposals, crowd_boxes)</div><div class="line">    crowd_iou_max = tf.reduce_max(crowd_overlaps, axis=<span class="number">1</span>)</div><div class="line">    no_crowd_bool = (crowd_iou_max &lt; <span class="number">0.001</span>)</div><div class="line"></div><div class="line">    <span class="comment"># Determine postive and negative ROIs</span></div><div class="line">    roi_iou_max = tf.reduce_max(overlaps, axis=<span class="number">1</span>)</div><div class="line">    <span class="comment"># 1. Positive ROIs are those with &gt;= 0.5 IoU with a GT box</span></div><div class="line">    positive_roi_bool = (roi_iou_max &gt;= <span class="number">0.5</span>)</div><div class="line">    positive_indices = tf.where(positive_roi_bool)[:, <span class="number">0</span>]</div><div class="line">    <span class="comment"># 2. Negative ROIs are those with &lt; 0.5 with every GT box. Skip crowds.</span></div><div class="line">    negative_indices = tf.where(tf.logical_and(roi_iou_max &lt; <span class="number">0.5</span>, no_crowd_bool))[:, <span class="number">0</span>]</div><div class="line"></div><div class="line">    <span class="comment"># Subsample ROIs. Aim for 33% positive</span></div><div class="line">    <span class="comment"># Positive ROIs</span></div><div class="line">    positive_count = int(config.TRAIN_ROIS_PER_IMAGE *</div><div class="line">                         config.ROI_POSITIVE_RATIO)</div><div class="line">    positive_indices = tf.random_shuffle(positive_indices)[:positive_count]</div><div class="line">    positive_count = tf.shape(positive_indices)[<span class="number">0</span>]</div><div class="line">    <span class="comment"># Negative ROIs. Add enough to maintain positive:negative ratio.</span></div><div class="line">    r = <span class="number">1.0</span> / config.ROI_POSITIVE_RATIO</div><div class="line">    negative_count = tf.cast(r * tf.cast(positive_count, tf.float32), tf.int32) - positive_count</div><div class="line">    negative_indices = tf.random_shuffle(negative_indices)[:negative_count]</div><div class="line">    <span class="comment"># Gather selected ROIs</span></div><div class="line">    positive_rois = tf.gather(proposals, positive_indices)</div><div class="line">    negative_rois = tf.gather(proposals, negative_indices)</div><div class="line"></div><div class="line">    <span class="comment"># Assign positive ROIs to GT boxes.</span></div><div class="line">    positive_overlaps = tf.gather(overlaps, positive_indices)</div><div class="line">    roi_gt_box_assignment = tf.argmax(positive_overlaps, axis=<span class="number">1</span>)</div><div class="line">    roi_gt_boxes = tf.gather(gt_boxes, roi_gt_box_assignment)</div><div class="line">    roi_gt_class_ids = tf.gather(gt_class_ids, roi_gt_box_assignment)</div><div class="line"></div><div class="line">    <span class="comment"># Compute bbox refinement for positive ROIs</span></div><div class="line">    deltas = utils.box_refinement_graph(positive_rois, roi_gt_boxes)</div><div class="line">    deltas /= config.BBOX_STD_DEV</div><div class="line"></div><div class="line">    <span class="comment"># Assign positive ROIs to GT masks</span></div><div class="line">    <span class="comment"># Permute masks to [N, height, width, 1]</span></div><div class="line">    transposed_masks = tf.expand_dims(tf.transpose(gt_masks, [<span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>]), <span class="number">-1</span>)</div><div class="line">    <span class="comment"># Pick the right mask for each ROI</span></div><div class="line">    roi_masks = tf.gather(transposed_masks, roi_gt_box_assignment)</div><div class="line"></div><div class="line">    <span class="comment"># Compute mask targets</span></div><div class="line">    boxes = positive_rois</div><div class="line">    <span class="keyword">if</span> config.USE_MINI_MASK:</div><div class="line">        <span class="comment"># Transform ROI corrdinates from normalized image space</span></div><div class="line">        <span class="comment"># to normalized mini-mask space.</span></div><div class="line">        y1, x1, y2, x2 = tf.split(positive_rois, <span class="number">4</span>, axis=<span class="number">1</span>)</div><div class="line">        gt_y1, gt_x1, gt_y2, gt_x2 = tf.split(roi_gt_boxes, <span class="number">4</span>, axis=<span class="number">1</span>)</div><div class="line">        gt_h = gt_y2 - gt_y1</div><div class="line">        gt_w = gt_x2 - gt_x1</div><div class="line">        y1 = (y1 - gt_y1) / gt_h</div><div class="line">        x1 = (x1 - gt_x1) / gt_w</div><div class="line">        y2 = (y2 - gt_y1) / gt_h</div><div class="line">        x2 = (x2 - gt_x1) / gt_w</div><div class="line">        boxes = tf.concat([y1, x1, y2, x2], <span class="number">1</span>)</div><div class="line">    box_ids = tf.range(<span class="number">0</span>, tf.shape(roi_masks)[<span class="number">0</span>])</div><div class="line">    masks = tf.image.crop_and_resize(tf.cast(roi_masks, tf.float32), boxes,</div><div class="line">                                     box_ids,</div><div class="line">                                     config.MASK_SHAPE)</div><div class="line">    <span class="comment"># Remove the extra dimension from masks.</span></div><div class="line">    masks = tf.squeeze(masks, axis=<span class="number">3</span>)</div><div class="line"></div><div class="line">    <span class="comment"># Threshold mask pixels at 0.5 to have GT masks be 0 or 1 to use with</span></div><div class="line">    <span class="comment"># binary cross entropy loss.</span></div><div class="line">    masks = tf.round(masks)</div><div class="line"></div><div class="line">    <span class="comment"># Append negative ROIs and pad bbox deltas and masks that</span></div><div class="line">    <span class="comment"># are not used for negative ROIs with zeros.</span></div><div class="line">    rois = tf.concat([positive_rois, negative_rois], axis=<span class="number">0</span>)</div><div class="line">    N = tf.shape(negative_rois)[<span class="number">0</span>]</div><div class="line">    P = tf.maximum(config.TRAIN_ROIS_PER_IMAGE - tf.shape(rois)[<span class="number">0</span>], <span class="number">0</span>)</div><div class="line">    rois = tf.pad(rois, [(<span class="number">0</span>, P), (<span class="number">0</span>, <span class="number">0</span>)])</div><div class="line">    roi_gt_boxes = tf.pad(roi_gt_boxes, [(<span class="number">0</span>, N + P), (<span class="number">0</span>, <span class="number">0</span>)])</div><div class="line">    roi_gt_class_ids = tf.pad(roi_gt_class_ids, [(<span class="number">0</span>, N + P)])</div><div class="line">    deltas = tf.pad(deltas, [(<span class="number">0</span>, N + P), (<span class="number">0</span>, <span class="number">0</span>)])</div><div class="line">    masks = tf.pad(masks, [[<span class="number">0</span>, N + P], (<span class="number">0</span>, <span class="number">0</span>), (<span class="number">0</span>, <span class="number">0</span>)])</div><div class="line"></div><div class="line">    <span class="keyword">return</span> rois, roi_gt_class_ids, deltas, masks</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DetectionTargetLayer</span><span class="params">(KE.Layer)</span>:</span></div><div class="line">    <span class="string">"""Subsamples proposals and generates target box refinement, class_ids,</span></div><div class="line">    and masks for each.</div><div class="line"></div><div class="line">    Inputs:</div><div class="line">    proposals: [batch, N, (y1, x1, y2, x2)] in normalized coordinates. Might</div><div class="line">               be zero padded if there are not enough proposals.</div><div class="line">    gt_class_ids: [batch, MAX_GT_INSTANCES] Integer class IDs.</div><div class="line">    gt_boxes: [batch, MAX_GT_INSTANCES, (y1, x1, y2, x2)] in normalized</div><div class="line">              coordinates.</div><div class="line">    gt_masks: [batch, height, width, MAX_GT_INSTANCES] of boolean type</div><div class="line"></div><div class="line">    Returns: Target ROIs and corresponding class IDs, bounding box shifts,</div><div class="line">    and masks.</div><div class="line">    rois: [batch, TRAIN_ROIS_PER_IMAGE, (y1, x1, y2, x2)] in normalized</div><div class="line">          coordinates</div><div class="line">    target_class_ids: [batch, TRAIN_ROIS_PER_IMAGE]. Integer class IDs.</div><div class="line">    target_deltas: [batch, TRAIN_ROIS_PER_IMAGE, NUM_CLASSES,</div><div class="line">                    (dy, dx, log(dh), log(dw), class_id)]</div><div class="line">                   Class-specific bbox refinements.</div><div class="line">    target_mask: [batch, TRAIN_ROIS_PER_IMAGE, height, width)</div><div class="line">                 Masks cropped to bbox boundaries and resized to neural</div><div class="line">                 network output size.</div><div class="line"></div><div class="line">    Note: Returned arrays might be zero padded if not enough target ROIs.</div><div class="line">    """</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, config, **kwargs)</span>:</span></div><div class="line">        super(DetectionTargetLayer, self).__init__(**kwargs)</div><div class="line">        self.config = config</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, inputs)</span>:</span></div><div class="line">        proposals = inputs[<span class="number">0</span>]</div><div class="line">        gt_class_ids = inputs[<span class="number">1</span>]</div><div class="line">        gt_boxes = inputs[<span class="number">2</span>]</div><div class="line">        gt_masks = inputs[<span class="number">3</span>]</div><div class="line"></div><div class="line">        <span class="comment"># Slice the batch and run a graph for each slice</span></div><div class="line">        <span class="comment"># <span class="doctag">TODO:</span> Rename target_bbox to target_deltas for clarity</span></div><div class="line">        names = [<span class="string">"rois"</span>, <span class="string">"target_class_ids"</span>, <span class="string">"target_bbox"</span>, <span class="string">"target_mask"</span>]</div><div class="line">        outputs = utils.batch_slice(</div><div class="line">            [proposals, gt_class_ids, gt_boxes, gt_masks],</div><div class="line">            <span class="keyword">lambda</span> w, x, y, z: detection_targets_graph(</div><div class="line">                w, x, y, z, self.config),</div><div class="line">            self.config.IMAGES_PER_GPU, names=names)</div><div class="line">        <span class="keyword">return</span> outputs</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compute_output_shape</span><span class="params">(self, input_shape)</span>:</span></div><div class="line">        <span class="keyword">return</span> [</div><div class="line">            (<span class="keyword">None</span>, self.config.TRAIN_ROIS_PER_IMAGE, <span class="number">4</span>),  <span class="comment"># rois</span></div><div class="line">            (<span class="keyword">None</span>, <span class="number">1</span>),  <span class="comment"># class_ids</span></div><div class="line">            (<span class="keyword">None</span>, self.config.TRAIN_ROIS_PER_IMAGE, <span class="number">4</span>),  <span class="comment"># deltas</span></div><div class="line">            (<span class="keyword">None</span>, self.config.TRAIN_ROIS_PER_IMAGE, self.config.MASK_SHAPE[<span class="number">0</span>],</div><div class="line">             self.config.MASK_SHAPE[<span class="number">1</span>])  <span class="comment"># masks</span></div><div class="line">        ]</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compute_mask</span><span class="params">(self, inputs, mask=None)</span>:</span></div><div class="line">        <span class="keyword">return</span> [<span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>]</div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最後更新時間：<time datetime="2018-06-03T09:34:30.094Z" itemprop="dateUpdated">2018-06-03 17:34:30</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://world4jason.github.io">
+            <img src="/img/avatar.jpg" alt="Jason Yeh">
+            Jason Yeh
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/&title=《Mask RCNNCode Reading for Network Head - Detection Target Layer》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/&title=《Mask RCNNCode Reading for Network Head - Detection Target Layer》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mask RCNNCode Reading for Network Head - Detection Target Layer》 — world4jason&url=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Mask RCNNCode Reading for ROI Align Layer</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Mask RCNNCode Reading for Proposal Layer</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: '',
+            repo: '',
+            oauth: {
+                client_id: '',
+                client_secret: '',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        總訪客數：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        總訪問量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Jason Yeh &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/&title=《Mask RCNNCode Reading for Network Head - Detection Target Layer》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/&title=《Mask RCNNCode Reading for Network Head - Detection Target Layer》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mask RCNNCode Reading for Network Head - Detection Target Layer》 — world4jason&url=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '持續搬磚中';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又回來了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

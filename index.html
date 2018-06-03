@@ -171,6 +171,257 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-Mask-RCNN-Code-Reading-ROI_Align"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-06-03 08:57:33" datetime="2018-06-03T00:57:33.000Z"  itemprop="datePublished">2018-06-03</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/">Mask RCNNCode Reading for ROI Align Layer</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        ROIAlign Layer功能型
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394...
+    
+
+        <a href="/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Mask-RCNN-Code-Reading-Head-DetectionTargetLayer"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-06-03 06:57:33" datetime="2018-06-02T22:57:33.000Z"  itemprop="datePublished">2018-06-03</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/">Mask RCNNCode Reading for Network Head - Detection Target Layer</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Detection Target Layer與Detection Layer 前者是在訓練時用到的後者是在測試時用的
+overlaps_graph這邊顧名思義是計算IOU用的
+123456789101112131415161718192021222324252627def overlaps_graph(boxes1, boxes2):    """Computes IoU overlaps ...
+    
+
+        <a href="/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Mask-RCNN-Code-Reading-Propsal-Layer"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-06-02 23:57:33" datetime="2018-06-02T15:57:33.000Z"  itemprop="datePublished">2018-06-02</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/">Mask RCNNCode Reading for Proposal Layer</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        通過下面這段程式碼拿到anchors以後
+12345678910# Anchorsif mode == "training":  anchors = self.get_anchors(config.IMAGE_SHAPE)  # Duplicate across the batch dimension because Keras requires it  # TODO: can this b...
+    
+
+        <a href="/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Mask-RCNN-Code-Reading-Anchor-boxes-Generate"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-06-02 20:57:33" datetime="2018-06-02T12:57:33.000Z"  itemprop="datePublished">2018-06-02</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/06/02/Mask-RCNN-Code-Reading-Anchor-boxes-Generate/">Mask RCNNCode Reading for Anchor boxes generate</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        接續上面的RPN output
+123456789101112131415161718rpn_class_logits, rpn_class, rpn_bbox = outputs# Generate proposals# Proposals are [batch, N, (y1, x1, y2, x2)] in normalized coordinates# and zero padded...
+    
+
+        <a href="/2018/06/02/Mask-RCNN-Code-Reading-Anchor-boxes-Generate/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Mask-RCNN-Code-Reading-RPN"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-05-30 09:16:43" datetime="2018-05-30T01:16:43.000Z"  itemprop="datePublished">2018-05-30</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/05/30/Mask-RCNN-Code-Reading-RPN/">Mask RCNN Code Reading for RPN</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Mask_RCNN V2.1版本
+檔案：Model.py
+
+                
+                    
+                    
+                
+                
+            
+Class MaskRCNN():這部分是在程式碼主體所使用到RPN的部分, 其中傳入參數預設為此, for loop那邊...
+    
+
+        <a href="/2018/05/30/Mask-RCNN-Code-Reading-RPN/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Mask-RCNN-Code-Reading-ResNet"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-05-30 04:54:24" datetime="2018-05-29T20:54:24.000Z"  itemprop="datePublished">2018-05-30</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/05/30/Mask-RCNN-Code-Reading-ResNet/">Mask RCNN Code Reading for ResNet &amp; FPN</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Mask_RCNN V2.1版本
+檔案：Model.py
+Resnet的程式碼是由下面這專案參考改來的https://github.com/fchollet/deep-learning-models/blob/master/resnet50.py
+identity_block這function主要是為了後面的resnet_graph做準備的, 主要是為了重複利用,對應到的就是Resnet裡面...
+    
+
+        <a href="/2018/05/30/Mask-RCNN-Code-Reading-ResNet/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-Mask-RCNN-Code-Reading"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -201,6 +452,47 @@
     
 
         <a href="/2018/05/30/Mask-RCNN-Code-Reading/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Optimize"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-04-07 21:15:01" datetime="2018-04-07T13:15:01.000Z"  itemprop="datePublished">2018-04-07</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Optimize/">Optimize</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/04/07/Optimize/">Optimize /</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+    
+
+        <a href="/2018/04/07/Optimize/" class="post-more waves-effect waves-button">
             閱讀全文…
         </a>
     </div>
@@ -257,47 +549,6 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-Optimize"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-04-07 21:15:01" datetime="2018-04-07T13:15:01.000Z"  itemprop="datePublished">2018-04-07</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Optimize/">Optimize</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/04/07/Optimize/">Optimize /</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        
-    
-
-        <a href="/2018/04/07/Optimize/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
             <article id="post-VGG-VERY-DEEP-CONVOLUTIONAL-NETWORK-SFOR-LARGE-SCALE-IMAGE-RECOGNITION"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -339,286 +590,6 @@
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Classification/">Classification</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Convolution/">Convolution</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Model-Architecture/">Model Architecture</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Model-Compression"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-04-07 21:05:01" datetime="2018-04-07T13:05:01.000Z"  itemprop="datePublished">2018-04-07</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Model-Architecture/">Model Architecture</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/04/07/Model-Compression/">CNN模型壓縮系列</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        網絡修剪網絡修剪，採用當網絡權重非常小的時候（小於某個設定的閾值），把它置0，就像二值網絡一般;然後屏蔽被設置為0的權重更新，繼續進行訓練;以此循環，每隔訓練幾輪過後，繼續進行修剪。例如Deep-Compression這篇paper
-權重共享對於每一層的參數，我們進行k-均值聚類，進行量化，對於歸屬於同一個聚類中心的權重，採用共享一個權重，進行重新訓練。需要注意的是這個權重共享並不是層之間的...
-    
-
-        <a href="/2018/04/07/Model-Compression/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Convolution/">Convolution</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Model-Architecture/">Model Architecture</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Model-Compression/">Model Compression</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Light Head R-CNN"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-03-16 13:53:47" datetime="2018-03-16T05:53:47.000Z"  itemprop="datePublished">2018-03-16</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/03/16/Light Head R-CNN/">Light Head R-CNN</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        旷视face++研究院解读Light-Head R-CNN
-
-    
-
-        <a href="/2018/03/16/Light Head R-CNN/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-2018-03-27"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-03-16 13:53:47" datetime="2018-03-16T05:53:47.000Z"  itemprop="datePublished">2018-03-16</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Series/">Series</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Series/Segmentation/">Segmentation</a></li></ul></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/03/16/2018-03-27/">Instance Segmentation Series</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        MNCFCISMask R-CNNPANet
-
-    
-
-        <a href="/2018/03/16/2018-03-27/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Tensorflow-Function-Usage-And-Example"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-03-16 13:53:47" datetime="2018-03-16T05:53:47.000Z"  itemprop="datePublished">2018-03-16</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/03/16/Tensorflow-Function-Usage-And-Example/">Tensorflow Function Usage And Example</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        Mini Tensorflow example12345678import tensorflow as tf a = tf.placeholder("float") b = tf.placeholder("float") y = tf.mul(a, b)  sess = tf.Session()print sess.run(y, feed_dict=&#123;a: 3, b: 3&#125...
-    
-
-        <a href="/2018/03/16/Tensorflow-Function-Usage-And-Example/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Mask R-CNN Code Reading"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-03-10 02:13:59" datetime="2018-03-09T18:13:59.000Z"  itemprop="datePublished">2018-03-10</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Segmentation/">Segmentation</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Segmentation/Detection/">Detection</a></li></ul></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/03/10/Mask R-CNN Code Reading/">Mask R-CNN</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        https://github.com/matterport/Mask_RCNN
-#model.py
-
-import 需要的東西 tf ver&gt;1.3 &amp;&amp; keras ver&gt;2.0.8
-
-12345678910111213141516171819202122232425262728import osimport sysimport globimport rand...
-    
-
-        <a href="/2018/03/10/Mask R-CNN Code Reading/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pose-Estimation/">Pose Estimation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R-CNN/">R-CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Segmentation/">Segmentation</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Mask R-CNN"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-03-10 02:13:59" datetime="2018-03-09T18:13:59.000Z"  itemprop="datePublished">2018-03-10</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Segmentation/">Segmentation</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Segmentation/Detection/">Detection</a></li></ul></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/03/10/Mask R-CNN/">Mask R-CNN</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        Overview
-                
-                    
-                    
-                
-                
-            
-
-                
-                    
-                    
-                
-     ...
-    
-
-        <a href="/2018/03/10/Mask R-CNN/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pose-Estimation/">Pose Estimation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R-CNN/">R-CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Segmentation/">Segmentation</a></li></ul>
 
     </div>
     

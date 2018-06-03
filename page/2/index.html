@@ -171,6 +171,286 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-Model-Compression"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-04-07 21:05:01" datetime="2018-04-07T13:05:01.000Z"  itemprop="datePublished">2018-04-07</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Model-Architecture/">Model Architecture</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/04/07/Model-Compression/">CNN模型壓縮系列</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        網絡修剪網絡修剪，採用當網絡權重非常小的時候（小於某個設定的閾值），把它置0，就像二值網絡一般;然後屏蔽被設置為0的權重更新，繼續進行訓練;以此循環，每隔訓練幾輪過後，繼續進行修剪。例如Deep-Compression這篇paper
+權重共享對於每一層的參數，我們進行k-均值聚類，進行量化，對於歸屬於同一個聚類中心的權重，採用共享一個權重，進行重新訓練。需要注意的是這個權重共享並不是層之間的...
+    
+
+        <a href="/2018/04/07/Model-Compression/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Convolution/">Convolution</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Model-Architecture/">Model Architecture</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Model-Compression/">Model Compression</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Light Head R-CNN"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-03-16 13:53:47" datetime="2018-03-16T05:53:47.000Z"  itemprop="datePublished">2018-03-16</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/03/16/Light Head R-CNN/">Light Head R-CNN</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        旷视face++研究院解读Light-Head R-CNN
+
+    
+
+        <a href="/2018/03/16/Light Head R-CNN/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Tensorflow-Function-Usage-And-Example"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-03-16 13:53:47" datetime="2018-03-16T05:53:47.000Z"  itemprop="datePublished">2018-03-16</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/03/16/Tensorflow-Function-Usage-And-Example/">Tensorflow Function Usage And Example</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Mini Tensorflow example12345678import tensorflow as tf a = tf.placeholder("float") b = tf.placeholder("float") y = tf.mul(a, b)  sess = tf.Session()print sess.run(y, feed_dict=&#123;a: 3, b: 3&#125...
+    
+
+        <a href="/2018/03/16/Tensorflow-Function-Usage-And-Example/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-2018-03-27"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-03-16 13:53:47" datetime="2018-03-16T05:53:47.000Z"  itemprop="datePublished">2018-03-16</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Series/">Series</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Series/Segmentation/">Segmentation</a></li></ul></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/03/16/2018-03-27/">Instance Segmentation Series</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        MNCFCISMask R-CNNPANet
+
+    
+
+        <a href="/2018/03/16/2018-03-27/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Mask R-CNN Code Reading"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-03-10 02:13:59" datetime="2018-03-09T18:13:59.000Z"  itemprop="datePublished">2018-03-10</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Segmentation/">Segmentation</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Segmentation/Detection/">Detection</a></li></ul></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/03/10/Mask R-CNN Code Reading/">Mask R-CNN</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        https://github.com/matterport/Mask_RCNN
+#model.py
+
+import 需要的東西 tf ver&gt;1.3 &amp;&amp; keras ver&gt;2.0.8
+
+12345678910111213141516171819202122232425262728import osimport sysimport globimport rand...
+    
+
+        <a href="/2018/03/10/Mask R-CNN Code Reading/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pose-Estimation/">Pose Estimation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R-CNN/">R-CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Segmentation/">Segmentation</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Mask R-CNN"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-03-10 02:13:59" datetime="2018-03-09T18:13:59.000Z"  itemprop="datePublished">2018-03-10</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Segmentation/">Segmentation</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Segmentation/Detection/">Detection</a></li></ul></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/03/10/Mask R-CNN/">Mask R-CNN</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Overview
+                
+                    
+                    
+                
+                
+            
+
+                
+                    
+                    
+                
+     ...
+    
+
+        <a href="/2018/03/10/Mask R-CNN/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pose-Estimation/">Pose Estimation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R-CNN/">R-CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Segmentation/">Segmentation</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-CapsuleNet"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -350,321 +630,6 @@ ISSUE 如果換成凹函式呢?-&gt; 大於小於對調 但生成結果好像沒
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Segmentation/">Segmentation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/real-time/">real-time</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Distance"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-01-14 02:12:19" datetime="2018-01-13T18:12:19.000Z"  itemprop="datePublished">2018-01-14</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/01/14/Distance/">機器學習中的相似性度量</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        Euclidean Distance(歐幾里和距離)二維與三維中就是兩點之間的距離。
-
-上圖中的綠線為歐氏距離，又稱歐幾里和距離(Euclidean Distance)，其餘的藍色與黃色還有紅色皆為曼哈頓距離。
-Manhattan distance(曼哈頓距離)平面上，坐標（x1, y1）的點P1與坐標（x2, y2）的點P2的曼哈頓距離為：
-                
-       ...
-    
-
-        <a href="/2018/01/14/Distance/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Deep-Sort"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-01-14 01:38:43" datetime="2018-01-13T17:38:43.000Z"  itemprop="datePublished">2018-01-14</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MOT/">MOT</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/01/14/Deep-Sort/">Deep Sort: Simple Online and Realtime Tracking with a Deep Association Metric</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        此篇文章是基於SORT的改進具體來說就是一句話
-1We adopt a conventional single hypothesis tracking methodology with recursive kalman filtering and frame-by-frame data association.
-
-    
-
-        <a href="/2018/01/14/Deep-Sort/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MOT/">MOT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tracking/">Tracking</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Multiple-Object-Tracking-Summary"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-01-10 20:03:49" datetime="2018-01-10T12:03:49.000Z"  itemprop="datePublished">2018-01-10</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MOT/">MOT</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/01/10/Multiple-Object-Tracking-Summary/">Multiple Object Tracking Summary</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        http://perception.yale.edu/Brian/refGuides/MOT.html
-
-    
-
-        <a href="/2018/01/10/Multiple-Object-Tracking-Summary/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MOT/">MOT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Summary/">Summary</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tracking/">Tracking</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Deep-Learning-Recommended-Papers"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-01-09 21:50:49" datetime="2018-01-09T13:50:49.000Z"  itemprop="datePublished">2018-01-09</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Deep-Learning/">Deep Learning</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/01/09/Deep-Learning-Recommended-Papers/">Deep Learning and Computer Vision Recommended Paper</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        Image ClassificationMust Read : LeNet, AlexNet, VGG-16, GoogleNet, ResNet
-
-
-Title
-Authors
-Pub.
-Links
-Figure
-
-
-
-
-LeNet-5, convolutional neural networks
-Y. LeCun
-??? 199X
-Web
-
-                
-      ...
-    
-
-        <a href="/2018/01/09/Deep-Learning-Recommended-Papers/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-List/">Paper List</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Self-Study/">Self-Study</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-person_re-ID_summary"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-01-02 21:50:49" datetime="2018-01-02T13:50:49.000Z"  itemprop="datePublished">2018-01-02</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Re-ID/">Re-ID</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/01/02/person_re-ID_summary/">Person re-ID Summary</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        
-                
-                    
-                    
-                
-                
-            
-目標難度
-目標遮擋（Occlusion）導致部分特徵丟失
-不同的 View，Illumination 導致同一目標的特徵差異
-不同目標衣服顏色近似、特徵近似導致區分度下降
-
-解決方...
-    
-
-        <a href="/2018/01/02/person_re-ID_summary/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tracking/">Tracking</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/image-retrieval/">image retrieval</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/survey/">survey</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-PYTHON中如何使用-ARGS和-KWARGS"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-12-24 18:48:14" datetime="2017-12-24T10:48:14.000Z"  itemprop="datePublished">2017-12-24</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Code/">Code</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/12/24/PYTHON中如何使用-ARGS和-KWARGS/">PYTHON中如何使用*ARGS和**KWARGS</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        範例與翻譯理解自連結與連結
-*args跟 **kwargs是類似的東西，是可有可無的參數。 一顆星的*args是tuple，可以接受很多的值。兩顆星的**kwargs一樣是可以接受很多值，但是是接受dictionary。###一顆星用法
-範例
-123456def test_var_args(farg, *args):    print "formal arg:", farg    for a...
-    
-
-        <a href="/2017/12/24/PYTHON中如何使用-ARGS和-KWARGS/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code/">code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
     </div>
     

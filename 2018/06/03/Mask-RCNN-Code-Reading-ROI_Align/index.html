@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>Mask RCNNCode Reading for ROI Align Layer | world4jason | 菜鳥搬磚日常</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="ROIAlign Layer功能型 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mask RCNNCode Reading for ROI Align Layer">
+<meta property="og:url" content="https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/index.html">
+<meta property="og:site_name" content="world4jason">
+<meta property="og:description" content="ROIAlign Layer功能型 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2018-06-03T09:34:38.487Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mask RCNNCode Reading for ROI Align Layer">
+<meta name="twitter:description" content="ROIAlign Layer功能型 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959">
+    
+        <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Jason Yeh</h5>
+          <a href="mailto:world4jason@gmail.com" title="world4jason@gmail.com" class="mail">world4jason@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-Home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/world4jason" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-research"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-about"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cv"  >
+                <i class="icon icon-lg icon-CV"></i>
+                CV
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Mask RCNNCode Reading for ROI Align Layer</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Mask RCNNCode Reading for ROI Align Layer</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-03T00:57:33.000Z" itemprop="datePublished" class="page-time">
+  2018-06-03
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ROIAlign-Layer"><span class="post-toc-number">1.</span> <span class="post-toc-text">ROIAlign Layer</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Mask-RCNN-Code-Reading-ROI_Align"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Mask RCNNCode Reading for ROI Align Layer</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-03 08:57:33" datetime="2018-06-03T00:57:33.000Z"  itemprop="datePublished">2018-06-03</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="ROIAlign-Layer"><a href="#ROIAlign-Layer" class="headerlink" title="ROIAlign Layer"></a>ROIAlign Layer</h2><p>功能型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">log2_graph</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="string">"""Implementatin of Log2. TF doesn't have a native implemenation."""</span></div><div class="line">    <span class="keyword">return</span> tf.log(x) / tf.log(<span class="number">2.0</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PyramidROIAlign</span><span class="params">(KE.Layer)</span>:</span></div><div class="line">    <span class="string">"""Implements ROI Pooling on multiple levels of the feature pyramid.</span></div><div class="line"></div><div class="line">    Params:</div><div class="line">    - pool_shape: [height, width] of the output pooled regions. Usually [7, 7]</div><div class="line"></div><div class="line">    Inputs:</div><div class="line">    - boxes: [batch, num_boxes, (y1, x1, y2, x2)] in normalized</div><div class="line">             coordinates. Possibly padded with zeros if not enough</div><div class="line">             boxes to fill the array.</div><div class="line">    - image_meta: [batch, (meta data)] Image details. See compose_image_meta()</div><div class="line">    - Feature maps: List of feature maps from different levels of the pyramid.</div><div class="line">                    Each is [batch, height, width, channels]</div><div class="line"></div><div class="line">    Output:</div><div class="line">    Pooled regions in the shape: [batch, num_boxes, height, width, channels].</div><div class="line">    The width and height are those specific in the pool_shape in the layer</div><div class="line">    constructor.</div><div class="line">    """</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, pool_shape, **kwargs)</span>:</span></div><div class="line">        super(PyramidROIAlign, self).__init__(**kwargs)</div><div class="line">        self.pool_shape = tuple(pool_shape)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, inputs)</span>:</span></div><div class="line">        <span class="comment"># Crop boxes [batch, num_boxes, (y1, x1, y2, x2)] in normalized coords</span></div><div class="line">        boxes = inputs[<span class="number">0</span>]</div><div class="line"></div><div class="line">        <span class="comment"># Image meta</span></div><div class="line">        <span class="comment"># Holds details about the image. See compose_image_meta()</span></div><div class="line">        image_meta = inputs[<span class="number">1</span>]</div><div class="line"></div><div class="line">        <span class="comment"># Feature Maps. List of feature maps from different level of the</span></div><div class="line">        <span class="comment"># feature pyramid. Each is [batch, height, width, channels]</span></div><div class="line">        feature_maps = inputs[<span class="number">2</span>:]</div><div class="line"></div><div class="line">        <span class="comment"># Assign each ROI to a level in the pyramid based on the ROI area.</span></div><div class="line">        y1, x1, y2, x2 = tf.split(boxes, <span class="number">4</span>, axis=<span class="number">2</span>)</div><div class="line">        h = y2 - y1</div><div class="line">        w = x2 - x1</div><div class="line">        <span class="comment"># Use shape of first image. Images in a batch must have the same size.</span></div><div class="line">        image_shape = parse_image_meta_graph(image_meta)[<span class="string">'image_shape'</span>][<span class="number">0</span>]</div><div class="line">        <span class="comment"># Equation 1 in the Feature Pyramid Networks paper. Account for</span></div><div class="line">        <span class="comment"># the fact that our coordinates are normalized here.</span></div><div class="line">        <span class="comment"># e.g. a 224x224 ROI (in pixels) maps to P4</span></div><div class="line">        image_area = tf.cast(image_shape[<span class="number">0</span>] * image_shape[<span class="number">1</span>], tf.float32)</div><div class="line">        roi_level = log2_graph(tf.sqrt(h * w) / (<span class="number">224.0</span> / tf.sqrt(image_area)))</div><div class="line">        roi_level = tf.minimum(<span class="number">5</span>, tf.maximum(</div><div class="line">            <span class="number">2</span>, <span class="number">4</span> + tf.cast(tf.round(roi_level), tf.int32)))</div><div class="line">        roi_level = tf.squeeze(roi_level, <span class="number">2</span>)</div><div class="line"></div><div class="line">        <span class="comment"># Loop through levels and apply ROI pooling to each. P2 to P5.</span></div><div class="line">        pooled = []</div><div class="line">        box_to_level = []</div><div class="line">        <span class="keyword">for</span> i, level <span class="keyword">in</span> enumerate(range(<span class="number">2</span>, <span class="number">6</span>)):</div><div class="line">            ix = tf.where(tf.equal(roi_level, level))</div><div class="line">            level_boxes = tf.gather_nd(boxes, ix)</div><div class="line"></div><div class="line">            <span class="comment"># Box indicies for crop_and_resize.</span></div><div class="line">            box_indices = tf.cast(ix[:, <span class="number">0</span>], tf.int32)</div><div class="line"></div><div class="line">            <span class="comment"># Keep track of which box is mapped to which level</span></div><div class="line">            box_to_level.append(ix)</div><div class="line"></div><div class="line">            <span class="comment"># Stop gradient propogation to ROI proposals</span></div><div class="line">            level_boxes = tf.stop_gradient(level_boxes)</div><div class="line">            box_indices = tf.stop_gradient(box_indices)</div><div class="line"></div><div class="line">            <span class="comment"># Crop and Resize</span></div><div class="line">            <span class="comment"># From Mask R-CNN paper: "We sample four regular locations, so</span></div><div class="line">            <span class="comment"># that we can evaluate either max or average pooling. In fact,</span></div><div class="line">            <span class="comment"># interpolating only a single value at each bin center (without</span></div><div class="line">            <span class="comment"># pooling) is nearly as effective."</span></div><div class="line">            <span class="comment">#</span></div><div class="line">            <span class="comment"># Here we use the simplified approach of a single value per bin,</span></div><div class="line">            <span class="comment"># which is how it's done in tf.crop_and_resize()</span></div><div class="line">            <span class="comment"># Result: [batch * num_boxes, pool_height, pool_width, channels]</span></div><div class="line">            pooled.append(tf.image.crop_and_resize(</div><div class="line">                feature_maps[i], level_boxes, box_indices, self.pool_shape,</div><div class="line">                method=<span class="string">"bilinear"</span>))</div><div class="line"></div><div class="line">        <span class="comment"># Pack pooled features into one tensor</span></div><div class="line">        pooled = tf.concat(pooled, axis=<span class="number">0</span>)</div><div class="line"></div><div class="line">        <span class="comment"># Pack box_to_level mapping into one array and add another</span></div><div class="line">        <span class="comment"># column representing the order of pooled boxes</span></div><div class="line">        box_to_level = tf.concat(box_to_level, axis=<span class="number">0</span>)</div><div class="line">        box_range = tf.expand_dims(tf.range(tf.shape(box_to_level)[<span class="number">0</span>]), <span class="number">1</span>)</div><div class="line">        box_to_level = tf.concat([tf.cast(box_to_level, tf.int32), box_range],</div><div class="line">                                 axis=<span class="number">1</span>)</div><div class="line"></div><div class="line">        <span class="comment"># Rearrange pooled features to match the order of the original boxes</span></div><div class="line">        <span class="comment"># Sort box_to_level by batch then box index</span></div><div class="line">        <span class="comment"># TF doesn't have a way to sort by two columns, so merge them and sort.</span></div><div class="line">        sorting_tensor = box_to_level[:, <span class="number">0</span>] * <span class="number">100000</span> + box_to_level[:, <span class="number">1</span>]</div><div class="line">        ix = tf.nn.top_k(sorting_tensor, k=tf.shape(</div><div class="line">            box_to_level)[<span class="number">0</span>]).indices[::<span class="number">-1</span>]</div><div class="line">        ix = tf.gather(box_to_level[:, <span class="number">2</span>], ix)</div><div class="line">        pooled = tf.gather(pooled, ix)</div><div class="line"></div><div class="line">        <span class="comment"># Re-add the batch dimension</span></div><div class="line">        pooled = tf.expand_dims(pooled, <span class="number">0</span>)</div><div class="line">        <span class="keyword">return</span> pooled</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compute_output_shape</span><span class="params">(self, input_shape)</span>:</span></div><div class="line">        <span class="keyword">return</span> input_shape[<span class="number">0</span>][:<span class="number">2</span>] + self.pool_shape + (input_shape[<span class="number">2</span>][<span class="number">-1</span>], )</div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最後更新時間：<time datetime="2018-06-03T09:34:38.487Z" itemprop="dateUpdated">2018-06-03 17:34:38</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://world4jason.github.io">
+            <img src="/img/avatar.jpg" alt="Jason Yeh">
+            Jason Yeh
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/&title=《Mask RCNNCode Reading for ROI Align Layer》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/&title=《Mask RCNNCode Reading for ROI Align Layer》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mask RCNNCode Reading for ROI Align Layer》 — world4jason&url=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Mask RCNNCode Reading for Network Head - Detection Target Layer</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: '',
+            repo: '',
+            oauth: {
+                client_id: '',
+                client_secret: '',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        總訪客數：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        總訪問量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Jason Yeh &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/&title=《Mask RCNNCode Reading for ROI Align Layer》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/&title=《Mask RCNNCode Reading for ROI Align Layer》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mask RCNNCode Reading for ROI Align Layer》 — world4jason&url=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '持續搬磚中';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又回來了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

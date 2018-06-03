@@ -2,6 +2,48 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/</loc>
+    
+    <lastmod>2018-06-03T09:34:38.487Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Anchor-boxes-Generate/</loc>
+    
+    <lastmod>2018-06-03T09:34:32.207Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://world4jason.github.io/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/</loc>
+    
+    <lastmod>2018-06-03T09:34:30.094Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/</loc>
+    
+    <lastmod>2018-06-03T09:34:24.637Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading-RPN/</loc>
+    
+    <lastmod>2018-06-03T09:34:21.674Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading-ResNet/</loc>
+    
+    <lastmod>2018-06-03T09:34:17.375Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading/</loc>
     
     <lastmod>2018-06-03T09:33:11.513Z</lastmod>

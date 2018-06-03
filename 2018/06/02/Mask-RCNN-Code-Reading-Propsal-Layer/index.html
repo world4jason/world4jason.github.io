@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>Mask RCNNCode Reading for Proposal Layer | world4jason | 菜鳥搬磚日常</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="通過下面這段程式碼拿到anchors以後 12345678910# Anchorsif mode == &quot;training&quot;:  anchors = self.get_anchors(config.IMAGE_SHAPE)  # Duplicate across the batch dimension because Keras requires it  # TODO: can this be o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mask RCNNCode Reading for Proposal Layer">
+<meta property="og:url" content="https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/index.html">
+<meta property="og:site_name" content="world4jason">
+<meta property="og:description" content="通過下面這段程式碼拿到anchors以後 12345678910# Anchorsif mode == &quot;training&quot;:  anchors = self.get_anchors(config.IMAGE_SHAPE)  # Duplicate across the batch dimension because Keras requires it  # TODO: can this be o">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2018-06-03T09:34:24.637Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mask RCNNCode Reading for Proposal Layer">
+<meta name="twitter:description" content="通過下面這段程式碼拿到anchors以後 12345678910# Anchorsif mode == &quot;training&quot;:  anchors = self.get_anchors(config.IMAGE_SHAPE)  # Duplicate across the batch dimension because Keras requires it  # TODO: can this be o">
+    
+        <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Jason Yeh</h5>
+          <a href="mailto:world4jason@gmail.com" title="world4jason@gmail.com" class="mail">world4jason@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-Home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/world4jason" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-research"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-about"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cv"  >
+                <i class="icon icon-lg icon-CV"></i>
+                CV
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Mask RCNNCode Reading for Proposal Layer</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Mask RCNNCode Reading for Proposal Layer</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-02T15:57:33.000Z" itemprop="datePublished" class="page-time">
+  2018-06-02
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Proposal-Layer"><span class="post-toc-number">1.</span> <span class="post-toc-text">Proposal Layer</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Mask-RCNN-Code-Reading-Propsal-Layer"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Mask RCNNCode Reading for Proposal Layer</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-02 23:57:33" datetime="2018-06-02T15:57:33.000Z"  itemprop="datePublished">2018-06-02</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>通過下面這段程式碼拿到anchors以後</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Anchors</span></div><div class="line"><span class="keyword">if</span> mode == <span class="string">"training"</span>:</div><div class="line">  anchors = self.get_anchors(config.IMAGE_SHAPE)</div><div class="line">  <span class="comment"># Duplicate across the batch dimension because Keras requires it</span></div><div class="line">  <span class="comment"># <span class="doctag">TODO:</span> can this be optimized to avoid duplicating the anchors?</span></div><div class="line">  anchors = np.broadcast_to(anchors, (config.BATCH_SIZE,) + anchors.shape)</div><div class="line">  <span class="comment"># A hack to get around Keras's bad support for constants</span></div><div class="line">  anchors = KL.Lambda(<span class="keyword">lambda</span> x: tf.Variable(anchors), name=<span class="string">"anchors"</span>)(input_image)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">  anchors = input_anchors</div></pre></td></tr></table></figure>
+<p>這裡總算要進行proposal layer計算了<br>將所有anchors還有相應對的分數跟偏移量當作輸入<br>而前面的東西都是class init的時候的設定</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">rpn_class_logits, rpn_class, rpn_bbox = outputs</div><div class="line"></div><div class="line"><span class="comment"># Generate proposals</span></div><div class="line"><span class="comment"># Proposals are [batch, N, (y1, x1, y2, x2)] in normalized coordinates</span></div><div class="line"><span class="comment"># and zero padded.</span></div><div class="line"></div><div class="line"><span class="comment"># POST_NMS_ROIS_INFERENCE = 1000</span></div><div class="line"><span class="comment"># POST_NMS_ROIS_TRAINING = 2000</span></div><div class="line"></div><div class="line">    proposal_count = config.POST_NMS_ROIS_TRAINING <span class="keyword">if</span> mode == <span class="string">"training"</span>\</div><div class="line">            <span class="keyword">else</span> config.POST_NMS_ROIS_INFERENCE</div><div class="line">        </div><div class="line">rpn_rois = ProposalLayer(</div><div class="line">              proposal_count=proposal_count,</div><div class="line">              nms_threshold=config.RPN_NMS_THRESHOLD,</div><div class="line">              name=<span class="string">"ROI"</span>,</div><div class="line">              config=config)([rpn_class, rpn_bbox, anchors]</div><div class="line">              )</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> mode == <span class="string">"training"</span>:</div><div class="line">      <span class="comment"># Class ID mask to mark class IDs supported by the dataset the image</span></div><div class="line">      <span class="comment"># came from.</span></div><div class="line">      active_class_ids = KL.Lambda(</div><div class="line">          <span class="keyword">lambda</span> x: parse_image_meta_graph(x)[<span class="string">"active_class_ids"</span>]</div><div class="line">          )(input_image_meta)</div><div class="line">    </div><div class="line">      <span class="keyword">if</span> <span class="keyword">not</span> config.USE_RPN_ROIS:</div><div class="line">          <span class="comment"># Ignore predicted ROIs and use ROIs provided as an input.</span></div><div class="line">          input_rois = KL.Input(shape=[config.POST_NMS_ROIS_TRAINING, <span class="number">4</span>],</div><div class="line">                                name=<span class="string">"input_roi"</span>, dtype=np.int32)</div><div class="line">          <span class="comment"># Normalize coordinates</span></div><div class="line">          target_rois = KL.Lambda(<span class="keyword">lambda</span> x: norm_boxes_graph(</div><div class="line">              x, K.shape(input_image)[<span class="number">1</span>:<span class="number">3</span>]))(input_rois)</div><div class="line">      <span class="keyword">else</span>:</div><div class="line">          target_rois = rpn_rois</div></pre></td></tr></table></figure>
+<p>其中parse_image_meta_graph</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> &#123;</div><div class="line">        <span class="string">"image_id"</span>: image_id,</div><div class="line">        <span class="string">"original_image_shape"</span>: original_image_shape,</div><div class="line">        <span class="string">"image_shape"</span>: image_shape,</div><div class="line">        <span class="string">"window"</span>: window,</div><div class="line">        <span class="string">"scale"</span>: scale,</div><div class="line">        <span class="string">"active_class_ids"</span>: active_class_ids,</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="Proposal-Layer"><a href="#Proposal-Layer" class="headerlink" title="Proposal Layer"></a>Proposal Layer</h3><p>rpn_class：所有像素點BG/FG的機率值。<br>rpn_bbox：所有像素點對應anchor上的4個偏移值[dy, dx, log(dh), log(dw)]。<br>anchors:  剛剛通過預先生成的有序anchor列表，注意這裡有序表示feature_map上像素點生成的anchor以及該像素點生成的rpn_class和rpn_bbox是對應的（看paper看起來是這樣,但這樣理解對嗎, 有點不確定)</p>
+<p>最終ProposalLayer會return一個經過bbox regression以及NMS過濾後anchor boxes set(稱為roi或proposal)，至此已經完成了RPN啦~<br>init內super的用法可參考 <a href="http://funhacks.net/explore-python/Class/super.html" target="_blank" rel="external">你不知道的 super
+</a></p>
+<p>另外Python中，如果在創建class的時候寫了call()， 那麼該class實例化出實例後， 實例名()就是調用call()。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProposalLayer</span><span class="params">(KE.Layer)</span>:</span></div><div class="line">    <span class="string">"""Receives anchor scores and selects a subset to pass as proposals</span></div><div class="line">    to the second stage. Filtering is done based on anchor scores and</div><div class="line">    non-max suppression to remove overlaps. It also applies bounding</div><div class="line">    box refinement deltas to anchors.</div><div class="line"></div><div class="line">    Inputs:</div><div class="line">        rpn_probs: [batch, anchors, (bg prob, fg prob)]</div><div class="line">        rpn_bbox: [batch, anchors, (dy, dx, log(dh), log(dw))]</div><div class="line">        anchors: [batch, (y1, x1, y2, x2)] anchors in normalized coordinates</div><div class="line"></div><div class="line">    Returns:</div><div class="line">        Proposals in normalized coordinates [batch, rois, (y1, x1, y2, x2)]</div><div class="line">    """</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, proposal_count, nms_threshold, config=None, **kwargs)</span>:</span></div><div class="line">        super(ProposalLayer, self).__init__(**kwargs)</div><div class="line">        self.config = config</div><div class="line">        self.proposal_count = proposal_count</div><div class="line">        self.nms_threshold = nms_threshold</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, inputs)</span>:</span></div><div class="line">        <span class="comment"># Box Scores. Use the foreground class confidence. [Batch, num_rois, 1]</span></div><div class="line">        scores = inputs[<span class="number">0</span>][:, :, <span class="number">1</span>]</div><div class="line">        <span class="comment"># Box deltas [batch, num_rois, 4]</span></div><div class="line">        deltas = inputs[<span class="number">1</span>]</div><div class="line">        deltas = deltas * np.reshape(self.config.RPN_BBOX_STD_DEV, [<span class="number">1</span>, <span class="number">1</span>, <span class="number">4</span>])</div><div class="line">        <span class="comment"># Anchors</span></div><div class="line">        anchors = inputs[<span class="number">2</span>]</div><div class="line"></div><div class="line">        <span class="comment"># Improve performance by trimming to top anchors by score</span></div><div class="line">        <span class="comment"># and doing the rest on the smaller subset.</span></div><div class="line">        pre_nms_limit = tf.minimum(<span class="number">6000</span>, tf.shape(anchors)[<span class="number">1</span>])</div><div class="line">        ix = tf.nn.top_k(scores, pre_nms_limit, sorted=<span class="keyword">True</span>,</div><div class="line">                         name=<span class="string">"top_anchors"</span>).indices</div><div class="line">        scores = utils.batch_slice([scores, ix], <span class="keyword">lambda</span> x, y: tf.gather(x, y),</div><div class="line">                                   self.config.IMAGES_PER_GPU)</div><div class="line">        deltas = utils.batch_slice([deltas, ix], <span class="keyword">lambda</span> x, y: tf.gather(x, y),</div><div class="line">                                   self.config.IMAGES_PER_GPU)</div><div class="line">        pre_nms_anchors = utils.batch_slice([anchors, ix], <span class="keyword">lambda</span> a, x: tf.gather(a, x),</div><div class="line">                                    self.config.IMAGES_PER_GPU,</div><div class="line">                                    names=[<span class="string">"pre_nms_anchors"</span>])</div><div class="line"></div><div class="line">        <span class="comment"># Apply deltas to anchors to get refined anchors.</span></div><div class="line">        <span class="comment"># [batch, N, (y1, x1, y2, x2)]</span></div><div class="line">        boxes = utils.batch_slice([pre_nms_anchors, deltas],</div><div class="line">                                  <span class="keyword">lambda</span> x, y: apply_box_deltas_graph(x, y),</div><div class="line">                                  self.config.IMAGES_PER_GPU,</div><div class="line">                                  names=[<span class="string">"refined_anchors"</span>])</div><div class="line">                                  </div><div class="line">        <span class="comment"># normalized coordinates就是對應原圖的百分比坐標</span></div><div class="line">        <span class="comment"># 下面的作用：防止修正後的anchor坐標超出了邊界即0&lt;=x,y&lt;=1</span></div><div class="line">        <span class="comment"># Clip to image boundaries. Since we're in normalized coordinates,</span></div><div class="line">        <span class="comment"># clip to 0..1 range. [batch, N, (y1, x1, y2, x2)]</span></div><div class="line">        window = np.array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>], dtype=np.float32)</div><div class="line">        boxes = utils.batch_slice(boxes,</div><div class="line">                                  <span class="keyword">lambda</span> x: clip_boxes_graph(x, window),</div><div class="line">                                  self.config.IMAGES_PER_GPU,</div><div class="line">                                  names=[<span class="string">"refined_anchors_clipped"</span>])</div><div class="line"></div><div class="line">        <span class="comment"># Filter out small boxes</span></div><div class="line">        <span class="comment"># According to Xinlei Chen's paper, this reduces detection accuracy</span></div><div class="line">        <span class="comment"># for small objects, so we're skipping it.</span></div><div class="line"></div><div class="line">        <span class="comment"># Non-max suppression</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">nms</span><span class="params">(boxes, scores)</span>:</span></div><div class="line">            indices = tf.image.non_max_suppression(</div><div class="line">                boxes, scores, self.proposal_count,</div><div class="line">                self.nms_threshold, name=<span class="string">"rpn_non_max_suppression"</span>)</div><div class="line">            proposals = tf.gather(boxes, indices)</div><div class="line">            <span class="comment"># Pad if needed</span></div><div class="line">            padding = tf.maximum(self.proposal_count - tf.shape(proposals)[<span class="number">0</span>], <span class="number">0</span>)</div><div class="line">            proposals = tf.pad(proposals, [(<span class="number">0</span>, padding), (<span class="number">0</span>, <span class="number">0</span>)])</div><div class="line">            <span class="keyword">return</span> proposals</div><div class="line">        proposals = utils.batch_slice([boxes, scores], nms,</div><div class="line">                                      self.config.IMAGES_PER_GPU)</div><div class="line">        <span class="keyword">return</span> proposals</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compute_output_shape</span><span class="params">(self, input_shape)</span>:</span></div><div class="line">        <span class="keyword">return</span> (<span class="keyword">None</span>, self.proposal_count, <span class="number">4</span>)</div></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最後更新時間：<time datetime="2018-06-03T09:34:24.637Z" itemprop="dateUpdated">2018-06-03 17:34:24</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="https://world4jason.github.io">
+            <img src="/img/avatar.jpg" alt="Jason Yeh">
+            Jason Yeh
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/&title=《Mask RCNNCode Reading for Proposal Layer》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/&title=《Mask RCNNCode Reading for Proposal Layer》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mask RCNNCode Reading for Proposal Layer》 — world4jason&url=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/06/03/Mask-RCNN-Code-Reading-Head-DetectionTargetLayer/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Mask RCNNCode Reading for Network Head - Detection Target Layer</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/06/02/Mask-RCNN-Code-Reading-Anchor-boxes-Generate/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Mask RCNNCode Reading for Anchor boxes generate</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: '',
+            repo: '',
+            oauth: {
+                client_id: '',
+                client_secret: '',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        總訪客數：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        總訪問量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Jason Yeh &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/&title=《Mask RCNNCode Reading for Proposal Layer》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/&title=《Mask RCNNCode Reading for Proposal Layer》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Mask RCNNCode Reading for Proposal Layer》 — world4jason&url=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://world4jason.github.io/2018/06/02/Mask-RCNN-Code-Reading-Propsal-Layer/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '持續搬磚中';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又回來了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
