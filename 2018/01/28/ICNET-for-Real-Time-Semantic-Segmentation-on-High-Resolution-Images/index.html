@@ -1,180 +1,241 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
-
-
-
-
-
-
-
+<html>
 <head>
-	<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="preconnect" href="//pic.zhih.me">
-	<link rel="preconnect" href="//www.googletagmanager.com">
-	<link rel="preconnect" href="//zz.bdstatic.com">
-	<link rel="preconnect" href="//sp0.baidu.com">
-	<link rel="preconnect" href="//www.google-analytics.com">
-	<link rel="preconnect" href="//cdn1.lncld.net">
-	<link rel="preconnect" href="//unpkg.com">
-	<link rel="preconnect" href="//app-router.leancloud.cn">
-	<link rel="preconnect" href="//9qpuwspm.api.lncld.net">
-	<link rel="preconnect" href="//gravatar.loli.net">
-	<link rel="preload" href="https://pic.zhih.me/blog/header.jpg" as="image">
+    
 
-	<title>ICNET for Real-Time Semantic Segmentation on High-Resolution Images | world4jason</title>
+    
 
-	<meta name="HandheldFriendly" content="True">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-	<meta name="generator" content="hexo">
-	<meta name="author" content="Jason Yeh">
-	<meta name="description" content="">
-
-	
-	<meta name="keywords" content="">
-	
-
-	
-	<link rel="shortcut icon" href="https://i.loli.net/2017/11/26/5a19c0b50432e.png">
-	<link rel="apple-touch-icon" href="https://i.loli.net/2017/11/26/5a19c0b50432e.png">
-	
-
-	
-	<meta name="theme-color" content="#3c484e">
-	<meta name="msapplication-TileColor" content="#3c484e">
-	
-
-	
-
-	
-
-	<meta property="og:site_name" content="world4jason">
-	<meta property="og:type" content="article">
-	<meta property="og:title" content="ICNET for Real-Time Semantic Segmentation on High-Resolution Images | world4jason">
-	<meta property="og:description" content="">
-	<meta property="og:url" content="https://world4jason.github.io/2018/01/28/ICNET-for-Real-Time-Semantic-Segmentation-on-High-Resolution-Images/">
-
-	
-	<meta property="article:published_time" content="2018-01-28T16:01:00+08:00"> 
-	<meta property="article:author" content="Jason Yeh">
-	<meta property="article:published_first" content="world4jason, /2018/01/28/ICNET-for-Real-Time-Semantic-Segmentation-on-High-Resolution-Images/">
-	
-
-	
-	
-	<link rel="stylesheet" href="/css/allinonecss.min.css">
-
-	
-	
-	
-<link rel="canonical" href="https://world4jason.github.io/2018/01/28/ICNET-for-Real-Time-Semantic-Segmentation-on-High-Resolution-Images/"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
 
 
 
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>ICNET for Real-Time Semantic Segmentation on High-Resolution Images | world4jason | 菜鳥搬磚日常</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Deep Learning,Computer Vision,Segmentation,real-time">
+    <meta name="description" content="RecapQuote:其實很討厭這作者的paper效果都很好, 但是每次都是用matlab, 而且PSPNet作者還說training code因為公司問題不能發布, 傻眼https://www.zhihu.com/question/53356671 Paperhttps://arxiv.org/pdf/1704.08545.pdfCodehttps://github.com/hszhao/ICN">
+<meta name="keywords" content="Deep Learning,Computer Vision,Segmentation,real-time">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ICNET for Real-Time Semantic Segmentation on High-Resolution Images">
+<meta property="og:url" content="https://world4jason.github.io/2018/01/28/ICNET-for-Real-Time-Semantic-Segmentation-on-High-Resolution-Images/index.html">
+<meta property="og:site_name" content="world4jason">
+<meta property="og:description" content="RecapQuote:其實很討厭這作者的paper效果都很好, 但是每次都是用matlab, 而且PSPNet作者還說training code因為公司問題不能發布, 傻眼https://www.zhihu.com/question/53356671 Paperhttps://arxiv.org/pdf/1704.08545.pdfCodehttps://github.com/hszhao/ICN">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://world4jason.github.io/media/15172367977860.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15172162210529.png">
+<meta property="og:image" content="https://world4jason.github.io/media/15172351270369.png">
+<meta property="og:image" content="https://world4jason.github.io/media/15172353341447.png">
+<meta property="og:image" content="https://world4jason.github.io/media/15172758974357.png">
+<meta property="og:image" content="https://world4jason.github.io/media/15172822508697.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15172765679435.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15172417899356.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15172417973947.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15172418178955.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15172418074043.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/20161024115403020.gif">
+<meta property="og:image" content="https://world4jason.github.io/media/15172789125366.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15172790446136.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15172790496567.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15172794424801.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15172827737568.png">
+<meta property="og:image" content="https://world4jason.github.io/media/15172838466580.png">
+<meta property="og:image" content="https://world4jason.github.io/media/15172845289475.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15173712115585.png">
+<meta property="og:image" content="https://world4jason.github.io/media/15173713226717.png">
+<meta property="og:image" content="https://world4jason.github.io/media/15173715003744.jpg">
+<meta property="og:image" content="https://world4jason.github.io/media/15173715775469.jpg">
+<meta property="og:updated_time" content="2018-01-31T06:53:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ICNET for Real-Time Semantic Segmentation on High-Resolution Images">
+<meta name="twitter:description" content="RecapQuote:其實很討厭這作者的paper效果都很好, 但是每次都是用matlab, 而且PSPNet作者還說training code因為公司問題不能發布, 傻眼https://www.zhihu.com/question/53356671 Paperhttps://arxiv.org/pdf/1704.08545.pdfCodehttps://github.com/hszhao/ICN">
+<meta name="twitter:image" content="https://world4jason.github.io/media/15172367977860.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
 
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
 
 </head>
-<body class="post-template">
-	<!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="site-wrapper">
-		
 
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
 
-
-
-<header class="site-header post-site-header outer">
-    <div class="inner">
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Jason Yeh</h5>
+          <a href="mailto:world4jason@gmail.com" title="world4jason@gmail.com" class="mail">world4jason@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
         
-<nav class="site-nav"> 
-    <div class="site-nav-left">
-        <ul class="nav">
-            <li>
-                
-                <a href="/" title="Home">HOME</a>
-                
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-Home"></i>
+                Home
+              </a>
             </li>
-            
-            
-            <li>
-                <a href="/about" title="ABOUT">ABOUT</a>
-            </li>
-            
-            <li>
-                <a href="/archives" title="ARCHIVES">ARCHIVES</a>
-            </li>
-            
-            
-        </ul> 
-    </div>
-    
-    <div class="search-button-area">
-        <a href="#search" class="search-button">Search ...</a>
-    </div>
-     
-    <div class="site-nav-right">
         
-        <a href="#search" class="search-button">Search ...</a>
-         
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
         
-<div class="social-links">
-    
-    <a class="social-link" title="weibo" href="https://weibo.com/xzhih" target="_blank" rel="noopener">
-        <svg viewbox="0 0 1141 1024" xmlns="http://www.w3.org/2000/svg"><path d="M916.48 518.144q27.648 21.504 38.912 51.712t9.216 62.976-14.336 65.536-31.744 59.392q-34.816 48.128-78.848 81.92t-91.136 56.32-94.72 35.328-89.6 18.944-75.264 7.68-51.712 1.536-49.152-2.56-68.096-10.24-78.336-21.504-79.872-36.352-74.24-55.296-59.904-78.848q-16.384-29.696-22.016-63.488t-5.632-86.016q0-22.528 7.68-51.2t27.136-63.488 53.248-75.776 86.016-90.112q51.2-48.128 105.984-85.504t117.248-57.856q28.672-10.24 63.488-11.264t57.344 11.264q10.24 11.264 19.456 23.04t12.288 29.184q3.072 14.336 0.512 27.648t-5.632 26.624-5.12 25.6 2.048 22.528q17.408 2.048 33.792-1.536t31.744-9.216 31.232-11.776 33.28-9.216q27.648-5.12 54.784-4.608t49.152 7.68 36.352 22.016 17.408 38.4q2.048 14.336-2.048 26.624t-8.704 23.04-7.168 22.016 1.536 23.552q3.072 7.168 14.848 13.312t27.136 12.288 32.256 13.312 29.184 16.384zM658.432 836.608q26.624-16.384 53.76-45.056t44.032-64 18.944-75.776-20.48-81.408q-19.456-33.792-47.616-57.344t-62.976-37.376-74.24-19.968-80.384-6.144q-78.848 0-139.776 16.384t-105.472 43.008-72.192 60.416-38.912 68.608q-11.264 33.792-6.656 67.072t20.992 62.976 42.496 53.248 57.856 37.888q58.368 25.6 119.296 32.256t116.224 0.512 100.864-21.504 74.24-33.792zM524.288 513.024q20.48 8.192 38.912 18.432t32.768 27.648q10.24 12.288 17.92 30.72t10.752 39.424 1.536 42.496-9.728 38.912q-8.192 18.432-19.968 37.376t-28.672 35.328-40.448 29.184-57.344 18.944q-61.44 11.264-117.76-11.264t-88.064-74.752q-12.288-39.936-13.312-70.656t16.384-66.56q13.312-27.648 40.448-51.712t62.464-38.912 75.264-17.408 78.848 12.8zM361.472 764.928q37.888 3.072 57.856-18.432t21.504-48.128-15.36-47.616-52.736-16.896q-27.648 3.072-43.008 23.552t-17.408 43.52 9.728 42.496 39.424 21.504zM780.288 6.144q74.752 0 139.776 19.968t113.664 57.856 76.288 92.16 27.648 122.88q0 33.792-16.384 50.688t-35.328 17.408-35.328-14.336-16.384-45.568q0-40.96-22.528-77.824t-59.392-64.512-84.48-43.52-96.768-15.872q-31.744 0-47.104-15.36t-14.336-34.304 18.944-34.304 51.712-15.36zM780.288 169.984q95.232 0 144.384 48.64t49.152 146.944q0 30.72-10.24 43.52t-22.528 11.264-22.528-14.848-10.24-35.84q0-60.416-34.816-96.256t-93.184-35.84q-19.456 0-28.672-10.752t-9.216-23.04 9.728-23.04 28.16-10.752z"/></svg>
-    </a>
-    
-    
-    <a class="social-link" title="github" href="https://github.com/xzhih" target="_blank" rel="noopener">
-        <svg viewbox="0 0 1049 1024" xmlns="http://www.w3.org/2000/svg"><path d="M524.979332 0C234.676191 0 0 234.676191 0 524.979332c0 232.068678 150.366597 428.501342 358.967656 498.035028 26.075132 5.215026 35.636014-11.299224 35.636014-25.205961 0-12.168395-0.869171-53.888607-0.869171-97.347161-146.020741 31.290159-176.441729-62.580318-176.441729-62.580318-23.467619-60.841976-58.234462-76.487055-58.234463-76.487055-47.804409-32.15933 3.476684-32.15933 3.476685-32.15933 53.019436 3.476684 80.83291 53.888607 80.83291 53.888607 46.935238 79.963739 122.553122 57.365291 152.97411 43.458554 4.345855-33.897672 18.252593-57.365291 33.028501-70.402857-116.468925-12.168395-239.022047-57.365291-239.022047-259.012982 0-57.365291 20.860106-104.300529 53.888607-140.805715-5.215026-13.037566-23.467619-66.926173 5.215027-139.067372 0 0 44.327725-13.906737 144.282399 53.888607 41.720212-11.299224 86.917108-17.383422 131.244833-17.383422s89.524621 6.084198 131.244833 17.383422C756.178839 203.386032 800.506564 217.29277 800.506564 217.29277c28.682646 72.1412 10.430053 126.029806 5.215026 139.067372 33.897672 36.505185 53.888607 83.440424 53.888607 140.805715 0 201.64769-122.553122 245.975415-239.891218 259.012982 19.121764 16.514251 35.636014 47.804409 35.636015 97.347161 0 70.402857-0.869171 126.898978-0.869172 144.282399 0 13.906737 9.560882 30.420988 35.636015 25.205961 208.601059-69.533686 358.967656-265.96635 358.967655-498.035028C1049.958663 234.676191 814.413301 0 524.979332 0z"/></svg>
-    </a>
-    
-    
-    <a class="social-link" title="facebook" href="https://facebook" target="_blank" rel="noopener">
-        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
-
-    </a>
-    
-    
-    <a class="social-link" title="twitter" href="https://twitter.com" target="_blank" rel="noopener">
-        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
-
-    </a>
-    
-    
-    
-    
-</div>
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/world4jason" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-research"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-about"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cv"  >
+                <i class="icon icon-lg icon-CV"></i>
+                CV
+              </a>
+            </li>
+        
+      </ul>
     </div>
-</nav>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">ICNET for Real-Time Semantic Segmentation on High-Resolution Images</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
     </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">ICNET for Real-Time Semantic Segmentation on High-Resolution Images</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-01-28T08:50:31.000Z" itemprop="datePublished" class="page-time">
+  2018-01-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Segmentation/">Segmentation</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
 </header>
 
 
-<div id="site-main" class="site-main outer" role="main">
-    <div class="inner">
-        <header class="post-full-header">
-            <div class="post-full-meta">
-                <time class="post-full-meta-date" datetime="2018-01-28T08:50:31.000Z">
-                    2018-01-28
-                </time>
-                
-                <span class="date-divider">/</span>
-                
-                <a href="/categories/Segmentation/">Segmentation</a>&nbsp;&nbsp;
-                
-                
-            </div>
-            <h1 class="post-full-title">ICNET for Real-Time Semantic Segmentation on High-Resolution Images</h1>
-        </header>
-        <div class="post-full no-image">
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Recap"><span class="post-toc-number">1.</span> <span class="post-toc-text">Recap</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Abstract"><span class="post-toc-number">2.</span> <span class="post-toc-text">Abstract</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Introduction"><span class="post-toc-number">3.</span> <span class="post-toc-text">Introduction</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Speed-Analysis"><span class="post-toc-number">4.</span> <span class="post-toc-text">Speed Analysis</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Intuitive-Speedup"><span class="post-toc-number">5.</span> <span class="post-toc-text">Intuitive Speedup</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#加速方法-1-輸入向下採樣-Downsampling-Input"><span class="post-toc-number">5.0.1.</span> <span class="post-toc-text">加速方法 1: 輸入向下採樣(Downsampling Input)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#加速方法-2-利用較小的feature-map來做inference-Downsampling-Feature"><span class="post-toc-number">5.0.2.</span> <span class="post-toc-text">加速方法 2 : 利用較小的feature map來做inference(Downsampling Feature)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#加速方法-3-減少模型複雜度-Model-Compression"><span class="post-toc-number">5.0.3.</span> <span class="post-toc-text">加速方法 3 : 減少模型複雜度(Model Compression)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#FCN-Fully-Convolutional-Networks-for-Fully-Convolutional-Networks"><span class="post-toc-number">5.0.4.</span> <span class="post-toc-text">FCN:Fully Convolutional Networks for Fully Convolutional Networks</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#例如-K-4096-的全連接層，輸入是7x7x512，這個全連接層可以被等效地看做一個F-7-Padding-0-Stride-1-Filter-Number-4096-的Conv層。換句話說，就是將Filter-Size設置的和Input-Data-Size一致了。輸出將變成-1x1x4096，這個結果就和使用初始的那個全連接層一樣了。"><span class="post-toc-number">5.0.4.0.1.</span> <span class="post-toc-text">例如 K=4096 的全連接層，輸入是7x7x512，這個全連接層可以被等效地看做一個F=7,Padding=0,Stride=1,Filter Number=4096 的Conv層。換句話說，就是將Filter Size設置的和Input Data Size一致了。輸出將變成 1x1x4096，這個結果就和使用初始的那個全連接層一樣了。</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Step-1"><span class="post-toc-number">5.0.4.1.</span> <span class="post-toc-text">Step 1:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Step-2"><span class="post-toc-number">5.0.4.2.</span> <span class="post-toc-text">Step 2:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Step-3"><span class="post-toc-number">5.0.4.3.</span> <span class="post-toc-text">Step 3:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Step-4"><span class="post-toc-number">5.0.4.4.</span> <span class="post-toc-text">Step 4:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Upsampling"><span class="post-toc-number">5.0.4.5.</span> <span class="post-toc-text">Upsampling</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Skip-Architecture"><span class="post-toc-number">5.0.4.6.</span> <span class="post-toc-text">Skip Architecture</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Architecture"><span class="post-toc-number">6.</span> <span class="post-toc-text">Architecture</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Branch-Analysis"><span class="post-toc-number">6.0.1.</span> <span class="post-toc-text">Branch Analysis</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Cascade-Label-Guidance"><span class="post-toc-number">6.0.2.</span> <span class="post-toc-text">Cascade Label Guidance</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Branch-Output"><span class="post-toc-number">6.0.3.</span> <span class="post-toc-text">Branch Output</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Cascade-Feature-Fusion"><span class="post-toc-number">7.</span> <span class="post-toc-text">Cascade Feature Fusion</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Loss-Function"><span class="post-toc-number">8.</span> <span class="post-toc-text">Loss Function</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Experiment"><span class="post-toc-number">9.</span> <span class="post-toc-text">Experiment</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#model-Compression"><span class="post-toc-number">9.0.1.</span> <span class="post-toc-text">model Compression</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Cascade-Structure-Experiment"><span class="post-toc-number">9.0.2.</span> <span class="post-toc-text">Cascade Structure Experiment</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Visualization"><span class="post-toc-number">9.0.3.</span> <span class="post-toc-text">Visualization</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Cityscape-Comparison"><span class="post-toc-number">9.0.4.</span> <span class="post-toc-text">Cityscape Comparison</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-ICNET-for-Real-Time-Semantic-Segmentation-on-High-Resolution-Images"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">ICNET for Real-Time Semantic Segmentation on High-Resolution Images</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-28 16:50:31" datetime="2018-01-28T08:50:31.000Z"  itemprop="datePublished">2018-01-28</time>
+
             
-            <div class="post-full-content">
-                <article id="lightgallery" class="markdown-body">
-                    <h2 id="Recap"><a href="#Recap" class="headerlink" title="Recap"></a>Recap</h2><p>Quote:<br>其實很討厭這作者的paper<br>效果都很好, 但是每次都是用matlab, 而且PSPNet作者還說training code因為公司問題不能發布, 傻眼<br><img alt="" class="post-img b-lazy" href="/media/15172367977860.jpg" data-src="/media/15172367977860.jpg"><br><a href="https://www.zhihu.com/question/53356671" target="_blank" rel="external">https://www.zhihu.com/question/53356671</a></p>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Segmentation/">Segmentation</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="Recap"><a href="#Recap" class="headerlink" title="Recap"></a>Recap</h2><p>Quote:<br>其實很討厭這作者的paper<br>效果都很好, 但是每次都是用matlab, 而且PSPNet作者還說training code因為公司問題不能發布, 傻眼<br><img src="/media/15172367977860.jpg" alt=""><br><a href="https://www.zhihu.com/question/53356671" target="_blank" rel="external">https://www.zhihu.com/question/53356671</a></p>
 <p>Paper<br><a href="https://arxiv.org/pdf/1704.08545.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1704.08545.pdf</a><br>Code<br><a href="https://github.com/hszhao/ICNet" target="_blank" rel="external">https://github.com/hszhao/ICNet</a><br><a href="https://github.com/aitorzip/Keras-ICNet" target="_blank" rel="external">https://github.com/aitorzip/Keras-ICNet</a><br><a href="https://github.com/hellochick/ICNet-tensorflow" target="_blank" rel="external">https://github.com/hellochick/ICNet-tensorflow</a></p>
 <p>Key Difference<br>之前的那些方法，如FCN、SegNet、UNet、RefineNet等，用高解析度圖片當input以後，強調Single scale或是Multi Scale在不同層之間的特徵融合，所有的Data需要在整個網絡中運行，因為高解析度的輸入而導致了昂貴的計算費用.而本文的方法，使用低解析度圖片作為主要輸入，採用高解析度圖片進行refine，保留細節的同時減少了開銷.</p>
 <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">We</span> propose an compressed-PSPNet-<span class="keyword">based </span>image cascade network (ICNet) that incorporates <span class="keyword">multi-resolution </span><span class="keyword">branches </span>under proper label guidance to <span class="keyword">address </span>this challenge.</div></pre></td></tr></table></figure>
 <p>ICNet是一個基於PSPNet的real-time semantic segmentation network，論文內對PSPNet做深入的分析，並且找出影響inference speed*的缺點。並且用搭配multi-resolution cascade combination。</p>
 <p>*註:inference speed是單指DeConv的階段。</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><img alt="" class="post-img b-lazy" href="/media/15172162210529.png" data-src="/media/15172162210529.png"></p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><img src="/media/15172162210529.png" alt=""></p>
 <p>在論文發表的時刻(2017 March), CityScapes上所有的Model表現基本上分成兩種類型, 一種是擁有高精準度但速度不行, 另一種是速度快但精准度不行。此論文在PSPNet的基礎上來增進速度，並找一個速度跟精準度的平衡點。</p>
 <p>論文貢獻:</p>
 <ul>
@@ -182,29 +243,29 @@
 <li>相對PSPNet來說, 可疑提高5倍速度並可以減少五倍RAM消耗</li>
 <li>低解析的速度+高解析的細節做cascade的整合</li>
 </ul>
-<h2 id="Speed-Analysis"><a href="#Speed-Analysis" class="headerlink" title="Speed Analysis"></a>Speed Analysis</h2><p>從PSPNet做解析<br><img alt="" class="post-img b-lazy" href="/media/15172351270369.png" data-src="/media/15172351270369.png"><br>藍色是1024x2048, 綠色是512x1024 (1/4大小)<br>從上圖可知</p>
+<h2 id="Speed-Analysis"><a href="#Speed-Analysis" class="headerlink" title="Speed Analysis"></a>Speed Analysis</h2><p>從PSPNet做解析<br><img src="/media/15172351270369.png" alt=""><br>藍色是1024x2048, 綠色是512x1024 (1/4大小)<br>從上圖可知</p>
 <ul>
 <li>圖越大速度越慢</li>
 <li>網路寬度越大速度越慢</li>
 <li>Kernel越多速度越慢, 以圖中例子來說stage4跟stage5在解析同樣的input時, inference speed差距十分驚人, 因為這部分的kernel number差距了一倍。</li>
 </ul>
-<h2 id="Intuitive-Speedup"><a href="#Intuitive-Speedup" class="headerlink" title="Intuitive Speedup"></a>Intuitive Speedup</h2><h4 id="加速方法-1-輸入向下採樣-Downsampling-Input"><a href="#加速方法-1-輸入向下採樣-Downsampling-Input" class="headerlink" title="加速方法 1: 輸入向下採樣(Downsampling Input)"></a>加速方法 1: 輸入向下採樣(Downsampling Input)</h4><p>在resolution只有原本的0.5跟0.25的狀況下雖然速度變快但精准度如上圖所示可以看出效果很差。<br><img alt="" class="post-img b-lazy" href="/media/15172353341447.png" data-src="/media/15172353341447.png"></p>
-<h4 id="加速方法-2-利用較小的feature-map來做inference-Downsampling-Feature"><a href="#加速方法-2-利用較小的feature-map來做inference-Downsampling-Feature" class="headerlink" title="加速方法 2 : 利用較小的feature map來做inference(Downsampling Feature)"></a>加速方法 2 : 利用較小的feature map來做inference(Downsampling Feature)</h4><p>FCN Downsampling到32倍, Deep Lab到 8倍, 而下方是用作者之前的PSPNet50, 縮小到了1:8, 1:16, 1:32整理的Table, 但可以看到最快的速度也只有132ms, 不太能符合real-time的標準。<br><img alt="" class="post-img b-lazy" href="/media/15172758974357.png" data-src="/media/15172758974357.png"></p>
-<h4 id="加速方法-3-減少模型複雜度-Model-Compression"><a href="#加速方法-3-減少模型複雜度-Model-Compression" class="headerlink" title="加速方法 3 : 減少模型複雜度(Model Compression)"></a>加速方法 3 : 減少模型複雜度(Model Compression)</h4><p>採用了其他篇paper(Pruning filters for efficient convnets)，作法就是減少Filter數量, 但一樣差強人意<br> <img alt="" class="post-img b-lazy" href="/media/15172822508697.jpg" data-src="/media/15172822508697.jpg"></p>
-<h4 id="FCN-Fully-Convolutional-Networks-for-Fully-Convolutional-Networks"><a href="#FCN-Fully-Convolutional-Networks-for-Fully-Convolutional-Networks" class="headerlink" title="FCN:Fully Convolutional Networks for Fully Convolutional Networks"></a>FCN:Fully Convolutional Networks for Fully Convolutional Networks</h4><p>這裡額外多講一下FCN，算是CNN做semantic segmentation的始祖，本質上的區別大概就是…FCN是沒有全連結層的CNN，好處是可以接受任意大小輸入。<br><img alt="" class="post-img b-lazy" href="/media/15172765679435.jpg" data-src="/media/15172765679435.jpg"></p>
+<h2 id="Intuitive-Speedup"><a href="#Intuitive-Speedup" class="headerlink" title="Intuitive Speedup"></a>Intuitive Speedup</h2><h4 id="加速方法-1-輸入向下採樣-Downsampling-Input"><a href="#加速方法-1-輸入向下採樣-Downsampling-Input" class="headerlink" title="加速方法 1: 輸入向下採樣(Downsampling Input)"></a>加速方法 1: 輸入向下採樣(Downsampling Input)</h4><p>在resolution只有原本的0.5跟0.25的狀況下雖然速度變快但精准度如上圖所示可以看出效果很差。<br><img src="/media/15172353341447.png" alt=""></p>
+<h4 id="加速方法-2-利用較小的feature-map來做inference-Downsampling-Feature"><a href="#加速方法-2-利用較小的feature-map來做inference-Downsampling-Feature" class="headerlink" title="加速方法 2 : 利用較小的feature map來做inference(Downsampling Feature)"></a>加速方法 2 : 利用較小的feature map來做inference(Downsampling Feature)</h4><p>FCN Downsampling到32倍, Deep Lab到 8倍, 而下方是用作者之前的PSPNet50, 縮小到了1:8, 1:16, 1:32整理的Table, 但可以看到最快的速度也只有132ms, 不太能符合real-time的標準。<br><img src="/media/15172758974357.png" alt=""></p>
+<h4 id="加速方法-3-減少模型複雜度-Model-Compression"><a href="#加速方法-3-減少模型複雜度-Model-Compression" class="headerlink" title="加速方法 3 : 減少模型複雜度(Model Compression)"></a>加速方法 3 : 減少模型複雜度(Model Compression)</h4><p>採用了其他篇paper(Pruning filters for efficient convnets)，作法就是減少Filter數量, 但一樣差強人意<br> <img src="/media/15172822508697.jpg" alt=""></p>
+<h4 id="FCN-Fully-Convolutional-Networks-for-Fully-Convolutional-Networks"><a href="#FCN-Fully-Convolutional-Networks-for-Fully-Convolutional-Networks" class="headerlink" title="FCN:Fully Convolutional Networks for Fully Convolutional Networks"></a>FCN:Fully Convolutional Networks for Fully Convolutional Networks</h4><p>這裡額外多講一下FCN，算是CNN做semantic segmentation的始祖，本質上的區別大概就是…FCN是沒有全連結層的CNN，好處是可以接受任意大小輸入。<br><img src="/media/15172765679435.jpg" alt=""></p>
 <p>CNN要如何轉FCN? 以此篇paper為例，input是一個224x224x3的圖，經過一系列Conv跟Downsampling之後是7x7x512。<br>AlexNet使用了兩個4096的全連接層，最後一個有1000個神經元的全連接層用於計算分類評分。我們可以將這3個全連接層轉化為Convolution層。</p>
 <p>任一全連結層轉化為Conv的方式以以下為例：</p>
 <h6 id="例如-K-4096-的全連接層，輸入是7x7x512，這個全連接層可以被等效地看做一個F-7-Padding-0-Stride-1-Filter-Number-4096-的Conv層。換句話說，就是將Filter-Size設置的和Input-Data-Size一致了。輸出將變成-1x1x4096，這個結果就和使用初始的那個全連接層一樣了。"><a href="#例如-K-4096-的全連接層，輸入是7x7x512，這個全連接層可以被等效地看做一個F-7-Padding-0-Stride-1-Filter-Number-4096-的Conv層。換句話說，就是將Filter-Size設置的和Input-Data-Size一致了。輸出將變成-1x1x4096，這個結果就和使用初始的那個全連接層一樣了。" class="headerlink" title="例如 K=4096 的全連接層，輸入是7x7x512，這個全連接層可以被等效地看做一個F=7,Padding=0,Stride=1,Filter Number=4096 的Conv層。換句話說，就是將Filter Size設置的和Input Data Size一致了。輸出將變成 1x1x4096，這個結果就和使用初始的那個全連接層一樣了。"></a>例如 K=4096 的全連接層，輸入是7x7x512，這個全連接層可以被等效地看做一個F=7,Padding=0,Stride=1,Filter Number=4096 的Conv層。換句話說，就是將Filter Size設置的和Input Data Size一致了。輸出將變成 1x1x4096，這個結果就和使用初始的那個全連接層一樣了。</h6><p>針對第一個連接區域是[7x7x512]的全連接層，令其Filter Size為F=7<strong>（Filter Size為7x7）</strong>，這樣輸出為[1x1x4096]。<br>針對第二個全連接層，令其Filter Size為F=1<strong>（Filter Size為1x1）</strong>，這樣輸出為[1x1x4096]。<br>對最後一個全連接層也做類似的，令其F=1<strong>（Filter Size為1x1）</strong>，最終輸出為[1x1x1000]</p>
-<h5 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1:"></a>Step 1:</h5><p>下圖是是原始CNN結構，CNN中輸入的圖像大小是統一固定resize成227x227大小的圖像，第一層pooling後為55x55，第二層pooling後為27x27，第五層pooling後的圖像大小為13*13。<br><img alt="" class="post-img b-lazy" href="/media/15172417899356.jpg" data-src="/media/15172417899356.jpg"></p>
-<h5 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2:"></a>Step 2:</h5><p>FCN輸入的圖像是假設是H*W，第一層pooling後變為原圖大小的1/4，第二層變為的1/8，第五層變為1/ 16，第八層變為1/32<br><img alt="" class="post-img b-lazy" href="/media/15172417973947.jpg" data-src="/media/15172417973947.jpg"></p>
+<h5 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1:"></a>Step 1:</h5><p>下圖是是原始CNN結構，CNN中輸入的圖像大小是統一固定resize成227x227大小的圖像，第一層pooling後為55x55，第二層pooling後為27x27，第五層pooling後的圖像大小為13*13。<br><img src="/media/15172417899356.jpg" alt=""></p>
+<h5 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2:"></a>Step 2:</h5><p>FCN輸入的圖像是假設是H*W，第一層pooling後變為原圖大小的1/4，第二層變為的1/8，第五層變為1/ 16，第八層變為1/32<br><img src="/media/15172417973947.jpg" alt=""></p>
 <h5 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3:"></a>Step 3:</h5><p>Convolution本質上就是DownSampling（下採樣）。經過多次Convolution和pooling以後，得到的圖像越來越小，解析度越來越低。其中圖像到H/32∗W/32 的時候圖片是最小的一層時，所產生圖叫做heatmap，heatmap就是我們最重要的高維特徵圖，得到高維特徵的heatmap之後就是最重要的一步也是最後的一步，就是對此heatmap進行UpSampling(Deconvolution)，把圖像進行放大到原圖像的大小。</p>
-<p><img alt="" class="post-img b-lazy" href="/media/15172418178955.jpg" data-src="/media/15172418178955.jpg"></p>
-<h5 id="Step-4"><a href="#Step-4" class="headerlink" title="Step 4:"></a>Step 4:</h5><p>最後的輸出是1000張heatmap經過UpSampling變為原圖大小的圖片。<br><img alt="" class="post-img b-lazy" href="/media/15172418074043.jpg" data-src="/media/15172418074043.jpg"></p>
-<h5 id="Upsampling"><a href="#Upsampling" class="headerlink" title="Upsampling"></a>Upsampling</h5><p><img alt="" class="post-img b-lazy" href="/media/20161024115403020.gif" data-src="/media/20161024115403020.gif"><br>其實這篇paper內雖然叫做Deconvolution，但之前CS231n課程內的大神也有說到，叫做Transposed Convolution比較適合。<br>舉個例子來說：</p>
+<p><img src="/media/15172418178955.jpg" alt=""></p>
+<h5 id="Step-4"><a href="#Step-4" class="headerlink" title="Step 4:"></a>Step 4:</h5><p>最後的輸出是1000張heatmap經過UpSampling變為原圖大小的圖片。<br><img src="/media/15172418074043.jpg" alt=""></p>
+<h5 id="Upsampling"><a href="#Upsampling" class="headerlink" title="Upsampling"></a>Upsampling</h5><p><img src="/media/20161024115403020.gif" alt=""><br>其實這篇paper內雖然叫做Deconvolution，但之前CS231n課程內的大神也有說到，叫做Transposed Convolution比較適合。<br>舉個例子來說：</p>
 <p>4x4的圖片輸入，Filter Size為3x3, 沒有Padding / Stride, 則輸出為2x2。</p>
-<p>輸入矩陣可展開為16維向量，記作<em>x</em><br>輸出矩陣可展開為4維向量，記作<em>y</em><br>Convolution運算可表示為<em>y</em>=<em>Cx</em><br>C其實就是如下的稀疏陣，而Forwarding就改成了的矩陣運算<br><img alt="" class="post-img b-lazy" href="/media/15172789125366.jpg" data-src="/media/15172789125366.jpg"><br>BackPropagation的話，假若已經從更深的網路得到了</p>
-<p><center><img alt="" class="post-img b-lazy" href="/media/15172790446136.jpg" data-src="/media/15172790446136.jpg"></center><br>那麼就可以導出以下公式:<br><img alt="" class="post-img b-lazy" href="/media/15172790496567.jpg" data-src="/media/15172790496567.jpg"><br>Deconvolution其實就是Forwarding時乘CT，而BackPropagation時乘(CT)T，即C。總結來說，Deconvolution等於Convolution在神經網絡結構的正向和反向傳播中的計算，做相反的計算。</p>
-<h5 id="Skip-Architecture"><a href="#Skip-Architecture" class="headerlink" title="Skip Architecture"></a>Skip Architecture</h5><p>由於縮小32倍結果超糟糕，所以FCN在前面的Pooling Layer進行Upsampling，然後結合這些結果來優化輸出。<br><img alt="" class="post-img b-lazy" href="/media/15172794424801.jpg" data-src="/media/15172794424801.jpg"></p>
+<p>輸入矩陣可展開為16維向量，記作<em>x</em><br>輸出矩陣可展開為4維向量，記作<em>y</em><br>Convolution運算可表示為<em>y</em>=<em>Cx</em><br>C其實就是如下的稀疏陣，而Forwarding就改成了的矩陣運算<br><img src="/media/15172789125366.jpg" alt=""><br>BackPropagation的話，假若已經從更深的網路得到了</p>
+<p><center><img src="/media/15172790446136.jpg" alt=""></center><br>那麼就可以導出以下公式:<br><img src="/media/15172790496567.jpg" alt=""><br>Deconvolution其實就是Forwarding時乘CT，而BackPropagation時乘(CT)T，即C。總結來說，Deconvolution等於Convolution在神經網絡結構的正向和反向傳播中的計算，做相反的計算。</p>
+<h5 id="Skip-Architecture"><a href="#Skip-Architecture" class="headerlink" title="Skip Architecture"></a>Skip Architecture</h5><p>由於縮小32倍結果超糟糕，所以FCN在前面的Pooling Layer進行Upsampling，然後結合這些結果來優化輸出。<br><img src="/media/15172794424801.jpg" alt=""></p>
 <h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>總結一下前面速度分析的結果，一系列的優化方法：</p>
 <ul>
 <li>Downsampling Input：降低輸入解析度能都大幅度的加速，但同時會讓預測非常模糊</li>
@@ -212,7 +273,7 @@
 <li>Model Compression：壓縮訓練好的模型，通過減輕模型達到加速效果，可惜實驗效果不佳</li>
 </ul>
 <p>針對以上的分析，發現，低解析度的圖片能夠有效降低運行時間，但是失去很多細節，而且邊界模糊；但是高解析度的計算時間難以忍受，ICNet總結了上述幾個問題，提出了一個綜合性的方法：使用低解析度加速捕捉語義，使用高解析度獲取細節，使用特徵融合(CFF)結合，同時使用guide label來監督，在限制的時間內獲得有效的結果。</p>
-<p><img alt="" class="post-img b-lazy" href="/media/15172827737568.png" data-src="/media/15172827737568.png"></p>
+<p><img src="/media/15172827737568.png" alt=""></p>
 <h4 id="Branch-Analysis"><a href="#Branch-Analysis" class="headerlink" title="Branch Analysis"></a>Branch Analysis</h4><p>圖中用了原尺寸,1/2,1/4當input，低解析度分枝超過50層Convolution，來提取更多的語義信息(inference 18 ms)，中解析度分枝有17層Convolution，但是由於權重共享，只有inference 6ms，而高解析度分枝是3 Convolution，有inference 9ms.</p>
 <table>
 <thead>
@@ -242,9 +303,9 @@
 </table>
 <p>對於每個分枝的輸出特徵，首先會上採樣2倍做輸出，在訓練的時候，會以Ground truth的1/16、1/8/、1/4來指導各個分枝的訓練，這樣的輔助訓練使得梯度優化更為平滑，便於訓練收斂，隨著每個分枝學習能力的增強，預測沒有被任何一個分枝主導。利用這樣的漸變的特徵融合和級聯引導結構可以產生合理的預測結果。</p>
 <p>ICNet使用低解析度完成語義分割，使用高解析度幫助細化結果。在結構上，產生的feature大大減少，同時仍然保持必要的細節。</p>
-<h4 id="Cascade-Label-Guidance"><a href="#Cascade-Label-Guidance" class="headerlink" title="Cascade Label Guidance"></a>Cascade Label Guidance</h4><h4 id="Branch-Output"><a href="#Branch-Output" class="headerlink" title="Branch Output"></a>Branch Output</h4><p>不同分枝的預測效果如下:<br><img alt="" class="post-img b-lazy" href="/media/15172838466580.png" data-src="/media/15172838466580.png"></p>
+<h4 id="Cascade-Label-Guidance"><a href="#Cascade-Label-Guidance" class="headerlink" title="Cascade Label Guidance"></a>Cascade Label Guidance</h4><h4 id="Branch-Output"><a href="#Branch-Output" class="headerlink" title="Branch Output"></a>Branch Output</h4><p>不同分枝的預測效果如下:<br><img src="/media/15172838466580.png" alt=""></p>
 <p>可以看到第三個分枝輸出效果無疑是最好的。在測試時，只保留第三分枝的結果。</p>
-<h2 id="Cascade-Feature-Fusion"><a href="#Cascade-Feature-Fusion" class="headerlink" title="Cascade Feature Fusion"></a>Cascade Feature Fusion</h2><p><img alt="" class="post-img b-lazy" href="/media/15172845289475.jpg" data-src="/media/15172845289475.jpg"><br>圖中的Loss是輔助Loss,F1是較低解析的分枝, F2是較高解析的分枝，</p>
+<h2 id="Cascade-Feature-Fusion"><a href="#Cascade-Feature-Fusion" class="headerlink" title="Cascade Feature Fusion"></a>Cascade Feature Fusion</h2><p><img src="/media/15172845289475.jpg" alt=""><br>圖中的Loss是輔助Loss,F1是較低解析的分枝, F2是較高解析的分枝，</p>
 <h2 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h2><p>L=λ1L1+λ2L2+λ3L3<br>Loss是對應到每個downsampled score maps使用cross-entropy loss</p>
 <p>依據CFF的設置，下分枝的lossL3的佔比λ3設置為1的話,則中分枝的lossL2的佔比λ2設置為0.4，上分枝的lossL1的佔比λ1設置為0.16</p>
 <h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><table>
@@ -290,326 +351,338 @@
 </tbody>
 </table>
 <h4 id="model-Compression"><a href="#model-Compression" class="headerlink" title="model Compression"></a>model Compression</h4><p>以PSPNet50為例，直接壓縮結果如下表Baseline：</p>
-<p><img alt="" class="post-img b-lazy" href="/media/15173712115585.png" data-src="/media/15173712115585.png"></p>
+<p><img src="/media/15173712115585.png" alt=""></p>
 <p>mIoU降低了，但時間170ms達不到realtime。這表明只有模型壓縮是達不到有良好分割結果的實時性能。對比ICNet，有類似的分割結果，但速度提升了5倍多。</p>
-<h4 id="Cascade-Structure-Experiment"><a href="#Cascade-Structure-Experiment" class="headerlink" title="Cascade Structure Experiment"></a>Cascade Structure Experiment</h4><p><img alt="" class="post-img b-lazy" href="/media/15173713226717.png" data-src="/media/15173713226717.png"><br>sub4代表只有低解析度輸入的結果，sub24代表前兩個分枝，sub124全部分枝。注意到全部分枝的速度很快，並且性能接近PSPNet了，且能保持30fps。而且Ram消耗也明顯減少了。</p>
-<h4 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h4><p><img alt="" class="post-img b-lazy" href="/media/15173715003744.jpg" data-src="/media/15173715003744.jpg"></p>
-<h4 id="Cityscape-Comparison"><a href="#Cityscape-Comparison" class="headerlink" title="Cityscape Comparison"></a>Cityscape Comparison</h4><p><img alt="" class="post-img b-lazy" href="/media/15173715775469.jpg" data-src="/media/15173715775469.jpg"></p>
+<h4 id="Cascade-Structure-Experiment"><a href="#Cascade-Structure-Experiment" class="headerlink" title="Cascade Structure Experiment"></a>Cascade Structure Experiment</h4><p><img src="/media/15173713226717.png" alt=""><br>sub4代表只有低解析度輸入的結果，sub24代表前兩個分枝，sub124全部分枝。注意到全部分枝的速度很快，並且性能接近PSPNet了，且能保持30fps。而且Ram消耗也明顯減少了。</p>
+<h4 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h4><p><img src="/media/15173715003744.jpg" alt=""></p>
+<h4 id="Cityscape-Comparison"><a href="#Cityscape-Comparison" class="headerlink" title="Cityscape Comparison"></a>Cityscape Comparison</h4><p><img src="/media/15173715775469.jpg" alt=""></p>
 
-                </article>
-                <ul class="tags-postTags">
-                    
-                    <li>
-                        <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/tags/Computer-Vision/" rel="tag"># Computer Vision</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/tags/Segmentation/" rel="tag"># Segmentation</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/tags/real-time/" rel="tag"># real-time</a>
-                    </li>
-                    
-                </ul>
-            </div>
         </div>
-    </div>
 
-    
-    <nav id="gobottom" class="pagination">
+        <blockquote class="post-copyright">
+    <div class="content">
         
-        <a class="prev-post" title="ICNET code Analysis" href="/2018/01/31/ICNET code Analysis/">
-            ← ICNET code Analysis
-        </a>
+<span class="post-time">
+    最後更新時間：<time datetime="2018-01-31T06:53:41.000Z" itemprop="dateUpdated">2018-01-31 14:53:41</time>
+</span><br>
+
+
         
-        <span class="prev-next-post">·</span>
+    </div>
+    <footer>
+        <a href="https://world4jason.github.io">
+            <img src="/img/avatar.jpg" alt="Jason Yeh">
+            Jason Yeh
+        </a>
+    </footer>
+</blockquote>
+
         
-        <a class="next-post" title="機器學習中的相似性度量" href="/2018/01/14/Distance/">
-            機器學習中的相似性度量 →
-        </a>
-        
-    </nav>
-
-    
-    <div class="inner">
-        <div id="comment"></div>
-    </div>
-    
-</div>
-
-<div class="toc-bar">
-    <div class="toc-btn-bar">
-        <a href="#site-main" class="toc-btn">
-            <svg viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M793.024 710.272a32 32 0 1 0 45.952-44.544l-310.304-320a32 32 0 0 0-46.4 0.48l-297.696 320a32 32 0 0 0 46.848 43.584l274.752-295.328 286.848 295.808z"/></svg>
-        </a>
-        <div class="toc-btn toc-switch">
-            <svg class="toc-open" viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M779.776 480h-387.2a32 32 0 0 0 0 64h387.2a32 32 0 0 0 0-64M779.776 672h-387.2a32 32 0 0 0 0 64h387.2a32 32 0 0 0 0-64M256 288a32 32 0 1 0 0 64 32 32 0 0 0 0-64M392.576 352h387.2a32 32 0 0 0 0-64h-387.2a32 32 0 0 0 0 64M256 480a32 32 0 1 0 0 64 32 32 0 0 0 0-64M256 672a32 32 0 1 0 0 64 32 32 0 0 0 0-64"/></svg>
-            <svg class="toc-close hide" viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M512 960c-247.039484 0-448-200.960516-448-448S264.960516 64 512 64 960 264.960516 960 512 759.039484 960 512 960zM512 128.287273c-211.584464 0-383.712727 172.128262-383.712727 383.712727 0 211.551781 172.128262 383.712727 383.712727 383.712727 211.551781 0 383.712727-172.159226 383.712727-383.712727C895.712727 300.415536 723.551781 128.287273 512 128.287273z"/><path d="M557.05545 513.376159l138.367639-136.864185c12.576374-12.416396 12.672705-32.671738 0.25631-45.248112s-32.704421-12.672705-45.248112-0.25631l-138.560301 137.024163-136.447897-136.864185c-12.512727-12.512727-32.735385-12.576374-45.248112-0.063647-12.512727 12.480043-12.54369 32.735385-0.063647 45.248112l136.255235 136.671523-137.376804 135.904314c-12.576374 12.447359-12.672705 32.671738-0.25631 45.248112 6.271845 6.335493 14.496116 9.504099 22.751351 9.504099 8.12794 0 16.25588-3.103239 22.496761-9.247789l137.567746-136.064292 138.687596 139.136568c6.240882 6.271845 14.432469 9.407768 22.65674 9.407768 8.191587 0 16.352211-3.135923 22.591372-9.34412 12.512727-12.480043 12.54369-32.704421 0.063647-45.248112L557.05545 513.376159z"/></svg>
-        </div>
-        <a href="#gobottom" class="toc-btn">
-            <svg viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M231.424 346.208a32 32 0 0 0-46.848 43.584l297.696 320a32 32 0 0 0 46.4 0.48l310.304-320a32 32 0 1 0-45.952-44.544l-286.848 295.808-274.752-295.36z"/></svg>
-        </a>
-    </div>
-    <div class="toc-main">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Recap"><span class="toc-text">Recap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Speed-Analysis"><span class="toc-text">Speed Analysis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intuitive-Speedup"><span class="toc-text">Intuitive Speedup</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#加速方法-1-輸入向下採樣-Downsampling-Input"><span class="toc-text">加速方法 1: 輸入向下採樣(Downsampling Input)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#加速方法-2-利用較小的feature-map來做inference-Downsampling-Feature"><span class="toc-text">加速方法 2 : 利用較小的feature map來做inference(Downsampling Feature)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#加速方法-3-減少模型複雜度-Model-Compression"><span class="toc-text">加速方法 3 : 減少模型複雜度(Model Compression)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FCN-Fully-Convolutional-Networks-for-Fully-Convolutional-Networks"><span class="toc-text">FCN:Fully Convolutional Networks for Fully Convolutional Networks</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#例如-K-4096-的全連接層，輸入是7x7x512，這個全連接層可以被等效地看做一個F-7-Padding-0-Stride-1-Filter-Number-4096-的Conv層。換句話說，就是將Filter-Size設置的和Input-Data-Size一致了。輸出將變成-1x1x4096，這個結果就和使用初始的那個全連接層一樣了。"><span class="toc-text">例如 K=4096 的全連接層，輸入是7x7x512，這個全連接層可以被等效地看做一個F=7,Padding=0,Stride=1,Filter Number=4096 的Conv層。換句話說，就是將Filter Size設置的和Input Data Size一致了。輸出將變成 1x1x4096，這個結果就和使用初始的那個全連接層一樣了。</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-1"><span class="toc-text">Step 1:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-2"><span class="toc-text">Step 2:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-3"><span class="toc-text">Step 3:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-4"><span class="toc-text">Step 4:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Upsampling"><span class="toc-text">Upsampling</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Skip-Architecture"><span class="toc-text">Skip Architecture</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#Architecture"><span class="toc-text">Architecture</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Branch-Analysis"><span class="toc-text">Branch Analysis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cascade-Label-Guidance"><span class="toc-text">Cascade Label Guidance</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Branch-Output"><span class="toc-text">Branch Output</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cascade-Feature-Fusion"><span class="toc-text">Cascade Feature Fusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Loss-Function"><span class="toc-text">Loss Function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experiment"><span class="toc-text">Experiment</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#model-Compression"><span class="toc-text">model Compression</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cascade-Structure-Experiment"><span class="toc-text">Cascade Structure Experiment</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Visualization"><span class="toc-text">Visualization</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cityscape-Comparison"><span class="toc-text">Cityscape Comparison</span></a></li></ol></li>
-    </div>
-</div>
 
 
-
-	</div>
-	
-
-
-<aside class="read-next outer">
-    <div class="inner">
-        <div class="read-next-feed">
+        <div class="post-footer">
             
-            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Segmentation/">Segmentation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/real-time/">real-time</a></li></ul>
 
-<article class="read-next-card" style="background-image: url(https://i.loli.net/2017/11/26/5a19c56faa29f.jpg)">
-  <header class="read-next-card-header">
-    <small class="read-next-card-header-sitetitle">&mdash; world4jason &mdash;</small>
-    <h3 class="read-next-card-header-title">最新文章</h3>
-  </header>
-  <div class="read-next-divider">
-    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
-      <path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/>
-    </svg>
-  </div>
-  <div class="read-next-card-content">
-    <ul>
-      
-      
-      
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
       <li>
-        <a href="/2018/06/04/Mask-RCNN-Code-Reading-DetectionLayer/">Mask RCNNCode Reading - Detection Layer</a>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2018/01/28/ICNET-for-Real-Time-Semantic-Segmentation-on-High-Resolution-Images/&title=《ICNET for Real-Time Semantic Segmentation on High-Resolution Images》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
       </li>
-      
-      
-      
       <li>
-        <a href="/2018/06/04/Batch-Normalization-and-Group-Normalization/">Batch Normalization and Group Normalization</a>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
       </li>
-      
-      
-      
       <li>
-        <a href="/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/">Mask RCNNCode Reading for ROI Align Layer</a>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2018/01/28/ICNET-for-Real-Time-Semantic-Segmentation-on-High-Resolution-Images/&title=《ICNET for Real-Time Semantic Segmentation on High-Resolution Images》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
       </li>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2018/01/28/ICNET-for-Real-Time-Semantic-Segmentation-on-High-Resolution-Images/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ICNET for Real-Time Semantic Segmentation on High-Resolution Images》 — world4jason&url=https://world4jason.github.io/2018/01/28/ICNET-for-Real-Time-Semantic-Segmentation-on-High-Resolution-Images/&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2018/01/28/ICNET-for-Real-Time-Semantic-Segmentation-on-High-Resolution-Images/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
     </ul>
-  </div>
-  <footer class="read-next-card-footer">
-    <a href="/archives">  MORE  → </a>
-  </footer>
-</article>
-
-            
-            
-            
-
-<article class="read-next-card" style="background-image: url(https://i.loli.net/2017/11/26/5a19c56faa29f.jpg)">
-    <header class="read-next-card-header tagcloud-card">
-        <h3 class="read-next-card-header-title">分類</h3>
-    </header>
-    <div class="read-next-card-content">
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Code/">Code</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Deep-Learning/">Deep Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Detection/">Detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Github/">Github</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MOT/">MOT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Model-Architecture/">Model Architecture</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Model-Architecture/Classification/">Classification</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Optimize/">Optimize</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Re-ID/">Re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Segmentation/">Segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Segmentation/Detection/">Detection</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Series/">Series</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Series/Segmentation/">Segmentation</a></li></ul></li></ul>
-    </div>
-</article>
-
-
-            
-            
-            
-
-<article class="read-next-card" style="background-image: url(https://i.loli.net/2017/11/26/5a19c56faa29f.jpg)">
-	<header class="read-next-card-header tagcloud-card">
-		<h3 class="read-next-card-header-title">標籤雲</h3>
-	</header>
-	<div class="read-next-card-content-ext">
-		<a href="/tags/C/" style="font-size: 14px;">C++</a> <a href="/tags/CNN/" style="font-size: 22.33px;">CNN</a> <a href="/tags/CPP/" style="font-size: 14px;">CPP</a> <a href="/tags/Classification/" style="font-size: 15.67px;">Classification</a> <a href="/tags/Computer-Vision/" style="font-size: 19px;">Computer Vision</a> <a href="/tags/Convolution/" style="font-size: 17.33px;">Convolution</a> <a href="/tags/Courses/" style="font-size: 14px;">Courses</a> <a href="/tags/Deep-Learning/" style="font-size: 24px;">Deep Learning</a> <a href="/tags/GAN/" style="font-size: 19px;">GAN</a> <a href="/tags/Generation/" style="font-size: 19px;">Generation</a> <a href="/tags/Generative-Model/" style="font-size: 19px;">Generative Model</a> <a href="/tags/MOT/" style="font-size: 15.67px;">MOT</a> <a href="/tags/Model-Architecture/" style="font-size: 17.33px;">Model Architecture</a> <a href="/tags/Model-Compression/" style="font-size: 14px;">Model Compression</a> <a href="/tags/Object-Detection/" style="font-size: 17.33px;">Object Detection</a> <a href="/tags/Paper-List/" style="font-size: 14px;">Paper List</a> <a href="/tags/Pose-Estimation/" style="font-size: 15.67px;">Pose Estimation</a> <a href="/tags/R-CNN/" style="font-size: 20.67px;">R-CNN</a> <a href="/tags/Segmentation/" style="font-size: 19px;">Segmentation</a> <a href="/tags/Self-Study/" style="font-size: 15.67px;">Self-Study</a> <a href="/tags/Style-Transfer/" style="font-size: 14px;">Style Transfer</a> <a href="/tags/Summary/" style="font-size: 14px;">Summary</a> <a href="/tags/Tensorflow/" style="font-size: 14px;">Tensorflow</a> <a href="/tags/Tracking/" style="font-size: 17.33px;">Tracking</a> <a href="/tags/code/" style="font-size: 17.33px;">code</a> <a href="/tags/image-retrieval/" style="font-size: 14px;">image retrieval</a> <a href="/tags/python/" style="font-size: 14px;">python</a> <a href="/tags/real-time/" style="font-size: 15.67px;">real-time</a> <a href="/tags/survey/" style="font-size: 14px;">survey</a>
-	</div>
-</article>
-
-            
-        </div>
-    </div>
-</aside>
-
-	
+ </div>
 
 
 
-
-<div id="search" class="search-overlay">
-    <div class="search-form">
-        
-        <img class="search-overlay-logo" src="https://i.loli.net/2017/11/26/5a19c0b50432e.png" alt="world4jason">
-        
-        <input id="local-search-input" class="search-input" type="text" name="search" placeholder="搜尋 ...">
-        <a class="search-overlay-close" href="#"></a>
-    </div>
-    <div id="local-search-result"></div>
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
 </div>
 
-<footer class="site-footer outer">
-	<div class="site-footer-content inner">
-		<div class="copyright">
-			<a href="/" title="world4jason">world4jason</a>
-			&copy; 2019
-		</div>
-		<nav class="site-footer-nav">
-			
-			<a href="https://hexo.io" title="Hexo" target="_blank" rel="external noopener">Hexo</a>
-			<a href="https://github.com/xzhih/hexo-theme-casper" title="Casper" target="_blank" rel="external noopener">Casper</a>
-		</nav>
-	</div>
-</footer>
-	
 
 
-<script>if(window.navigator && navigator.serviceWorker) {navigator.serviceWorker.getRegistrations().then(function(registrations) {for(let registration of registrations) {registration.unregister()}})}</script>
+        </div>
+    </div>
 
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/01/31/ICNET code Analysis/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">ICNET code Analysis</h4>
+      </a>
+    </div>
+  
 
-<script async src="/js/allinone.min.js" id="scriptLoad"></script>
-
-
-
-
-
-
-<script>
-    document.getElementById('scriptLoad').addEventListener('load', function () {
-        var bLazy = new Blazy()
-    })
-</script>
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/01/14/Distance/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">機器學習中的相似性度量</h4>
+      </a>
+    </div>
+  
+</nav>
 
 
 
+    
 
 
-
-
-<script src="/js/lightgallery.min.js"></script>
-<link rel="stylesheet" href="/css/lightgallery.min.css">
-<script>
-    lightGallery(document.getElementById('lightgallery'), {
-        selector: '.post-img'
-    });
-</script>
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
 
 
 
 
-<script async src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script async src="https://unpkg.com/valine@1.3.4/dist/Valine.min.js"></script>
-<script>
-    window.addEventListener("load", function() {
-        new Valine({
-            el: '#comment' ,
-            verify: false,
-            notify: false,
-            appId: '',
-            appKey: '',
-            placeholder: 'Just go go',
-            pageSize: 10,
-            avatar: 'mm',
-            visitor: true,
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: '',
+            repo: '',
+            oauth: {
+                client_id: '',
+                client_secret: '',
+            },
         })
-    });
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        總訪客數：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        總訪問量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Jason Yeh &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2018/01/28/ICNET-for-Real-Time-Semantic-Segmentation-on-High-Resolution-Images/&title=《ICNET for Real-Time Semantic Segmentation on High-Resolution Images》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2018/01/28/ICNET-for-Real-Time-Semantic-Segmentation-on-High-Resolution-Images/&title=《ICNET for Real-Time Semantic Segmentation on High-Resolution Images》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2018/01/28/ICNET-for-Real-Time-Semantic-Segmentation-on-High-Resolution-Images/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ICNET for Real-Time Semantic Segmentation on High-Resolution Images》 — world4jason&url=https://world4jason.github.io/2018/01/28/ICNET-for-Real-Time-Semantic-Segmentation-on-High-Resolution-Images/&via=https://world4jason.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2018/01/28/ICNET-for-Real-Time-Semantic-Segmentation-on-High-Resolution-Images/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://world4jason.github.io/2018/01/28/ICNET-for-Real-Time-Semantic-Segmentation-on-High-Resolution-Images/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
 </script>
 
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
 <script>
-    document.getElementById('scriptLoad').addEventListener('load', function(){
-        searchFunc("/")
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '持續搬磚中';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又回來了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
     });
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
 
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
 
-
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 
