@@ -218,7 +218,13 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_var_kwargs</span><span class="params">(farg, **kwargs)</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"formal arg:"</span>, farg</div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> kwargs:</div><div class="line">        <span class="keyword">print</span> <span class="string">"another keyword arg: %s: %s"</span> % (key, kwargs[key])</div><div class="line"></div><div class="line">test_var_kwargs(farg=<span class="number">1</span>, myarg2=<span class="string">"two"</span>, myarg3=<span class="number">3</span>)</div></pre></td></tr></table></figure>
 <p>结果</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">formal arg: <span class="number">1</span></div><div class="line">another keyword arg: myarg2: two</div><div class="line">another keyword arg: myarg3: <span class="number">3</span></div></pre></td></tr></table></figure>
-<p><img src="/media/15141999823321.png" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15141999823321.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <h3 id="順序問題"><a href="#順序問題" class="headerlink" title="順序問題"></a>順序問題</h3><p>如果function定義時如上圖先放了tuple才是dictionary，呼叫時參數先放dictionary再放tuple會跳error。</p>
 
         </div>

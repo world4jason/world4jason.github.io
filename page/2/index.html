@@ -218,54 +218,6 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-Model-Compression"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-04-07 21:05:01" datetime="2018-04-07T13:05:01.000Z"  itemprop="datePublished">2018-04-07</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Model-Architecture/">Model Architecture</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/04/07/Model-Compression/">CNN模型壓縮系列</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        網絡修剪網絡修剪，採用當網絡權重非常小的時候（小於某個設定的閾值），把它置0，就像二值網絡一般;然後屏蔽被設置為0的權重更新，繼續進行訓練;以此循環，每隔訓練幾輪過後，繼續進行修剪。例如Deep-Compression這篇paper
-權重共享對於每一層的參數，我們進行k-均值聚類，進行量化，對於歸屬於同一個聚類中心的權重，採用共享一個權重，進行重新訓練。需要注意的是這個權重共享並不是層之間的...
-    
-
-        <a href="/2018/04/07/Model-Compression/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Convolution/">Convolution</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Model-Architecture/">Model Architecture</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Model-Compression/">Model Compression</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
             <article id="post-VGG-VERY-DEEP-CONVOLUTIONAL-NETWORK-SFOR-LARGE-SCALE-IMAGE-RECOGNITION"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -315,13 +267,15 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-Light Head R-CNN"
+            <article id="post-Model-Compression"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2018-03-16 13:53:47" datetime="2018-03-16T05:53:47.000Z"  itemprop="datePublished">2018-03-16</time>
+        <time class="post-time" title="2018-04-07 21:05:01" datetime="2018-04-07T13:05:01.000Z"  itemprop="datePublished">2018-04-07</time>
 
         
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Model-Architecture/">Model Architecture</a></li></ul>
+
 
 
     </div>
@@ -331,7 +285,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/03/16/Light Head R-CNN/">Light Head R-CNN</a>
+      <a class="post-title-link" href="/2018/04/07/Model-Compression/">CNN模型壓縮系列</a>
     </h3>
   
 
@@ -341,13 +295,19 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        旷视face++研究院解读Light-Head R-CNN
-
+        網絡修剪網絡修剪，採用當網絡權重非常小的時候（小於某個設定的閾值），把它置0，就像二值網絡一般;然後屏蔽被設置為0的權重更新，繼續進行訓練;以此循環，每隔訓練幾輪過後，繼續進行修剪。例如Deep-Compression這篇paper
+權重共享對於每一層的參數，我們進行k-均值聚類，進行量化，對於歸屬於同一個聚類中心的權重，採用共享一個權重，進行重新訓練。需要注意的是這個權重共享並不是層之間的...
     
 
-        <a href="/2018/03/16/Light Head R-CNN/" class="post-more waves-effect waves-button">
+        <a href="/2018/04/07/Model-Compression/" class="post-more waves-effect waves-button">
             閱讀全文…
         </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Convolution/">Convolution</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Model-Architecture/">Model Architecture</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Model-Compression/">Model Compression</a></li></ul>
+
     </div>
     
 </article>
@@ -397,6 +357,46 @@
         </li>
     
         <li class="post-list-item fade">
+            <article id="post-Light Head R-CNN"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-03-16 13:53:47" datetime="2018-03-16T05:53:47.000Z"  itemprop="datePublished">2018-03-16</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/03/16/Light Head R-CNN/">Light Head R-CNN</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        旷视face++研究院解读Light-Head R-CNN
+
+    
+
+        <a href="/2018/03/16/Light Head R-CNN/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-Tensorflow-Function-Usage-And-Example"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -429,61 +429,6 @@
         <a href="/2018/03/16/Tensorflow-Function-Usage-And-Example/" class="post-more waves-effect waves-button">
             閱讀全文…
         </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Mask R-CNN"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-03-10 02:13:59" datetime="2018-03-09T18:13:59.000Z"  itemprop="datePublished">2018-03-10</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Segmentation/">Segmentation</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Segmentation/Detection/">Detection</a></li></ul></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/03/10/Mask R-CNN/">Mask R-CNN</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        Overview
-
-ConceptMask R-CNN 利用了相當簡潔與彈性的方法進行實例分割, 主要跟 Faster R-CNN 不同的地方在於原架構有 2 個分支 
-
-Classification branch 
-Bounding box branch 
-
-而 Mask R-CNN 的方法則是多加了另一個分支  — Mask branch。
-Mask branchLoss functio...
-    
-
-        <a href="/2018/03/10/Mask R-CNN/" class="post-more waves-effect waves-button">
-            閱讀全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pose-Estimation/">Pose Estimation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R-CNN/">R-CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Segmentation/">Segmentation</a></li></ul>
-
     </div>
     
 </article>
@@ -528,6 +473,65 @@ import 需要的東西 tf ver&gt;1.3 &amp;&amp; keras ver&gt;2.0.8
     
 
         <a href="/2018/03/10/Mask R-CNN Code Reading/" class="post-more waves-effect waves-button">
+            閱讀全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pose-Estimation/">Pose Estimation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R-CNN/">R-CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Segmentation/">Segmentation</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Mask R-CNN"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-03-10 02:13:59" datetime="2018-03-09T18:13:59.000Z"  itemprop="datePublished">2018-03-10</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Segmentation/">Segmentation</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Segmentation/Detection/">Detection</a></li></ul></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/03/10/Mask R-CNN/">Mask R-CNN</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Overview
+                
+                    
+                    
+                
+                
+            
+
+                
+                    
+                    
+                
+     ...
+    
+
+        <a href="/2018/03/10/Mask R-CNN/" class="post-more waves-effect waves-button">
             閱讀全文…
         </a>
     </div>

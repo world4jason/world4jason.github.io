@@ -20,13 +20,13 @@
     
     
     <meta name="keywords" content="Deep Learning,R-CNN,CNN,Object Detection">
-    <meta name="description" content="Object Detection with Convolution Neural Network SeriesOutline  檢測任務? R-CNN Fast R-CNN Faster R-CNN SSD YOLO  檢測任務 R-CNN  步驟   候選區域生成： 一張圖像生成1K~2K個候選區域（採用Selective Search 方法）  特徵提取： 對每個候選區域，使用深度卷積網絡提取">
+    <meta name="description" content="Object Detection with Convolution Neural Network SeriesOutline  檢測任務? R-CNN Fast R-CNN Faster R-CNN SSD YOLO  檢測任務">
 <meta name="keywords" content="Deep Learning,R-CNN,CNN,Object Detection">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Object Detection with Convolution Neural Network Series">
 <meta property="og:url" content="https://world4jason.github.io/2017/11/06/Object-Detection-with-Convolution-Neural-Network/index.html">
 <meta property="og:site_name" content="world4jason">
-<meta property="og:description" content="Object Detection with Convolution Neural Network SeriesOutline  檢測任務? R-CNN Fast R-CNN Faster R-CNN SSD YOLO  檢測任務 R-CNN  步驟   候選區域生成： 一張圖像生成1K~2K個候選區域（採用Selective Search 方法）  特徵提取： 對每個候選區域，使用深度卷積網絡提取">
+<meta property="og:description" content="Object Detection with Convolution Neural Network SeriesOutline  檢測任務? R-CNN Fast R-CNN Faster R-CNN SSD YOLO  檢測任務">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https://world4jason.github.io/media/15100388874028.png">
 <meta property="og:image" content="https://world4jason.github.io/media/15099707654238.jpg">
@@ -37,7 +37,7 @@
 <meta property="og:updated_time" content="2017-12-28T06:55:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Object Detection with Convolution Neural Network Series">
-<meta name="twitter:description" content="Object Detection with Convolution Neural Network SeriesOutline  檢測任務? R-CNN Fast R-CNN Faster R-CNN SSD YOLO  檢測任務 R-CNN  步驟   候選區域生成： 一張圖像生成1K~2K個候選區域（採用Selective Search 方法）  特徵提取： 對每個候選區域，使用深度卷積網絡提取">
+<meta name="twitter:description" content="Object Detection with Convolution Neural Network SeriesOutline  檢測任務? R-CNN Fast R-CNN Faster R-CNN SSD YOLO  檢測任務">
 <meta name="twitter:image" content="https://world4jason.github.io/media/15100388874028.png">
     
         <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
@@ -221,8 +221,20 @@
 <li>SSD</li>
 <li>YOLO</li>
 </ul>
-<h2 id="檢測任務"><a href="#檢測任務" class="headerlink" title="檢測任務"></a>檢測任務</h2><p><img src="/media/15100388874028.png" alt=""></p>
-<h2 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h2><center><img src="/media/15099707654238.jpg" alt=""></center>
+<h2 id="檢測任務"><a href="#檢測任務" class="headerlink" title="檢測任務"></a>檢測任務</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15100388874028.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h2><center><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15099707654238.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></center>
 
 <p>步驟 </p>
 <ol>
@@ -232,11 +244,35 @@
 <li>位置精修： 使用回歸器精細修正候選框位置 </li>
 <li>用Non-Maximum Selection 合併後選框</li>
 </ol>
-<h2 id="Fast-R-CNN"><a href="#Fast-R-CNN" class="headerlink" title="Fast R-CNN"></a>Fast R-CNN</h2><center><img src="/media/15100371122830.jpg" alt=""></center><br>步驟<br>1. 候選區域生成： 一張圖像生成1K~2K個候選區域（採用Selective Search 方法）<br>2. 特徵提取： 該張圖片，使用深度卷積網絡提取特徵（CNN）<br>3. ROI Pooling：<br>4. 類別判斷： 特徵送入每一類的SVM 分類器，判別是否屬於該類<br>5. 位置精修： 使用回歸器精細修正候選框位置<br>6. 用Non-Maximum Selection 合併後選框<br><br>## Faster R-CNN<br><center><img src="/media/15100371249624.jpg" alt=""></center>
+<h2 id="Fast-R-CNN"><a href="#Fast-R-CNN" class="headerlink" title="Fast R-CNN"></a>Fast R-CNN</h2><center><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15100371122830.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></center><br>步驟<br>1. 候選區域生成： 一張圖像生成1K~2K個候選區域（採用Selective Search 方法）<br>2. 特徵提取： 該張圖片，使用深度卷積網絡提取特徵（CNN）<br>3. ROI Pooling：<br>4. 類別判斷： 特徵送入每一類的SVM 分類器，判別是否屬於該類<br>5. 位置精修： 使用回歸器精細修正候選框位置<br>6. 用Non-Maximum Selection 合併後選框<br><br>## Faster R-CNN<br><center><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15100371249624.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></center>
 
-<h2 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h2><center><img src="/media/15100374296902.jpg" alt=""><br></center>
+<h2 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h2><center><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15100374296902.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br></center>
 
-<h2 id="YOLO"><a href="#YOLO" class="headerlink" title="YOLO"></a>YOLO</h2><p><img src="/media/15144441218022.jpg" alt=""></p>
+<h2 id="YOLO"><a href="#YOLO" class="headerlink" title="YOLO"></a>YOLO</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15144441218022.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>Reference:</p>
 <ol>
 <li><a href="http://zh.gluon.ai/" target="_blank" rel="external">http://zh.gluon.ai/</a></li>

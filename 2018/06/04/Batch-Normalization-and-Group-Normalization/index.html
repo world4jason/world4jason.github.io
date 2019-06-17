@@ -215,12 +215,49 @@
 <p>而且在訓練的過程中，經過一層層的網絡運算，中間層的學習到的數據分佈也是發生著挺大的變化，這就要求我們必須使用一個很小的學習率和對參數很好的初始化，但是這麼做會讓訓練過程變得慢而且複雜m在論文中，這種現象被稱為Internal Covariate Shift。為瞭解決這個問題，作者提出了Batch Normalization。</p>
 <p>##Batch Normalization原理<br>為了降低Internal Covariate Shift帶來的影響，其實只要進行歸一化就可以的。比如，我們把network每一層的輸出都整為方差為1，均值為0的正態分佈，這樣看起來是可以解決問題，但是想想，network好不容易學習到的數據特徵，被你這樣一弄又回到瞭解放前了，相當於沒有學習了。所以這樣是不行的，大神想到了一個大招：變換重構，引入了兩個可以學習的參數γ、β，當然，這也是算法的靈魂所在：</p>
 <p>具體的算法流程如下：</p>
-<p><img src="/media/15280580743313.jpg" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15280580743313.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p> Batch Normalization 是對一個batch來進行normalization的，例如我們的輸入的一個batch為：β=x_(1…m)，輸出為：y_i=BN(x)。具體的完整流程如下：</p>
 <p>1.求出該batch數據x的均值</p>
-<p><img src="/media/15280580994379.jpg" alt=""><br>2.求出該batch數據的方差<br><img src="/media/15280581211439.jpg" alt=""><br>3.對輸入數據x做歸一化處理，得到：<br><img src="/media/15280581373757.jpg" alt=""></p>
-<p>4.最後加入可訓練的兩個參數：縮放變量γ和平移變量β，計算歸一化後的值：<br><img src="/media/15280581605011.jpg" alt=""><br>加入了這兩個參數之後，網絡就可以更加容易的學習到更多的東西了。先想想極端的情況，當縮放變量γ和平移變量β分別等於batch數據的方差和均值時，最後得到的yi就和原來的xi一模一樣了，相當於batch normalization沒有起作用了。這樣就保證了每一次數據經過歸一化後還保留的有學習來的特徵，同時又能完成歸一化這個操作，加速訓練。</p>
-<p>引入參數的更新過程，也就是微積分的Chain Rule：<br><img src="/media/15280581942881.jpg" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15280580994379.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>2.求出該batch數據的方差<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15280581211439.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>3.對輸入數據x做歸一化處理，得到：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15280581373757.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>4.最後加入可訓練的兩個參數：縮放變量γ和平移變量β，計算歸一化後的值：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15280581605011.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>加入了這兩個參數之後，網絡就可以更加容易的學習到更多的東西了。先想想極端的情況，當縮放變量γ和平移變量β分別等於batch數據的方差和均值時，最後得到的yi就和原來的xi一模一樣了，相當於batch normalization沒有起作用了。這樣就保證了每一次數據經過歸一化後還保留的有學習來的特徵，同時又能完成歸一化這個操作，加速訓練。</p>
+<p>引入參數的更新過程，也就是微積分的Chain Rule：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15280581942881.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <p>Example</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">Batchnorm_simple_for_train</span><span class="params">(x, gamma,beta, bn_param)</span>:</span><span class="string">"""  </span></div><div class="line">param:x   : 輸入數據，設shape(B,L)  </div><div class="line">param:gama : 縮放因子  γ  </div><div class="line">param:beta : 平移因子  β  </div><div class="line">param:bn_param   : batchnorm所需要的一些參數  </div><div class="line">   eps      : 接近0的數，防止分母出現0  </div><div class="line">   momentum : 動量參數，一般為0.9，0.99， 0.999  </div><div class="line">   running_mean ：滑動平均的方式計算新的均值，訓練時計算，為測試數據做準備  </div><div class="line">   running_var  : 滑動平均的方式計算新的方差，訓練時計算，為測試數據做準備  </div><div class="line">"""  </div><div class="line">   running_mean = bn_param[<span class="string">'running_mean'</span>] <span class="comment">#shape = [B]  </span></div><div class="line">   running_var = bn_param[<span class="string">'running_var'</span>]   <span class="comment">#shape = [B]  </span></div><div class="line">   results = <span class="number">0.</span> <span class="comment"># 建立一個新的變量  </span></div><div class="line">   x_mean=x.mean(axis=<span class="number">0</span>)  <span class="comment"># 計算x的均值  </span></div><div class="line">   x_var=x.var(axis=<span class="number">0</span>)    <span class="comment"># 計算方差  </span></div><div class="line">   x_normalized=(x-x_mean)/np.sqrt(x_var+eps)       <span class="comment"># 歸一化  </span></div><div class="line">   results = gamma * x_normalized + beta            <span class="comment"># 縮放平移  </span></div><div class="line">   running_mean = momentum * running_mean + (<span class="number">1</span> - momentum) * x_mean  </div><div class="line">   running_var = momentum * running_var + (<span class="number">1</span> - momentum) * x_var    <span class="comment">#記錄新的值  </span></div><div class="line">   bn_param[<span class="string">'running_mean'</span>] = running_mean  </div><div class="line">   bn_param[<span class="string">'running_var'</span>] = running_var     </div><div class="line">   <span class="keyword">return</span> results , bn_param</div></pre></td></tr></table></figure>
 <p>這份code首先計算均值和方差，然後歸一化，然後縮放和平移就結束了！但是這是在訓練中完成的任務，每次訓練給一個批量，然後計算批量的均值方差，但是在測試的時候可不是這樣，測試的時候每次只輸入一張圖片，這怎麼計算批量的均值和方差，於是，就有了代碼中下面兩行，在訓練的時候實現計算好mean var測試的時候直接拿來用就可以了，不用計算均值和方差。</p>
@@ -231,7 +268,13 @@
 <p>Batch Normalization 的TensorFlow 源碼解讀，來自知乎：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">batch_norm_layer</span><span class="params">(x, train_phase,scope_bn)</span>:</span>  </div><div class="line">   <span class="keyword">with</span> tf.variable_scope(scope_bn):  </div><div class="line">        <span class="comment"># 新建兩個變量，平移、縮放因子  </span></div><div class="line">       beta = tf.Variable(tf.constant(<span class="number">0.0</span>, shape=[x.shape[<span class="number">-1</span>]]), name=<span class="string">'beta'</span>,trainable=<span class="keyword">True</span>)  </div><div class="line">       gamma = tf.Variable(tf.constant(<span class="number">1.0</span>, shape=[x.shape[<span class="number">-1</span>]]), name=<span class="string">'gamma'</span>,trainable=<span class="keyword">True</span>)  </div><div class="line">       <span class="comment"># 計算此次批量的均值和方差  </span></div><div class="line">       axises = np.arange(len(x.shape) - <span class="number">1</span>)  </div><div class="line">       batch_mean, batch_var = tf.nn.moments(x, axises, name=<span class="string">'moments'</span>)  </div><div class="line">       <span class="comment"># 滑動平均做衰減  </span></div><div class="line">       ema = tf.train.ExponentialMovingAverage(decay=<span class="number">0.5</span>)  </div><div class="line">       <span class="function"><span class="keyword">def</span> <span class="title">mean_var_with_update</span><span class="params">()</span>:</span>  </div><div class="line">           ema_apply_op = ema.apply([batch_mean, batch_var])  </div><div class="line">           <span class="keyword">with</span> tf.control_dependencies([ema_apply_op]):  </div><div class="line">                <span class="keyword">return</span> tf.identity(batch_mean),tf.identity(batch_var)  </div><div class="line">       <span class="comment"># train_phase 訓練還是測試的flag  </span></div><div class="line">       <span class="comment"># 訓練階段計算runing_mean和runing_var，使用mean_var_with_update（）函數  </span></div><div class="line">       <span class="comment"># 測試的時候直接把之前計算的拿去用 ema.average(batch_mean)  </span></div><div class="line">       mean, var = tf.cond(train_phase, mean_var_with_update,  </div><div class="line">                            <span class="keyword">lambda</span>:(ema.average(batch_mean), ema.average(batch_var)))  </div><div class="line">       normed = tf.nn.batch_normalization(x, mean, var, beta, gamma, <span class="number">1e-3</span>)  </div><div class="line">   <span class="keyword">return</span> normed</div></pre></td></tr></table></figure>
 <p>至於此行代碼tf.nn.batch_normalization()就是簡單的計算batchnorm過程，這個函數所實現的功能就如此公式：</p>
-<p><img src="/media/15280583334189.jpg" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15280583334189.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">batch_normalization</span><span class="params">(x, mean, variance, offset,scale, variance_epsilon, name=None)</span>:</span>  </div><div class="line">   <span class="keyword">with</span> ops.name_scope(name, <span class="string">"batchnorm"</span>, [x, mean, variance,scale, offset]):  </div><div class="line">       inv = math_ops.rsqrt(variance + variance_epsilon)  </div><div class="line">    <span class="keyword">if</span> scale <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:  </div><div class="line">           inv *= scale        </div><div class="line">       <span class="keyword">return</span> x * inv + (offset - mean * inv  </div><div class="line">                       <span class="keyword">if</span> offset <span class="keyword">is</span> <span class="keyword">not</span> Noneelse -mean * inv)</div></pre></td></tr></table></figure>
 <p>##Batch Normalization的帶來的優勢：</p>
 <p>沒有它之前，需要小心的調整學習率和權重初始化，但是有了BN可以放心的使用大學習率，但是使用了BN，就不用小心的調參了，較大的學習率極大的提高了學習速度，</p>
@@ -239,9 +282,23 @@
 <p>另外，個人認為，batchnorm降低了數據之間的絕對差異，有一個去相關的性質，更多的考慮相對差異性，因此在分類任務上具有更好的效果</p>
 <p>#Group Normalization<br>group normalization是2018年3月份何愷明大神的又一力作，優化了batch normalization在比較小的batch size 情況下表現不太好的劣勢。批量維度進行歸一化會帶來一些問題——批量統計估算不準確導致批量變小時，BN 的誤差會迅速增加。在訓練大型網絡和將特徵轉移到計算機視覺任務中（包括檢測、分割和視頻），內存消耗限制了只能使用小批量的BN。尤其是在我的破電腦裡面，batch的大小一般都是使用的1，相當於不存在BN。</p>
 <p>下圖是論文中給出BN和GN的對比：</p>
-<p><img src="/media/15280584129198.jpg" alt=""><br>  可以看出在bath size比較小的情況下，BN的性能十分地差，而GN的性能基本上沒有太大改變。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15280584129198.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>  可以看出在bath size比較小的情況下，BN的性能十分地差，而GN的性能基本上沒有太大改變。</p>
 <p>##Group Normalization 原理：<br>先給出他目前出現比較多的幾種normalization的示意圖：</p>
-<p><img src="/media/15280584563207.jpg" alt=""><br>BatchNorm：batch方向做歸一化，算N<em>H</em>W的均值</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15280584563207.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>BatchNorm：batch方向做歸一化，算N<em>H</em>W的均值</p>
 <p>LayerNorm：channel方向做歸一化，算C<em>H</em>W的均值</p>
 <p>InstanceNorm：一個channel內做歸一化，算H*W的均值</p>
 <p>GroupNorm：將channel方向分group，然後每個group內做歸一化，算(C//G)<em>H</em>W的均值</p>

@@ -20,18 +20,18 @@
     
     
     <meta name="keywords" content="">
-    <meta name="description" content="Mask_RCNN V2.1版本 檔案：Model.py  Class MaskRCNN():這部分是在程式碼主體所使用到RPN的部分, 其中傳入參數預設為此, for loop那邊可以看到有幾個從fpn的output就會有幾個rpn RPN_ANCHOR_RATIOS = [0.5, 1, 2] RPN_ANCHOR_STRIDE = 1 123456789101112131415161718#">
+    <meta name="description" content="Mask_RCNN V2.1版本 檔案：Model.py                                                                                                            Class MaskRCNN():這部分是在程式碼主體所使用到RPN的部分, 其中傳入參數預設為此, for loop那邊可以看">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mask RCNN Code Reading for RPN">
 <meta property="og:url" content="https://world4jason.github.io/2018/05/30/Mask-RCNN-Code-Reading-RPN/index.html">
 <meta property="og:site_name" content="world4jason">
-<meta property="og:description" content="Mask_RCNN V2.1版本 檔案：Model.py  Class MaskRCNN():這部分是在程式碼主體所使用到RPN的部分, 其中傳入參數預設為此, for loop那邊可以看到有幾個從fpn的output就會有幾個rpn RPN_ANCHOR_RATIOS = [0.5, 1, 2] RPN_ANCHOR_STRIDE = 1 123456789101112131415161718#">
+<meta property="og:description" content="Mask_RCNN V2.1版本 檔案：Model.py                                                                                                            Class MaskRCNN():這部分是在程式碼主體所使用到RPN的部分, 其中傳入參數預設為此, for loop那邊可以看">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https://world4jason.github.io/media/15276733083036.jpg">
 <meta property="og:updated_time" content="2018-06-03T09:34:21.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mask RCNN Code Reading for RPN">
-<meta name="twitter:description" content="Mask_RCNN V2.1版本 檔案：Model.py  Class MaskRCNN():這部分是在程式碼主體所使用到RPN的部分, 其中傳入參數預設為此, for loop那邊可以看到有幾個從fpn的output就會有幾個rpn RPN_ANCHOR_RATIOS = [0.5, 1, 2] RPN_ANCHOR_STRIDE = 1 123456789101112131415161718#">
+<meta name="twitter:description" content="Mask_RCNN V2.1版本 檔案：Model.py                                                                                                            Class MaskRCNN():這部分是在程式碼主體所使用到RPN的部分, 其中傳入參數預設為此, for loop那邊可以看">
 <meta name="twitter:image" content="https://world4jason.github.io/media/15276733083036.jpg">
     
         <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
@@ -204,7 +204,13 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>Mask_RCNN V2.1版本</p>
 <p>檔案：<a href="https://github.com/matterport/Mask_RCNN/blob/master/mrcnn/model.py#L822" target="_blank" rel="external">Model.py</a></p>
-<p><img src="/media/15276733083036.jpg" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/media/15276733083036.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <h3 id="Class-MaskRCNN"><a href="#Class-MaskRCNN" class="headerlink" title="Class MaskRCNN():"></a>Class MaskRCNN():</h3><p>這部分是在程式碼主體所使用到RPN的部分, 其中傳入參數預設為此, for loop那邊可以看到有幾個從fpn的output就會有幾個rpn</p>
 <pre><code>RPN_ANCHOR_RATIOS = [0.5, 1, 2]
 RPN_ANCHOR_STRIDE = 1
