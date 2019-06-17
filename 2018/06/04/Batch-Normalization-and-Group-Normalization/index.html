@@ -1,226 +1,182 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
+
+
+
+
+
+
+
 <head>
-    
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="preconnect" href="//pic.zhih.me">
+	<link rel="preconnect" href="//www.googletagmanager.com">
+	<link rel="preconnect" href="//zz.bdstatic.com">
+	<link rel="preconnect" href="//sp0.baidu.com">
+	<link rel="preconnect" href="//www.google-analytics.com">
+	<link rel="preconnect" href="//cdn1.lncld.net">
+	<link rel="preconnect" href="//unpkg.com">
+	<link rel="preconnect" href="//app-router.leancloud.cn">
+	<link rel="preconnect" href="//9qpuwspm.api.lncld.net">
+	<link rel="preconnect" href="//gravatar.loli.net">
+	<link rel="preload" href="https://pic.zhih.me/blog/header.jpg" as="image">
 
-    
+	<title>Batch Normalization and Group Normalization | world4jason</title>
 
-    
+	<meta name="HandheldFriendly" content="True">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+	<meta name="generator" content="hexo">
+	<meta name="author" content="Jason Yeh">
+	<meta name="description" content="">
+
+	
+	<meta name="keywords" content="">
+	
+
+	
+	<link rel="shortcut icon" href="https://i.loli.net/2017/11/26/5a19c0b50432e.png">
+	<link rel="apple-touch-icon" href="https://i.loli.net/2017/11/26/5a19c0b50432e.png">
+	
+
+	
+	<meta name="theme-color" content="#3c484e">
+	<meta name="msapplication-TileColor" content="#3c484e">
+	
+
+	
+
+	
+
+	<meta property="og:site_name" content="world4jason">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Batch Normalization and Group Normalization | world4jason">
+	<meta property="og:description" content="">
+	<meta property="og:url" content="https://world4jason.github.io/2018/06/04/Batch-Normalization-and-Group-Normalization/">
+
+	
+	<meta property="article:published_time" content="2018-06-04T04:06:00+08:00"> 
+	<meta property="article:author" content="Jason Yeh">
+	<meta property="article:published_first" content="world4jason, /2018/06/04/Batch-Normalization-and-Group-Normalization/">
+	
+
+	
+	
+	<link rel="stylesheet" href="/css/allinonecss.min.css">
+
+	
+	
+	
+<link rel="canonical" href="https://world4jason.github.io/2018/06/04/Batch-Normalization-and-Group-Normalization/"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    
-    
-    
-    <title>Batch Normalization and Group Normalization | world4jason | 菜鳥搬磚日常</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="">
-    <meta name="description" content="#Batch NormalizationBatch Normalization 在深度學習上算是不可或缺的一部分，基本上所有的框架中都會用到它，我記得比較清楚的是，在YOLOV2中作者採用了Batch Normalization 從而提高了4個百分點的Map吧。 ##為何要提出Batch Normalization？在每次給network輸入數據時，都需要進行預處理，比如歸一化之類的，為什麼需要歸">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Batch Normalization and Group Normalization">
-<meta property="og:url" content="https://world4jason.github.io/2018/06/04/Batch-Normalization-and-Group-Normalization/index.html">
-<meta property="og:site_name" content="world4jason">
-<meta property="og:description" content="#Batch NormalizationBatch Normalization 在深度學習上算是不可或缺的一部分，基本上所有的框架中都會用到它，我記得比較清楚的是，在YOLOV2中作者採用了Batch Normalization 從而提高了4個百分點的Map吧。 ##為何要提出Batch Normalization？在每次給network輸入數據時，都需要進行預處理，比如歸一化之類的，為什麼需要歸">
-<meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://world4jason.github.io/media/15280580743313.jpg">
-<meta property="og:image" content="https://world4jason.github.io/media/15280580994379.jpg">
-<meta property="og:image" content="https://world4jason.github.io/media/15280581211439.jpg">
-<meta property="og:image" content="https://world4jason.github.io/media/15280581373757.jpg">
-<meta property="og:image" content="https://world4jason.github.io/media/15280581605011.jpg">
-<meta property="og:image" content="https://world4jason.github.io/media/15280581942881.jpg">
-<meta property="og:image" content="https://world4jason.github.io/media/15280583334189.jpg">
-<meta property="og:image" content="https://world4jason.github.io/media/15280584129198.jpg">
-<meta property="og:image" content="https://world4jason.github.io/media/15280584563207.jpg">
-<meta property="og:updated_time" content="2018-06-03T20:42:47.406Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Batch Normalization and Group Normalization">
-<meta name="twitter:description" content="#Batch NormalizationBatch Normalization 在深度學習上算是不可或缺的一部分，基本上所有的框架中都會用到它，我記得比較清楚的是，在YOLOV2中作者採用了Batch Normalization 從而提高了4個百分點的Map吧。 ##為何要提出Batch Normalization？在每次給network輸入數據時，都需要進行預處理，比如歸一化之類的，為什麼需要歸">
-<meta name="twitter:image" content="https://world4jason.github.io/media/15280580743313.jpg">
-    
-        <link rel="alternate" type="application/atom+xml" title="world4jason" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
 
-    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-    
 
 </head>
+<body class="post-template">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="site-wrapper">
+		
 
-<body>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
 
-    <aside id="menu" class="hide" >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
+
+
+<header class="site-header post-site-header outer">
+    <div class="inner">
+        
+<nav class="site-nav"> 
+    <div class="site-nav-left">
+        <ul class="nav">
+            <li>
+                
+                <a href="/" title="Home">HOME</a>
+                
+            </li>
+            
+            
+            <li>
+                <a href="/about" title="ABOUT">ABOUT</a>
+            </li>
+            
+            <li>
+                <a href="/archives" title="ARCHIVES">ARCHIVES</a>
+            </li>
+            
+            
+        </ul> 
+    </div>
+    
+    <div class="search-button-area">
+        <a href="#search" class="search-button">Search ...</a>
+    </div>
+     
+    <div class="site-nav-right">
+        
+        <a href="#search" class="search-button">Search ...</a>
+         
+        
+<div class="social-links">
+    
+    <a class="social-link" title="weibo" href="https://weibo.com/xzhih" target="_blank" rel="noopener">
+        <svg viewbox="0 0 1141 1024" xmlns="http://www.w3.org/2000/svg"><path d="M916.48 518.144q27.648 21.504 38.912 51.712t9.216 62.976-14.336 65.536-31.744 59.392q-34.816 48.128-78.848 81.92t-91.136 56.32-94.72 35.328-89.6 18.944-75.264 7.68-51.712 1.536-49.152-2.56-68.096-10.24-78.336-21.504-79.872-36.352-74.24-55.296-59.904-78.848q-16.384-29.696-22.016-63.488t-5.632-86.016q0-22.528 7.68-51.2t27.136-63.488 53.248-75.776 86.016-90.112q51.2-48.128 105.984-85.504t117.248-57.856q28.672-10.24 63.488-11.264t57.344 11.264q10.24 11.264 19.456 23.04t12.288 29.184q3.072 14.336 0.512 27.648t-5.632 26.624-5.12 25.6 2.048 22.528q17.408 2.048 33.792-1.536t31.744-9.216 31.232-11.776 33.28-9.216q27.648-5.12 54.784-4.608t49.152 7.68 36.352 22.016 17.408 38.4q2.048 14.336-2.048 26.624t-8.704 23.04-7.168 22.016 1.536 23.552q3.072 7.168 14.848 13.312t27.136 12.288 32.256 13.312 29.184 16.384zM658.432 836.608q26.624-16.384 53.76-45.056t44.032-64 18.944-75.776-20.48-81.408q-19.456-33.792-47.616-57.344t-62.976-37.376-74.24-19.968-80.384-6.144q-78.848 0-139.776 16.384t-105.472 43.008-72.192 60.416-38.912 68.608q-11.264 33.792-6.656 67.072t20.992 62.976 42.496 53.248 57.856 37.888q58.368 25.6 119.296 32.256t116.224 0.512 100.864-21.504 74.24-33.792zM524.288 513.024q20.48 8.192 38.912 18.432t32.768 27.648q10.24 12.288 17.92 30.72t10.752 39.424 1.536 42.496-9.728 38.912q-8.192 18.432-19.968 37.376t-28.672 35.328-40.448 29.184-57.344 18.944q-61.44 11.264-117.76-11.264t-88.064-74.752q-12.288-39.936-13.312-70.656t16.384-66.56q13.312-27.648 40.448-51.712t62.464-38.912 75.264-17.408 78.848 12.8zM361.472 764.928q37.888 3.072 57.856-18.432t21.504-48.128-15.36-47.616-52.736-16.896q-27.648 3.072-43.008 23.552t-17.408 43.52 9.728 42.496 39.424 21.504zM780.288 6.144q74.752 0 139.776 19.968t113.664 57.856 76.288 92.16 27.648 122.88q0 33.792-16.384 50.688t-35.328 17.408-35.328-14.336-16.384-45.568q0-40.96-22.528-77.824t-59.392-64.512-84.48-43.52-96.768-15.872q-31.744 0-47.104-15.36t-14.336-34.304 18.944-34.304 51.712-15.36zM780.288 169.984q95.232 0 144.384 48.64t49.152 146.944q0 30.72-10.24 43.52t-22.528 11.264-22.528-14.848-10.24-35.84q0-60.416-34.816-96.256t-93.184-35.84q-19.456 0-28.672-10.752t-9.216-23.04 9.728-23.04 28.16-10.752z"/></svg>
     </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Jason Yeh</h5>
-          <a href="mailto:world4jason@gmail.com" title="world4jason@gmail.com" class="mail">world4jason@gmail.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-Home"></i>
-                Home
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/world4jason" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/research"  >
-                <i class="icon icon-lg icon-research"></i>
-                Research
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-about"></i>
-                About
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/cv"  >
-                <i class="icon icon-lg icon-CV"></i>
-                CV
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">Batch Normalization and Group Normalization</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">Batch Normalization and Group Normalization</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2018-06-03T20:30:09.000Z" itemprop="datePublished" class="page-time">
-  2018-06-04
-</time>
-
-
-            
-        </h5>
-    </div>
-
     
+    
+    <a class="social-link" title="github" href="https://github.com/xzhih" target="_blank" rel="noopener">
+        <svg viewbox="0 0 1049 1024" xmlns="http://www.w3.org/2000/svg"><path d="M524.979332 0C234.676191 0 0 234.676191 0 524.979332c0 232.068678 150.366597 428.501342 358.967656 498.035028 26.075132 5.215026 35.636014-11.299224 35.636014-25.205961 0-12.168395-0.869171-53.888607-0.869171-97.347161-146.020741 31.290159-176.441729-62.580318-176.441729-62.580318-23.467619-60.841976-58.234462-76.487055-58.234463-76.487055-47.804409-32.15933 3.476684-32.15933 3.476685-32.15933 53.019436 3.476684 80.83291 53.888607 80.83291 53.888607 46.935238 79.963739 122.553122 57.365291 152.97411 43.458554 4.345855-33.897672 18.252593-57.365291 33.028501-70.402857-116.468925-12.168395-239.022047-57.365291-239.022047-259.012982 0-57.365291 20.860106-104.300529 53.888607-140.805715-5.215026-13.037566-23.467619-66.926173 5.215027-139.067372 0 0 44.327725-13.906737 144.282399 53.888607 41.720212-11.299224 86.917108-17.383422 131.244833-17.383422s89.524621 6.084198 131.244833 17.383422C756.178839 203.386032 800.506564 217.29277 800.506564 217.29277c28.682646 72.1412 10.430053 126.029806 5.215026 139.067372 33.897672 36.505185 53.888607 83.440424 53.888607 140.805715 0 201.64769-122.553122 245.975415-239.891218 259.012982 19.121764 16.514251 35.636014 47.804409 35.636015 97.347161 0 70.402857-0.869171 126.898978-0.869172 144.282399 0 13.906737 9.560882 30.420988 35.636015 25.205961 208.601059-69.533686 358.967656-265.96635 358.967655-498.035028C1049.958663 234.676191 814.413301 0 524.979332 0z"/></svg>
+    </a>
+    
+    
+    <a class="social-link" title="facebook" href="https://facebook" target="_blank" rel="noopener">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 
+    </a>
+    
+    
+    <a class="social-link" title="twitter" href="https://twitter.com" target="_blank" rel="noopener">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
+    </a>
+    
+    
+    
+    
+</div>
+    </div>
+</nav>
+    </div>
 </header>
 
 
-<div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Group-Normalization-in-Keras"><span class="post-toc-number">1.</span> <span class="post-toc-text">Group Normalization in Keras</span></a></li></ol>
-        </nav>
-    </aside>
-    
-<article id="post-Batch-Normalization-and-Group-Normalization"
-  class="post-article article-type-post fade" itemprop="blogPost">
-
-    <div class="post-card">
-        <h1 class="post-card-title">Batch Normalization and Group Normalization</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2018-06-04 04:30:09" datetime="2018-06-03T20:30:09.000Z"  itemprop="datePublished">2018-06-04</time>
-
+<div id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+        <header class="post-full-header">
+            <div class="post-full-meta">
+                <time class="post-full-meta-date" datetime="2018-06-03T20:30:09.000Z">
+                    2018-06-4
+                </time>
+                
+                <span class="date-divider">/</span>
+                
+                
+            </div>
+            <h1 class="post-full-title">Batch Normalization and Group Normalization</h1>
+        </header>
+        <div class="post-full no-image">
             
-
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p>#Batch Normalization<br>Batch Normalization 在深度學習上算是不可或缺的一部分，基本上所有的框架中都會用到它，我記得比較清楚的是，在YOLOV2中作者採用了Batch Normalization 從而提高了4個百分點的Map吧。</p>
+            <div class="post-full-content">
+                <article id="lightgallery" class="markdown-body">
+                    <p>#Batch Normalization<br>Batch Normalization 在深度學習上算是不可或缺的一部分，基本上所有的框架中都會用到它，我記得比較清楚的是，在YOLOV2中作者採用了Batch Normalization 從而提高了4個百分點的Map吧。</p>
 <p>##為何要提出Batch Normalization？<br>在每次給network輸入數據時，都需要進行預處理，比如歸一化之類的，為什麼需要歸一化呢？神經網絡學習過程本質就是為了學習數據分佈，一旦訓練數據與測試數據的分佈不同，那麼網絡的泛化能力也大大降低；另外一方面，一旦每批訓練數據的分佈各不相同(batch 梯度下降)，那麼網絡就要在每次迭代都去學習適應不同的分佈，這樣將會大大降低網絡的訓練速度，這也正是為什麼我們需要對數據都要做一個歸一化預處理的原因。</p>
 <p>而且在訓練的過程中，經過一層層的網絡運算，中間層的學習到的數據分佈也是發生著挺大的變化，這就要求我們必須使用一個很小的學習率和對參數很好的初始化，但是這麼做會讓訓練過程變得慢而且複雜m在論文中，這種現象被稱為Internal Covariate Shift。為瞭解決這個問題，作者提出了Batch Normalization。</p>
 <p>##Batch Normalization原理<br>為了降低Internal Covariate Shift帶來的影響，其實只要進行歸一化就可以的。比如，我們把network每一層的輸出都整為方差為1，均值為0的正態分佈，這樣看起來是可以解決問題，但是想想，network好不容易學習到的數據特徵，被你這樣一弄又回到瞭解放前了，相當於沒有學習了。所以這樣是不行的，大神想到了一個大招：變換重構，引入了兩個可以學習的參數γ、β，當然，這也是算法的靈魂所在：</p>
 <p>具體的算法流程如下：</p>
-<p><img src="/media/15280580743313.jpg" alt=""></p>
+<p><img alt="" class="post-img b-lazy" href="/media/15280580743313.jpg" data-src="/media/15280580743313.jpg"></p>
 <p> Batch Normalization 是對一個batch來進行normalization的，例如我們的輸入的一個batch為：β=x_(1…m)，輸出為：y_i=BN(x)。具體的完整流程如下：</p>
 <p>1.求出該batch數據x的均值</p>
-<p><img src="/media/15280580994379.jpg" alt=""><br>2.求出該batch數據的方差<br><img src="/media/15280581211439.jpg" alt=""><br>3.對輸入數據x做歸一化處理，得到：<br><img src="/media/15280581373757.jpg" alt=""></p>
-<p>4.最後加入可訓練的兩個參數：縮放變量γ和平移變量β，計算歸一化後的值：<br><img src="/media/15280581605011.jpg" alt=""><br>加入了這兩個參數之後，網絡就可以更加容易的學習到更多的東西了。先想想極端的情況，當縮放變量γ和平移變量β分別等於batch數據的方差和均值時，最後得到的yi就和原來的xi一模一樣了，相當於batch normalization沒有起作用了。這樣就保證了每一次數據經過歸一化後還保留的有學習來的特徵，同時又能完成歸一化這個操作，加速訓練。</p>
-<p>引入參數的更新過程，也就是微積分的Chain Rule：<br><img src="/media/15280581942881.jpg" alt=""></p>
+<p><img alt="" class="post-img b-lazy" href="/media/15280580994379.jpg" data-src="/media/15280580994379.jpg"><br>2.求出該batch數據的方差<br><img alt="" class="post-img b-lazy" href="/media/15280581211439.jpg" data-src="/media/15280581211439.jpg"><br>3.對輸入數據x做歸一化處理，得到：<br><img alt="" class="post-img b-lazy" href="/media/15280581373757.jpg" data-src="/media/15280581373757.jpg"></p>
+<p>4.最後加入可訓練的兩個參數：縮放變量γ和平移變量β，計算歸一化後的值：<br><img alt="" class="post-img b-lazy" href="/media/15280581605011.jpg" data-src="/media/15280581605011.jpg"><br>加入了這兩個參數之後，網絡就可以更加容易的學習到更多的東西了。先想想極端的情況，當縮放變量γ和平移變量β分別等於batch數據的方差和均值時，最後得到的yi就和原來的xi一模一樣了，相當於batch normalization沒有起作用了。這樣就保證了每一次數據經過歸一化後還保留的有學習來的特徵，同時又能完成歸一化這個操作，加速訓練。</p>
+<p>引入參數的更新過程，也就是微積分的Chain Rule：<br><img alt="" class="post-img b-lazy" href="/media/15280581942881.jpg" data-src="/media/15280581942881.jpg"></p>
 <p>Example</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">Batchnorm_simple_for_train</span><span class="params">(x, gamma,beta, bn_param)</span>:</span><span class="string">"""  </span></div><div class="line">param:x   : 輸入數據，設shape(B,L)  </div><div class="line">param:gama : 縮放因子  γ  </div><div class="line">param:beta : 平移因子  β  </div><div class="line">param:bn_param   : batchnorm所需要的一些參數  </div><div class="line">   eps      : 接近0的數，防止分母出現0  </div><div class="line">   momentum : 動量參數，一般為0.9，0.99， 0.999  </div><div class="line">   running_mean ：滑動平均的方式計算新的均值，訓練時計算，為測試數據做準備  </div><div class="line">   running_var  : 滑動平均的方式計算新的方差，訓練時計算，為測試數據做準備  </div><div class="line">"""  </div><div class="line">   running_mean = bn_param[<span class="string">'running_mean'</span>] <span class="comment">#shape = [B]  </span></div><div class="line">   running_var = bn_param[<span class="string">'running_var'</span>]   <span class="comment">#shape = [B]  </span></div><div class="line">   results = <span class="number">0.</span> <span class="comment"># 建立一個新的變量  </span></div><div class="line">   x_mean=x.mean(axis=<span class="number">0</span>)  <span class="comment"># 計算x的均值  </span></div><div class="line">   x_var=x.var(axis=<span class="number">0</span>)    <span class="comment"># 計算方差  </span></div><div class="line">   x_normalized=(x-x_mean)/np.sqrt(x_var+eps)       <span class="comment"># 歸一化  </span></div><div class="line">   results = gamma * x_normalized + beta            <span class="comment"># 縮放平移  </span></div><div class="line">   running_mean = momentum * running_mean + (<span class="number">1</span> - momentum) * x_mean  </div><div class="line">   running_var = momentum * running_var + (<span class="number">1</span> - momentum) * x_var    <span class="comment">#記錄新的值  </span></div><div class="line">   bn_param[<span class="string">'running_mean'</span>] = running_mean  </div><div class="line">   bn_param[<span class="string">'running_var'</span>] = running_var     </div><div class="line">   <span class="keyword">return</span> results , bn_param</div></pre></td></tr></table></figure>
 <p>這份code首先計算均值和方差，然後歸一化，然後縮放和平移就結束了！但是這是在訓練中完成的任務，每次訓練給一個批量，然後計算批量的均值方差，但是在測試的時候可不是這樣，測試的時候每次只輸入一張圖片，這怎麼計算批量的均值和方差，於是，就有了代碼中下面兩行，在訓練的時候實現計算好mean var測試的時候直接拿來用就可以了，不用計算均值和方差。</p>
@@ -231,7 +187,7 @@
 <p>Batch Normalization 的TensorFlow 源碼解讀，來自知乎：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">batch_norm_layer</span><span class="params">(x, train_phase,scope_bn)</span>:</span>  </div><div class="line">   <span class="keyword">with</span> tf.variable_scope(scope_bn):  </div><div class="line">        <span class="comment"># 新建兩個變量，平移、縮放因子  </span></div><div class="line">       beta = tf.Variable(tf.constant(<span class="number">0.0</span>, shape=[x.shape[<span class="number">-1</span>]]), name=<span class="string">'beta'</span>,trainable=<span class="keyword">True</span>)  </div><div class="line">       gamma = tf.Variable(tf.constant(<span class="number">1.0</span>, shape=[x.shape[<span class="number">-1</span>]]), name=<span class="string">'gamma'</span>,trainable=<span class="keyword">True</span>)  </div><div class="line">       <span class="comment"># 計算此次批量的均值和方差  </span></div><div class="line">       axises = np.arange(len(x.shape) - <span class="number">1</span>)  </div><div class="line">       batch_mean, batch_var = tf.nn.moments(x, axises, name=<span class="string">'moments'</span>)  </div><div class="line">       <span class="comment"># 滑動平均做衰減  </span></div><div class="line">       ema = tf.train.ExponentialMovingAverage(decay=<span class="number">0.5</span>)  </div><div class="line">       <span class="function"><span class="keyword">def</span> <span class="title">mean_var_with_update</span><span class="params">()</span>:</span>  </div><div class="line">           ema_apply_op = ema.apply([batch_mean, batch_var])  </div><div class="line">           <span class="keyword">with</span> tf.control_dependencies([ema_apply_op]):  </div><div class="line">                <span class="keyword">return</span> tf.identity(batch_mean),tf.identity(batch_var)  </div><div class="line">       <span class="comment"># train_phase 訓練還是測試的flag  </span></div><div class="line">       <span class="comment"># 訓練階段計算runing_mean和runing_var，使用mean_var_with_update（）函數  </span></div><div class="line">       <span class="comment"># 測試的時候直接把之前計算的拿去用 ema.average(batch_mean)  </span></div><div class="line">       mean, var = tf.cond(train_phase, mean_var_with_update,  </div><div class="line">                            <span class="keyword">lambda</span>:(ema.average(batch_mean), ema.average(batch_var)))  </div><div class="line">       normed = tf.nn.batch_normalization(x, mean, var, beta, gamma, <span class="number">1e-3</span>)  </div><div class="line">   <span class="keyword">return</span> normed</div></pre></td></tr></table></figure>
 <p>至於此行代碼tf.nn.batch_normalization()就是簡單的計算batchnorm過程，這個函數所實現的功能就如此公式：</p>
-<p><img src="/media/15280583334189.jpg" alt=""></p>
+<p><img alt="" class="post-img b-lazy" href="/media/15280583334189.jpg" data-src="/media/15280583334189.jpg"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">batch_normalization</span><span class="params">(x, mean, variance, offset,scale, variance_epsilon, name=None)</span>:</span>  </div><div class="line">   <span class="keyword">with</span> ops.name_scope(name, <span class="string">"batchnorm"</span>, [x, mean, variance,scale, offset]):  </div><div class="line">       inv = math_ops.rsqrt(variance + variance_epsilon)  </div><div class="line">    <span class="keyword">if</span> scale <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:  </div><div class="line">           inv *= scale        </div><div class="line">       <span class="keyword">return</span> x * inv + (offset - mean * inv  </div><div class="line">                       <span class="keyword">if</span> offset <span class="keyword">is</span> <span class="keyword">not</span> Noneelse -mean * inv)</div></pre></td></tr></table></figure>
 <p>##Batch Normalization的帶來的優勢：</p>
 <p>沒有它之前，需要小心的調整學習率和權重初始化，但是有了BN可以放心的使用大學習率，但是使用了BN，就不用小心的調參了，較大的學習率極大的提高了學習速度，</p>
@@ -239,9 +195,9 @@
 <p>另外，個人認為，batchnorm降低了數據之間的絕對差異，有一個去相關的性質，更多的考慮相對差異性，因此在分類任務上具有更好的效果</p>
 <p>#Group Normalization<br>group normalization是2018年3月份何愷明大神的又一力作，優化了batch normalization在比較小的batch size 情況下表現不太好的劣勢。批量維度進行歸一化會帶來一些問題——批量統計估算不準確導致批量變小時，BN 的誤差會迅速增加。在訓練大型網絡和將特徵轉移到計算機視覺任務中（包括檢測、分割和視頻），內存消耗限制了只能使用小批量的BN。尤其是在我的破電腦裡面，batch的大小一般都是使用的1，相當於不存在BN。</p>
 <p>下圖是論文中給出BN和GN的對比：</p>
-<p><img src="/media/15280584129198.jpg" alt=""><br>  可以看出在bath size比較小的情況下，BN的性能十分地差，而GN的性能基本上沒有太大改變。</p>
+<p><img alt="" class="post-img b-lazy" href="/media/15280584129198.jpg" data-src="/media/15280584129198.jpg"><br>  可以看出在bath size比較小的情況下，BN的性能十分地差，而GN的性能基本上沒有太大改變。</p>
 <p>##Group Normalization 原理：<br>先給出他目前出現比較多的幾種normalization的示意圖：</p>
-<p><img src="/media/15280584563207.jpg" alt=""><br>BatchNorm：batch方向做歸一化，算N<em>H</em>W的均值</p>
+<p><img alt="" class="post-img b-lazy" href="/media/15280584563207.jpg" data-src="/media/15280584563207.jpg"><br>BatchNorm：batch方向做歸一化，算N<em>H</em>W的均值</p>
 <p>LayerNorm：channel方向做歸一化，算C<em>H</em>W的均值</p>
 <p>InstanceNorm：一個channel內做歸一化，算H*W的均值</p>
 <p>GroupNorm：將channel方向分group，然後每個group內做歸一化，算(C//G)<em>H</em>W的均值</p>
@@ -251,330 +207,304 @@
 <h2 id="Group-Normalization-in-Keras"><a href="#Group-Normalization-in-Keras" class="headerlink" title="Group Normalization in Keras"></a>Group Normalization in Keras</h2><p>其實也是在keras中的BatchNormalization層上進行一定的修改就得到了GroupNormalization層。正常和batchnormalization一樣的調用即可。但注意需要保持channel數是group的整數倍。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> keras.engine <span class="keyword">import</span> Layer, InputSpec</div><div class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> initializers</div><div class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> regularizers</div><div class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> constraints</div><div class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> backend <span class="keyword">as</span> K</div><div class="line"></div><div class="line"><span class="keyword">from</span> keras.utils.generic_utils <span class="keyword">import</span> get_custom_objects</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">GroupNormalization</span><span class="params">(Layer)</span>:</span></div><div class="line">    <span class="string">"""Group normalization layer</span></div><div class="line"></div><div class="line">    Group Normalization divides the channels into groups and computes within each group</div><div class="line">    the mean and variance for normalization. GN's computation is independent of batch sizes,</div><div class="line">    and its accuracy is stable in a wide range of batch sizes</div><div class="line"></div><div class="line">    # Arguments</div><div class="line">        groups: Integer, the number of groups for Group Normalization.</div><div class="line">        axis: Integer, the axis that should be normalized</div><div class="line">            (typically the features axis).</div><div class="line">            For instance, after a `Conv2D` layer with</div><div class="line">            `data_format="channels_first"`,</div><div class="line">            set `axis=1` in `BatchNormalization`.</div><div class="line">        epsilon: Small float added to variance to avoid dividing by zero.</div><div class="line">        center: If True, add offset of `beta` to normalized tensor.</div><div class="line">            If False, `beta` is ignored.</div><div class="line">        scale: If True, multiply by `gamma`.</div><div class="line">            If False, `gamma` is not used.</div><div class="line">            When the next layer is linear (also e.g. `nn.relu`),</div><div class="line">            this can be disabled since the scaling</div><div class="line">            will be done by the next layer.</div><div class="line">        beta_initializer: Initializer for the beta weight.</div><div class="line">        gamma_initializer: Initializer for the gamma weight.</div><div class="line">        beta_regularizer: Optional regularizer for the beta weight.</div><div class="line">        gamma_regularizer: Optional regularizer for the gamma weight.</div><div class="line">        beta_constraint: Optional constraint for the beta weight.</div><div class="line">        gamma_constraint: Optional constraint for the gamma weight.</div><div class="line"></div><div class="line">    # Input shape</div><div class="line">        Arbitrary. Use the keyword argument `input_shape`</div><div class="line">        (tuple of integers, does not include the samples axis)</div><div class="line">        when using this layer as the first layer in a model.</div><div class="line"></div><div class="line">    # Output shape</div><div class="line">        Same shape as input.</div><div class="line"></div><div class="line">    # References</div><div class="line">        - [Group Normalization](https://arxiv.org/abs/1803.08494)</div><div class="line">    """</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,</span></span></div><div class="line">                 groups=<span class="number">32</span>,</div><div class="line">                 axis=<span class="number">-1</span>,</div><div class="line">                 epsilon=<span class="number">1e-5</span>,</div><div class="line">                 center=True,</div><div class="line">                 scale=True,</div><div class="line">                 beta_initializer=<span class="string">'zeros'</span>,</div><div class="line">                 gamma_initializer=<span class="string">'ones'</span>,</div><div class="line">                 beta_regularizer=None,</div><div class="line">                 gamma_regularizer=None,</div><div class="line">                 beta_constraint=None,</div><div class="line">                 gamma_constraint=None,</div><div class="line">                 **kwargs):</div><div class="line">        super(GroupNormalization, self).__init__(**kwargs)</div><div class="line">        self.supports_masking = <span class="keyword">True</span></div><div class="line">        self.groups = groups</div><div class="line">        self.axis = axis</div><div class="line">        self.epsilon = epsilon</div><div class="line">        self.center = center</div><div class="line">        self.scale = scale</div><div class="line">        self.beta_initializer = initializers.get(beta_initializer)</div><div class="line">        self.gamma_initializer = initializers.get(gamma_initializer)</div><div class="line">        self.beta_regularizer = regularizers.get(beta_regularizer)</div><div class="line">        self.gamma_regularizer = regularizers.get(gamma_regularizer)</div><div class="line">        self.beta_constraint = constraints.get(beta_constraint)</div><div class="line">        self.gamma_constraint = constraints.get(gamma_constraint)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">build</span><span class="params">(self, input_shape)</span>:</span></div><div class="line">        dim = input_shape[self.axis]</div><div class="line"></div><div class="line">        <span class="keyword">if</span> dim <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'Axis '</span> + str(self.axis) + <span class="string">' of '</span></div><div class="line">                                                        <span class="string">'input tensor should have a defined dimension '</span></div><div class="line">                                                        <span class="string">'but the layer received an input with shape '</span> +</div><div class="line">                             str(input_shape) + <span class="string">'.'</span>)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> dim &lt; self.groups:</div><div class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'Number of groups ('</span> + str(self.groups) + <span class="string">') cannot be '</span></div><div class="line">                                                                       <span class="string">'more than the number of channels ('</span> +</div><div class="line">                             str(dim) + <span class="string">').'</span>)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> dim % self.groups != <span class="number">0</span>:</div><div class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'Number of groups ('</span> + str(self.groups) + <span class="string">') must be a '</span></div><div class="line">                                                                       <span class="string">'multiple of the number of channels ('</span> +</div><div class="line">                             str(dim) + <span class="string">').'</span>)</div><div class="line"></div><div class="line">        self.input_spec = InputSpec(ndim=len(input_shape),</div><div class="line">                                    axes=&#123;self.axis: dim&#125;)</div><div class="line">        shape = (dim,)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> self.scale:</div><div class="line">            self.gamma = self.add_weight(shape=shape,</div><div class="line">                                         name=<span class="string">'gamma'</span>,</div><div class="line">                                         initializer=self.gamma_initializer,</div><div class="line">                                         regularizer=self.gamma_regularizer,</div><div class="line">                                         constraint=self.gamma_constraint)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            self.gamma = <span class="keyword">None</span></div><div class="line">        <span class="keyword">if</span> self.center:</div><div class="line">            self.beta = self.add_weight(shape=shape,</div><div class="line">                                        name=<span class="string">'beta'</span>,</div><div class="line">                                        initializer=self.beta_initializer,</div><div class="line">                                        regularizer=self.beta_regularizer,</div><div class="line">                                        constraint=self.beta_constraint)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            self.beta = <span class="keyword">None</span></div><div class="line">        self.built = <span class="keyword">True</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, inputs, **kwargs)</span>:</span></div><div class="line">        input_shape = K.int_shape(inputs)</div><div class="line">        <span class="comment"># Prepare broadcasting shape.</span></div><div class="line">        ndim = len(input_shape)</div><div class="line">        reduction_axes = list(range(len(input_shape)))</div><div class="line">        <span class="keyword">del</span> reduction_axes[self.axis]</div><div class="line">        broadcast_shape = [<span class="number">1</span>] * len(input_shape)</div><div class="line">        broadcast_shape[self.axis] = input_shape[self.axis]</div><div class="line"></div><div class="line">        reshape_group_shape = list(input_shape)</div><div class="line">        reshape_group_shape[self.axis] = input_shape[self.axis] // self.groups</div><div class="line">        group_shape = [<span class="number">-1</span>, self.groups]</div><div class="line">        group_shape.extend(reshape_group_shape[<span class="number">1</span>:])</div><div class="line">        group_reduction_axes = list(range(len(group_shape)))</div><div class="line"></div><div class="line">        <span class="comment"># Determines whether broadcasting is needed.</span></div><div class="line">        needs_broadcasting = (sorted(reduction_axes) != list(range(ndim))[:<span class="number">-1</span>])</div><div class="line"></div><div class="line">        inputs = K.reshape(inputs, group_shape)</div><div class="line"></div><div class="line">        mean = K.mean(inputs, axis=group_reduction_axes[<span class="number">2</span>:], keepdims=<span class="keyword">True</span>)</div><div class="line">        variance = K.var(inputs, axis=group_reduction_axes[<span class="number">2</span>:], keepdims=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">        inputs = (inputs - mean) / (K.sqrt(variance + self.epsilon))</div><div class="line"></div><div class="line">        original_shape = [<span class="number">-1</span>] + list(input_shape[<span class="number">1</span>:])</div><div class="line">        inputs = K.reshape(inputs, original_shape)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> needs_broadcasting:</div><div class="line">            outputs = inputs</div><div class="line"></div><div class="line">            <span class="comment"># In this case we must explicitly broadcast all parameters.</span></div><div class="line">            <span class="keyword">if</span> self.scale:</div><div class="line">                broadcast_gamma = K.reshape(self.gamma, broadcast_shape)</div><div class="line">                outputs = outputs * broadcast_gamma</div><div class="line"></div><div class="line">            <span class="keyword">if</span> self.center:</div><div class="line">                broadcast_beta = K.reshape(self.beta, broadcast_shape)</div><div class="line">                outputs = outputs + broadcast_beta</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            outputs = inputs</div><div class="line"></div><div class="line">            <span class="keyword">if</span> self.scale:</div><div class="line">                outputs = outputs * self.gamma</div><div class="line"></div><div class="line">            <span class="keyword">if</span> self.center:</div><div class="line">                outputs = outputs + self.beta</div><div class="line"></div><div class="line">        <span class="keyword">return</span> outputs</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_config</span><span class="params">(self)</span>:</span></div><div class="line">        config = &#123;</div><div class="line">            <span class="string">'groups'</span>: self.groups,</div><div class="line">            <span class="string">'axis'</span>: self.axis,</div><div class="line">            <span class="string">'epsilon'</span>: self.epsilon,</div><div class="line">            <span class="string">'center'</span>: self.center,</div><div class="line">            <span class="string">'scale'</span>: self.scale,</div><div class="line">            <span class="string">'beta_initializer'</span>: initializers.serialize(self.beta_initializer),</div><div class="line">            <span class="string">'gamma_initializer'</span>: initializers.serialize(self.gamma_initializer),</div><div class="line">            <span class="string">'beta_regularizer'</span>: regularizers.serialize(self.beta_regularizer),</div><div class="line">            <span class="string">'gamma_regularizer'</span>: regularizers.serialize(self.gamma_regularizer),</div><div class="line">            <span class="string">'beta_constraint'</span>: constraints.serialize(self.beta_constraint),</div><div class="line">            <span class="string">'gamma_constraint'</span>: constraints.serialize(self.gamma_constraint)</div><div class="line">        &#125;</div><div class="line">        base_config = super(GroupNormalization, self).get_config()</div><div class="line">        <span class="keyword">return</span> dict(list(base_config.items()) + list(config.items()))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compute_output_shape</span><span class="params">(self, input_shape)</span>:</span></div><div class="line">        <span class="keyword">return</span> input_shape</div></pre></td></tr></table></figure>
 
+                </article>
+                <ul class="tags-postTags">
+                    
+                </ul>
+            </div>
         </div>
-
-        <blockquote class="post-copyright">
-    <div class="content">
-        
-<span class="post-time">
-    最後更新時間：<time datetime="2018-06-03T20:42:47.406Z" itemprop="dateUpdated">2018-06-04 04:42:47</time>
-</span><br>
-
-
-        
     </div>
-    <footer>
-        <a href="https://world4jason.github.io">
-            <img src="/img/avatar.jpg" alt="Jason Yeh">
-            Jason Yeh
-        </a>
-    </footer>
-</blockquote>
 
-        
-
-
-        <div class="post-footer">
-            
-
-            
-<div class="page-share-wrap">
     
+    <nav id="gobottom" class="pagination">
+        
+        <a class="prev-post" title="Mask RCNNCode Reading - Detection Layer" href="/2018/06/04/Mask-RCNN-Code-Reading-DetectionLayer/">
+            ← Mask RCNNCode Reading - Detection Layer
+        </a>
+        
+        <span class="prev-next-post">·</span>
+        
+        <a class="next-post" title="Mask RCNNCode Reading for ROI Align Layer" href="/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/">
+            Mask RCNNCode Reading for ROI Align Layer →
+        </a>
+        
+    </nav>
 
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2018/06/04/Batch-Normalization-and-Group-Normalization/&title=《Batch Normalization and Group Normalization》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2018/06/04/Batch-Normalization-and-Group-Normalization/&title=《Batch Normalization and Group Normalization》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2018/06/04/Batch-Normalization-and-Group-Normalization/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Batch Normalization and Group Normalization》 — world4jason&url=https://world4jason.github.io/2018/06/04/Batch-Normalization-and-Group-Normalization/&via=https://world4jason.github.io" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2018/06/04/Batch-Normalization-and-Group-Normalization/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
+    
+    <div class="inner">
+        <div id="comment"></div>
+    </div>
+    
+</div>
 
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
+<div class="toc-bar">
+    <div class="toc-btn-bar">
+        <a href="#site-main" class="toc-btn">
+            <svg viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M793.024 710.272a32 32 0 1 0 45.952-44.544l-310.304-320a32 32 0 0 0-46.4 0.48l-297.696 320a32 32 0 0 0 46.848 43.584l274.752-295.328 286.848 295.808z"/></svg>
+        </a>
+        <div class="toc-btn toc-switch">
+            <svg class="toc-open" viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M779.776 480h-387.2a32 32 0 0 0 0 64h387.2a32 32 0 0 0 0-64M779.776 672h-387.2a32 32 0 0 0 0 64h387.2a32 32 0 0 0 0-64M256 288a32 32 0 1 0 0 64 32 32 0 0 0 0-64M392.576 352h387.2a32 32 0 0 0 0-64h-387.2a32 32 0 0 0 0 64M256 480a32 32 0 1 0 0 64 32 32 0 0 0 0-64M256 672a32 32 0 1 0 0 64 32 32 0 0 0 0-64"/></svg>
+            <svg class="toc-close hide" viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M512 960c-247.039484 0-448-200.960516-448-448S264.960516 64 512 64 960 264.960516 960 512 759.039484 960 512 960zM512 128.287273c-211.584464 0-383.712727 172.128262-383.712727 383.712727 0 211.551781 172.128262 383.712727 383.712727 383.712727 211.551781 0 383.712727-172.159226 383.712727-383.712727C895.712727 300.415536 723.551781 128.287273 512 128.287273z"/><path d="M557.05545 513.376159l138.367639-136.864185c12.576374-12.416396 12.672705-32.671738 0.25631-45.248112s-32.704421-12.672705-45.248112-0.25631l-138.560301 137.024163-136.447897-136.864185c-12.512727-12.512727-32.735385-12.576374-45.248112-0.063647-12.512727 12.480043-12.54369 32.735385-0.063647 45.248112l136.255235 136.671523-137.376804 135.904314c-12.576374 12.447359-12.672705 32.671738-0.25631 45.248112 6.271845 6.335493 14.496116 9.504099 22.751351 9.504099 8.12794 0 16.25588-3.103239 22.496761-9.247789l137.567746-136.064292 138.687596 139.136568c6.240882 6.271845 14.432469 9.407768 22.65674 9.407768 8.191587 0 16.352211-3.135923 22.591372-9.34412 12.512727-12.480043 12.54369-32.704421 0.063647-45.248112L557.05545 513.376159z"/></svg>
+        </div>
+        <a href="#gobottom" class="toc-btn">
+            <svg viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M231.424 346.208a32 32 0 0 0-46.848 43.584l297.696 320a32 32 0 0 0 46.4 0.48l310.304-320a32 32 0 1 0-45.952-44.544l-286.848 295.808-274.752-295.36z"/></svg>
+        </a>
+    </div>
+    <div class="toc-main">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Group-Normalization-in-Keras"><span class="toc-text">Group Normalization in Keras</span></a></li></ol>
+    </div>
 </div>
 
 
 
-        </div>
+	</div>
+	
+
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+            
+
+<article class="read-next-card" style="background-image: url(https://i.loli.net/2017/11/26/5a19c56faa29f.jpg)">
+  <header class="read-next-card-header">
+    <small class="read-next-card-header-sitetitle">&mdash; world4jason &mdash;</small>
+    <h3 class="read-next-card-header-title">最新文章</h3>
+  </header>
+  <div class="read-next-divider">
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+      <path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/>
+    </svg>
+  </div>
+  <div class="read-next-card-content">
+    <ul>
+      
+      
+      
+      <li>
+        <a href="/2018/06/04/Mask-RCNN-Code-Reading-DetectionLayer/">Mask RCNNCode Reading - Detection Layer</a>
+      </li>
+      
+      
+      
+      <li>
+        <a href="/2018/06/04/Batch-Normalization-and-Group-Normalization/">Batch Normalization and Group Normalization</a>
+      </li>
+      
+      
+      
+      <li>
+        <a href="/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/">Mask RCNNCode Reading for ROI Align Layer</a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+  <footer class="read-next-card-footer">
+    <a href="/archives">  MORE  → </a>
+  </footer>
+</article>
+
+            
+            
+            
+
+<article class="read-next-card" style="background-image: url(https://i.loli.net/2017/11/26/5a19c56faa29f.jpg)">
+    <header class="read-next-card-header tagcloud-card">
+        <h3 class="read-next-card-header-title">分類</h3>
+    </header>
+    <div class="read-next-card-content">
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Code/">Code</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Deep-Learning/">Deep Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Detection/">Detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Github/">Github</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MOT/">MOT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Model-Architecture/">Model Architecture</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Model-Architecture/Classification/">Classification</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Optimize/">Optimize</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Re-ID/">Re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Segmentation/">Segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Segmentation/Detection/">Detection</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Series/">Series</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Series/Segmentation/">Segmentation</a></li></ul></li></ul>
     </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2018/06/04/Mask-RCNN-Code-Reading-DetectionLayer/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Mask RCNNCode Reading - Detection Layer</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2018/06/03/Mask-RCNN-Code-Reading-ROI_Align/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Mask RCNNCode Reading for ROI Align Layer</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-<section class="comments" id="comments">
-    <div id="disqus_thread"></div>
-    <script>
-    var disqus_shortname = 'true';
-    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</section>
-
-
-
-
-<section class="comments" id="comments">
-    <!-- UY BEGIN -->
-    <div id="uyan_frame"></div>
-    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
-    <!-- UY END -->
-</section>
-
-
-
-
-<section class="comments" id="comments">
-    <div id="gitment_thread"></div>
-    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
-    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
-    <script>
-        var gitment = new Gitment({
-            owner: '',
-            repo: '',
-            oauth: {
-                client_id: '',
-                client_secret: '',
-            },
-        })
-        gitment.render('comments')
-    </script>
-</section>
-
-
-
-
 </article>
 
 
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        總訪客數：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        總訪問量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
             
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>Jason Yeh &copy; 2015 - 2019</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
+            
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<article class="read-next-card" style="background-image: url(https://i.loli.net/2017/11/26/5a19c56faa29f.jpg)">
+	<header class="read-next-card-header tagcloud-card">
+		<h3 class="read-next-card-header-title">標籤雲</h3>
+	</header>
+	<div class="read-next-card-content-ext">
+		<a href="/tags/C/" style="font-size: 14px;">C++</a> <a href="/tags/CNN/" style="font-size: 22.33px;">CNN</a> <a href="/tags/CPP/" style="font-size: 14px;">CPP</a> <a href="/tags/Classification/" style="font-size: 15.67px;">Classification</a> <a href="/tags/Computer-Vision/" style="font-size: 19px;">Computer Vision</a> <a href="/tags/Convolution/" style="font-size: 17.33px;">Convolution</a> <a href="/tags/Courses/" style="font-size: 14px;">Courses</a> <a href="/tags/Deep-Learning/" style="font-size: 24px;">Deep Learning</a> <a href="/tags/GAN/" style="font-size: 19px;">GAN</a> <a href="/tags/Generation/" style="font-size: 19px;">Generation</a> <a href="/tags/Generative-Model/" style="font-size: 19px;">Generative Model</a> <a href="/tags/MOT/" style="font-size: 15.67px;">MOT</a> <a href="/tags/Model-Architecture/" style="font-size: 17.33px;">Model Architecture</a> <a href="/tags/Model-Compression/" style="font-size: 14px;">Model Compression</a> <a href="/tags/Object-Detection/" style="font-size: 17.33px;">Object Detection</a> <a href="/tags/Paper-List/" style="font-size: 14px;">Paper List</a> <a href="/tags/Pose-Estimation/" style="font-size: 15.67px;">Pose Estimation</a> <a href="/tags/R-CNN/" style="font-size: 20.67px;">R-CNN</a> <a href="/tags/Segmentation/" style="font-size: 19px;">Segmentation</a> <a href="/tags/Self-Study/" style="font-size: 15.67px;">Self-Study</a> <a href="/tags/Style-Transfer/" style="font-size: 14px;">Style Transfer</a> <a href="/tags/Summary/" style="font-size: 14px;">Summary</a> <a href="/tags/Tensorflow/" style="font-size: 14px;">Tensorflow</a> <a href="/tags/Tracking/" style="font-size: 17.33px;">Tracking</a> <a href="/tags/code/" style="font-size: 17.33px;">code</a> <a href="/tags/image-retrieval/" style="font-size: 14px;">image retrieval</a> <a href="/tags/python/" style="font-size: 14px;">python</a> <a href="/tags/real-time/" style="font-size: 15.67px;">real-time</a> <a href="/tags/survey/" style="font-size: 14px;">survey</a>
+	</div>
+</article>
 
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://world4jason.github.io/2018/06/04/Batch-Normalization-and-Group-Normalization/&title=《Batch Normalization and Group Normalization》 — world4jason&pic=https://world4jason.github.io/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://world4jason.github.io/2018/06/04/Batch-Normalization-and-Group-Normalization/&title=《Batch Normalization and Group Normalization》 — world4jason&source=菜鳥搬磚日常" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://world4jason.github.io/2018/06/04/Batch-Normalization-and-Group-Normalization/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Batch Normalization and Group Normalization》 — world4jason&url=https://world4jason.github.io/2018/06/04/Batch-Normalization-and-Group-Normalization/&via=https://world4jason.github.io" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://world4jason.github.io/2018/06/04/Batch-Normalization-and-Group-Normalization/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://world4jason.github.io/2018/06/04/Batch-Normalization-and-Group-Normalization/" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
+            
         </div>
-    </a>
-</li>
-</template>
+    </div>
+</aside>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-
-
-
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
-
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+	
 
 
 
 
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div id="search" class="search-overlay">
+    <div class="search-form">
+        
+        <img class="search-overlay-logo" src="https://i.loli.net/2017/11/26/5a19c0b50432e.png" alt="world4jason">
+        
+        <input id="local-search-input" class="search-input" type="text" name="search" placeholder="搜尋 ...">
+        <a class="search-overlay-close" href="#"></a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+<footer class="site-footer outer">
+	<div class="site-footer-content inner">
+		<div class="copyright">
+			<a href="/" title="world4jason">world4jason</a>
+			&copy; 2019
+		</div>
+		<nav class="site-footer-nav">
+			
+			<a href="https://hexo.io" title="Hexo" target="_blank" rel="external noopener">Hexo</a>
+			<a href="https://github.com/xzhih/hexo-theme-casper" title="Casper" target="_blank" rel="external noopener">Casper</a>
+		</nav>
+	</div>
+</footer>
+	
+
+
+<script>if(window.navigator && navigator.serviceWorker) {navigator.serviceWorker.getRegistrations().then(function(registrations) {for(let registration of registrations) {registration.unregister()}})}</script>
+
+
+<script async src="/js/allinone.min.js" id="scriptLoad"></script>
+
+
+
 
 
 
 <script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '持續搬磚中';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '(つェ⊂)咦!又回來了!';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
-        }
+    document.getElementById('scriptLoad').addEventListener('load', function () {
+        var bLazy = new Blazy()
+    })
+</script>
+
+
+
+
+
+
+
+<script src="/js/lightgallery.min.js"></script>
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<script>
+    lightGallery(document.getElementById('lightgallery'), {
+        selector: '.post-img'
     });
-})();
-</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
 </script>
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
+
+
+
+<script async src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script async src="https://unpkg.com/valine@1.3.4/dist/Valine.min.js"></script>
+<script>
+    window.addEventListener("load", function() {
+        new Valine({
+            el: '#comment' ,
+            verify: false,
+            notify: false,
+            appId: '',
+            appKey: '',
+            placeholder: 'Just go go',
+            pageSize: 10,
+            avatar: 'mm',
+            visitor: true,
+        })
+    });
 </script>
 
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+
+
+
+
+<script>
+    document.getElementById('scriptLoad').addEventListener('load', function(){
+        searchFunc("/")
+    });
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
 
 
 
